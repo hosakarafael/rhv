@@ -1,0 +1,51 @@
+export const videos = [
+  {
+    id: "d6e15727-9fe1-4961-8c5b-ea44a9bd81aa",
+    title: "Video 1",
+    channel: "Channel 1",
+    views: "123",
+    createdAt: "2024-11-05",
+  },
+  {
+    id: "410544b2-4001-4271-9855-fec4b6a6442a",
+    title: "Video 2",
+    channel: "Channel 2",
+    views: "123",
+    createdAt: "2024-11-05",
+  },
+  {
+    id: "3958dc9e-712f-4377-85e9-fec4b6a6442a",
+    title: "Video 3",
+    channel: "Channel 3",
+    views: "123",
+    createdAt: "2024-11-05",
+  },
+  {
+    id: "3958dc9e-742f-4377-85e9-fec4b6a6442a",
+    title: "Video 4",
+    channel: "Channel 4",
+    views: "123",
+    createdAt: "2024-11-05",
+  },
+  {
+    id: "76d65c26-f784-44a2-ac19-586678f7c2f2",
+    title: "Video 5",
+    channel: "Channel 5",
+    views: "123",
+    createdAt: "2024-11-05",
+  },
+  {
+    id: "CC27C14A-0ACF-4F4A-A6C9-D45682C144B9",
+    title: "Video 6",
+    channel: "Channel 6",
+    views: "123",
+    createdAt: "2024-11-05",
+  },
+  {
+    id: "13D07535-C59E-4157-A011-F8D2EF4E0CBB",
+    title: "Video 7",
+    channel: "Channel 7",
+    views: "123",
+    createdAt: "2024-11-05",
+  },
+];
