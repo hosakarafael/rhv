@@ -1,6 +1,12 @@
 import Avatar from "@/components/Avatar";
+import { fetchVideoById } from "@/services/videoService";
 
-export default function Page() {
+export default async function Page(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
+  const id = params.id;
+
+  const video = await fetchVideoById(id);
+
   return (
     <>
       <div
@@ -17,7 +23,7 @@ export default function Page() {
         </video>
       </div>
       <div className="p-4">
-        <h1 className="text-3xl font-bold">Video Title</h1>
+        <h1 className="text-3xl font-bold">{video.title}</h1>
         <div className="flex gap-2 mt-2">
           <Avatar />
           <div>

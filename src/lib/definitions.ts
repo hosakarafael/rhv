@@ -1,7 +1,7 @@
 export interface Video {
-  id: string;
+  id: number;
   title: string;
-  channel: string;
-  views: string;
-  createdAt: string;
+  url: string;
+  views: number;
+  createdAt: Date;
 }

@@ -1,51 +1,31 @@
-export const videos = [
+export const newVideos = [
   {
-    id: "d6e15727-9fe1-4961-8c5b-ea44a9bd81aa",
     title: "Video 1",
-    channel: "Channel 1",
-    views: "123",
-    createdAt: "2024-11-05",
+    url: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
   },
   {
-    id: "410544b2-4001-4271-9855-fec4b6a6442a",
     title: "Video 2",
-    channel: "Channel 2",
-    views: "123",
-    createdAt: "2024-11-05",
+    url: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
+  },
+];
+
+export const newChannels = [
+  {
+    name: "Guillermo Rauch",
+    email: "rauchg@vercel.com",
+    image:
+      "https://images.ctfassets.net/e5382hct74si/2P1iOve0LZJRZWUzfXpi9r/9d4d27765764fb1ad7379d7cbe5f1043/ucxb4lHy_400x400.jpg",
   },
   {
-    id: "3958dc9e-712f-4377-85e9-fec4b6a6442a",
-    title: "Video 3",
-    channel: "Channel 3",
-    views: "123",
-    createdAt: "2024-11-05",
+    name: "Lee Robinson",
+    email: "lee@vercel.com",
+    image:
+      "https://images.ctfassets.net/e5382hct74si/4BtM41PDNrx4z1ml643tdc/7aa88bdde8b5b7809174ea5b764c80fa/adWRdqQ6_400x400.jpg",
   },
   {
-    id: "3958dc9e-742f-4377-85e9-fec4b6a6442a",
-    title: "Video 4",
-    channel: "Channel 4",
-    views: "123",
-    createdAt: "2024-11-05",
-  },
-  {
-    id: "76d65c26-f784-44a2-ac19-586678f7c2f2",
-    title: "Video 5",
-    channel: "Channel 5",
-    views: "123",
-    createdAt: "2024-11-05",
-  },
-  {
-    id: "CC27C14A-0ACF-4F4A-A6C9-D45682C144B9",
-    title: "Video 6",
-    channel: "Channel 6",
-    views: "123",
-    createdAt: "2024-11-05",
-  },
-  {
-    id: "13D07535-C59E-4157-A011-F8D2EF4E0CBB",
-    title: "Video 7",
-    channel: "Channel 7",
-    views: "123",
-    createdAt: "2024-11-05",
+    name: "Steven Tey",
+    email: "stey@vercel.com",
+    image:
+      "https://images.ctfassets.net/e5382hct74si/4QEuVLNyZUg5X6X4cW4pVH/eb7cd219e21b29ae976277871cd5ca4b/profile.jpg",
   },
 ];
