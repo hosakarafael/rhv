@@ -1,7 +1,18 @@
-export interface Video {
+export interface VideoType {
   id: number;
   title: string;
-  url: string;
+  description: string;
+  videoUrl: string;
   views: number;
+  userId: number;
+  createdAt: Date;
+  user: UserType;
+}
+
+export interface UserType {
+  id: number;
+  name: string;
+  email: string;
+  imageUrl: string;
   createdAt: Date;
 }

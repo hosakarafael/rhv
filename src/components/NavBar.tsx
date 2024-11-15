@@ -1,9 +1,49 @@
+"use client";
 import Link from "next/link";
 import Avatar from "./Avatar";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Tooltip from "./Tooltip";
+import { useUser } from "@/context/userContext";
+import LoginBadge from "./LoginBadge";
 
 const NavBar = () => {
+  const { isLogged, updateToken } = useUser();
+
+  const logout = () => {
+    if (updateToken) {
+      localStorage.removeItem("token");
+      updateToken("");
+    }
+  };
+
+  const renderAvatar = () => {
+    return (
+      <div className="dropdown dropdown-end">
+        <div
+          tabIndex={0}
+          role="button"
+          className="btn btn-ghost btn-circle avatar"
+        >
+          <Avatar />
+        </div>
+        <ul
+          tabIndex={0}
+          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+        >
+          <li>
+            <a className="justify-between">Profile</a>
+          </li>
+          <li>
+            <a>Settings</a>
+          </li>
+          <li>
+            <button onClick={() => logout()}>Logout</button>
+          </li>
+        </ul>
+      </div>
+    );
+  };
+
   return (
     <div className="navbar bg-base-100 justify-between">
       <div>
@@ -24,30 +64,7 @@ const NavBar = () => {
           </Tooltip>
         </div>
       </div>
-
-      <div className="dropdown dropdown-end">
-        <div
-          tabIndex={0}
-          role="button"
-          className="btn btn-ghost btn-circle avatar"
-        >
-          <Avatar />
-        </div>
-        <ul
-          tabIndex={0}
-          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-        >
-          <li>
-            <a className="justify-between">Profile</a>
-          </li>
-          <li>
-            <a>Settings</a>
-          </li>
-          <li>
-            <a>Logout</a>
-          </li>
-        </ul>
-      </div>
+      {isLogged ? renderAvatar() : <LoginBadge />}
     </div>
   );
 };

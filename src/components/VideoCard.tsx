@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Avatar from "./Avatar";
-import { Video } from "@/lib/definitions";
+import { VideoType } from "@/lib/definitions";
 
 interface VideoCardProps {
-  video: Video;
+  video: VideoType;
 }
 
-const VideoCard = ({ video }: { video: Video }) => {
+const VideoCard = ({ video }: VideoCardProps) => {
   return (
     <div className="card bg-base-100 w-auto shadow-xl mx-1 my-1">
       <figure className="px-1 pt-1">

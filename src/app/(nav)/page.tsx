@@ -1,14 +1,15 @@
 import VideoCard from "@/components/VideoCard";
-import { Video } from "@/lib/definitions";
-import { fetchAllVideos } from "@/services/videoService";
+import { useUser } from "@/context/userContext";
+import { VideoType } from "@/lib/definitions";
+import { fetchAllVideos } from "@/services/publicVideoService";
 
 export default async function Page() {
-  const videos: Video[] = await fetchAllVideos();
+  const videos = await fetchAllVideos();
 
   const renderVideos = () => {
     return (
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  2xl:grid-cols-6 ">
-        {videos.map((video) => {
+        {videos?.map((video) => {
           return <VideoCard key={video.id} video={video} />;
         })}
       </div>
@@ -23,5 +24,5 @@ export default async function Page() {
     );
   };
 
-  return <>{videos.length > 0 ? renderVideos() : noVideoFound()}</>;
+  return <>{videos && videos.length > 0 ? renderVideos() : noVideoFound()}</>;
 }
