@@ -2,27 +2,29 @@
 
 import { useUser } from "@/context/userContext";
 import { authenticate } from "@/services/authService";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 
 export default function Page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { updateToken } = useUser();
+  const { updateToken, updateUser } = useUser();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await authenticate(email, password);
     localStorage.setItem("token", res.token);
-    if (updateToken) {
+    if (updateToken && updateUser) {
       updateToken(res.token);
+      updateUser(res.user);
     }
     redirect("/");
   };
 
   return (
-    <div className="h-screen">
-      <div className="flex justify-center gap-3">
+    <div className="flex items-center h-screen justify-center gap-3">
+      <div className="flex flex-col gap-5 sm:flex-row">
         <h1 className="text-6xl">Login</h1>
         <form className="flex flex-col gap-4 w-96">
           <label className="input input-bordered flex items-center gap-2">
@@ -63,12 +65,12 @@ export default function Page() {
             />
           </label>
           <div className="flex justify-end gap-3">
-            <button
-              onClick={(e) => handleSubmit(e)}
+            <Link
+              href={"/"}
               className="btn btn-outline text-xl text-white rounded-full"
             >
               Back
-            </button>
+            </Link>
             <button
               onClick={(e) => handleSubmit(e)}
               className="btn btn-accent text-xl text-white rounded-full"

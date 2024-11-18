@@ -1,8 +1,6 @@
-const serviceURL: string = process.env.NEXT_PUBLIC_API_URL + "auth";
+import { AuthenticationResponse } from "@/lib/definitions";
 
-export interface AuthenticationResponse {
-  token: string;
-}
+const serviceURL: string = process.env.NEXT_PUBLIC_API_URL + "auth";
 
 export const authenticate = async (
   email: string,
@@ -17,8 +15,4 @@ export const authenticate = async (
   });
 
   return await res.json();
-};
-
-export const getToken = () => {
-  return localStorage.getItem("token");
 };

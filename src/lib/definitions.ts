@@ -1,3 +1,8 @@
+export interface AuthenticationResponse {
+  user: UserType;
+  token: string;
+}
+
 export interface VideoType {
   id: number;
   title: string;

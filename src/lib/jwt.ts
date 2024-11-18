@@ -18,3 +18,12 @@ export function isValidToken(token: string) {
     return false;
   }
 }
+
+export function getSubjectFromToken(token: string) {
+  try {
+    const decodedToken = jwtDecode(token);
+    return decodedToken.sub;
+  } catch (error) {
+    return null;
+  }
+}

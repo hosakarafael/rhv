@@ -7,7 +7,7 @@ import { useUser } from "@/context/userContext";
 import LoginBadge from "./LoginBadge";
 
 const NavBar = () => {
-  const { isLogged, updateToken } = useUser();
+  const { isLogged, updateToken, user } = useUser();
 
   const logout = () => {
     if (updateToken) {
@@ -19,13 +19,15 @@ const NavBar = () => {
   const renderAvatar = () => {
     return (
       <div className="dropdown dropdown-end">
-        <div
-          tabIndex={0}
-          role="button"
-          className="btn btn-ghost btn-circle avatar"
-        >
-          <Avatar />
-        </div>
+        <Tooltip label={user ? user?.name : ""} direction="left">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar"
+          >
+            <Avatar />
+          </div>
+        </Tooltip>
         <ul
           tabIndex={0}
           className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
