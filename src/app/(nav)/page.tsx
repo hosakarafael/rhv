@@ -1,6 +1,4 @@
 import VideoCard from "@/components/VideoCard";
-import { useUser } from "@/context/userContext";
-import { VideoType } from "@/lib/definitions";
 import { fetchAllVideos } from "@/services/publicVideoService";
 
 export default async function Page() {

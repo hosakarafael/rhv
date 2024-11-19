@@ -18,7 +18,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
       </figure>
       <div className="flex m-3">
         <div>
-          <Link href={"/channel/"}>
+          <Link href={`/channel/${video.userId}`}>
             <Avatar />
           </Link>
         </div>
@@ -26,8 +26,8 @@ const VideoCard = ({ video }: VideoCardProps) => {
           <Link href={"/video/" + video.id}>
             <h2 className="card-title">{video.title}</h2>
           </Link>
-          <Link href={"/channel/1"}>
-            <p className="text-sm text-neutral-400">{video.title}</p>
+          <Link href={`/channel/${video.userId}`}>
+            <p className="text-sm text-neutral-400">{video.user.name}</p>
           </Link>
           <p className="text-sm text-neutral-400">
             {video.views} views・x month ago

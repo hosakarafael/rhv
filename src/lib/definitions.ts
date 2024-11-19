@@ -3,6 +3,11 @@ export interface AuthenticationResponse {
   token: string;
 }
 
+export interface RegisterResponse {
+  user: UserType;
+  token: string;
+}
+
 export interface VideoType {
   id: number;
   title: string;

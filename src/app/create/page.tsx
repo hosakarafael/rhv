@@ -2,19 +2,20 @@
 
 import { Logo } from "@/components/Logo";
 import { useUser } from "@/context/userContext";
-import { authenticate } from "@/services/authService";
+import { register } from "@/services/authService";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 
 export default function Page() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { updateToken, updateUser } = useUser();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await authenticate(email, password);
+    const res = await register(name, email, password);
     localStorage.setItem("token", res.token);
     if (updateToken && updateUser) {
       updateToken(res.token);
@@ -28,8 +29,24 @@ export default function Page() {
       <Logo />
       <div className="flex items-center h-screen justify-center gap-3">
         <div className="flex flex-col gap-5 sm:flex-row">
-          <h1 className="text-6xl">Login</h1>
+          <h1 className="text-6xl">Create</h1>
           <form className="flex flex-col gap-4 w-96">
+            <label className="input input-bordered flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                className="h-4 w-4 opacity-70"
+              >
+                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+              </svg>
+              <input
+                type="text"
+                className="grow"
+                placeholder="Channel name"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </label>
             <label className="input input-bordered flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -69,16 +86,16 @@ export default function Page() {
             </label>
             <div className="flex justify-end gap-3">
               <Link
-                href={"/create"}
+                href={"/login"}
                 className="btn btn-outline text-xl text-white rounded-full"
               >
-                Create
+                Login
               </Link>
               <button
                 onClick={(e) => handleSubmit(e)}
                 className="btn btn-accent text-xl text-white rounded-full"
               >
-                Login
+                Create Channel
               </button>
             </div>
           </form>

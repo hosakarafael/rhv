@@ -1,10 +1,10 @@
 "use client";
-import Link from "next/link";
 import Avatar from "./Avatar";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Tooltip from "./Tooltip";
 import { useUser } from "@/context/userContext";
 import LoginBadge from "./LoginBadge";
+import { Logo } from "./Logo";
 
 const NavBar = () => {
   const { isLogged, updateToken, user } = useUser();
@@ -49,9 +49,7 @@ const NavBar = () => {
   return (
     <div className="navbar bg-base-100 justify-between">
       <div>
-        <Link href={"/"} className="btn btn-primary text-xl text-white">
-          RHV
-        </Link>
+        <Logo />
       </div>
 
       <div className="form-control">
@@ -59,7 +57,7 @@ const NavBar = () => {
           <input
             type="text"
             placeholder="Search"
-            className="input input-bordered w-72 md:w-96"
+            className="input input-bordered md:w-96"
           />
           <Tooltip label="Search">
             <MagnifyingGlassIcon className="mx-4 h-[30px] w-[30px] text-gray-500" />

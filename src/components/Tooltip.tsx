@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 interface TooltipProps {
   children: React.ReactNode;
   label: string;
@@ -9,11 +11,16 @@ export default function Tooltip({
   label,
   direction = "bottom",
 }: TooltipProps) {
+  const style = clsx({
+    "hover:tooltip hover:tooltip-open": true,
+    "hover:tooltip-bottom": direction == "bottom",
+    "hover:tooltip-left": direction == "left",
+    "hover:tooltip-right": direction == "right",
+    "hover:tooltip-top": direction == "top",
+  });
+
   return (
-    <div
-      className={`hover:tooltip hover:tooltip-open hover:tooltip-${direction}`}
-      data-tip={label}
-    >
+    <div className={style} data-tip={label}>
       {children}
     </div>
   );
