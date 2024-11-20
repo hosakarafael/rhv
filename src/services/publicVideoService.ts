@@ -18,3 +18,16 @@ export const fetchVideoById = async (id: string): Promise<VideoType> => {
   });
   return await res.json();
 };
+
+export const increaseView = async (videoId: string) => {
+  const resIp = await fetch("https://api.ipify.org?format=json");
+  const data: { ip: string } = await resIp.json();
+
+  const res = await fetch(`${serviceURL}/view`, {
+    body: JSON.stringify({ ip: data.ip, videoId }),
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
