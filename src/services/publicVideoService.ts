@@ -24,7 +24,8 @@ export const increaseView = async (videoId: string) => {
   const data: { ip: string } = await resIp.json();
 
   const res = await fetch(`${serviceURL}/view`, {
-    body: JSON.stringify({ ip: data.ip, videoId }),
+    //use data.ip to get IP - now is using random number
+    body: JSON.stringify({ ip: Math.floor(Math.random() * 1001), videoId }),
     method: "POST",
     headers: {
       "Content-Type": "application/json",
