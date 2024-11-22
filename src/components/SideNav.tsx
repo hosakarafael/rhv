@@ -14,7 +14,7 @@ export const SideNav = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col gap-20 my-10 mx-5 absolute">
+    <div className="flex flex-col gap-20 py-10 px-5 fixed">
       <Tooltip label="Home">
         <Link href="/">
           <div

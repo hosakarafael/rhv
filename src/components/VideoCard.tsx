@@ -8,7 +8,7 @@ interface VideoCardProps {
 
 const VideoCard = ({ video }: VideoCardProps) => {
   return (
-    <div className="card bg-base-100 w-auto shadow-xl mx-1 my-1">
+    <div className="card bg-base-100 w-auto mx-1 my-1">
       <figure className="px-1 pt-1">
         <Link href={"/video/" + video.id}>
           <video className="rounded-xl">
