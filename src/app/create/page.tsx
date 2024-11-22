@@ -1,9 +1,9 @@
 "use client";
 
+import { Alert } from "@/components/Alert";
 import { Logo } from "@/components/Logo";
 import { useUser } from "@/context/userContext";
 import { register } from "@/services/authService";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 
@@ -12,10 +12,37 @@ export default function Page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { updateToken, updateUser } = useUser();
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!name) {
+      setIsAlertVisible(true);
+      setErrorMessage("Channel name cannot be empty");
+      return;
+    }
+
+    if (!email) {
+      setIsAlertVisible(true);
+      setErrorMessage("Email cannot be empty");
+      return;
+    }
+
+    if (!password) {
+      setIsAlertVisible(true);
+      setErrorMessage("Password cannot be empty");
+      return;
+    }
+
     const res = await register(name, email, password);
+    if (res.message) {
+      setIsAlertVisible(true);
+      setErrorMessage(res.message);
+      return;
+    }
+
     localStorage.setItem("token", res.token);
     if (updateToken && updateUser) {
       updateToken(res.token);
@@ -84,13 +111,14 @@ export default function Page() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
+            <Alert show={isAlertVisible} type="error" message={errorMessage} />
             <div className="flex justify-end gap-3">
-              <Link
+              <a
                 href={"/login"}
                 className="btn btn-outline text-xl text-white rounded-full"
               >
                 Login
-              </Link>
+              </a>
               <button
                 onClick={(e) => handleSubmit(e)}
                 className="btn btn-accent text-xl text-white rounded-full"

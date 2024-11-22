@@ -1,9 +1,13 @@
-export interface AuthenticationResponse {
+interface Response {
+  message: string;
+}
+
+export interface AuthenticationResponse extends Response {
   user: UserType;
   token: string;
 }
 
-export interface RegisterResponse {
+export interface RegisterResponse extends Response {
   user: UserType;
   token: string;
 }

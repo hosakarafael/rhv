@@ -3,8 +3,8 @@ import Avatar from "./Avatar";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Tooltip from "./Tooltip";
 import { useUser } from "@/context/userContext";
-import LoginBadge from "./LoginBadge";
 import { Logo } from "./Logo";
+import Link from "next/link";
 
 const NavBar = () => {
   const { isLogged, updateToken, user } = useUser();
@@ -46,6 +46,19 @@ const NavBar = () => {
     );
   };
 
+  const renderLoginButton = () => {
+    return (
+      <div>
+        <Link
+          href={"/login"}
+          className="btn btn-accent text-xl text-white rounded-full"
+        >
+          Login
+        </Link>
+      </div>
+    );
+  };
+
   return (
     <div className="navbar bg-base-100 justify-between">
       <div>
@@ -64,7 +77,7 @@ const NavBar = () => {
           </Tooltip>
         </div>
       </div>
-      {isLogged ? renderAvatar() : <LoginBadge />}
+      {isLogged ? renderAvatar() : renderLoginButton()}
     </div>
   );
 };

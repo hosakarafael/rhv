@@ -1,9 +1,9 @@
 "use client";
 
+import { Alert } from "@/components/Alert";
 import { Logo } from "@/components/Logo";
 import { useUser } from "@/context/userContext";
 import { authenticate } from "@/services/authService";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 
@@ -11,10 +11,37 @@ export default function Page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { updateToken, updateUser } = useUser();
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!email) {
+      setIsAlertVisible(true);
+      setErrorMessage("Email cannot be empty");
+      return;
+    }
+
+    if (!password) {
+      setIsAlertVisible(true);
+      setErrorMessage("Password cannot be empty");
+      return;
+    }
+
     const res = await authenticate(email, password);
+    if (res.message) {
+      setIsAlertVisible(true);
+      switch (res.message) {
+        case "Bad credentials":
+          setErrorMessage("Incorrect email or password.");
+          break;
+        default:
+          setErrorMessage(res.message);
+      }
+      return;
+    }
+
     localStorage.setItem("token", res.token);
     if (updateToken && updateUser) {
       updateToken(res.token);
@@ -67,13 +94,14 @@ export default function Page() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
+            <Alert show={isAlertVisible} type="error" message={errorMessage} />
             <div className="flex justify-end gap-3">
-              <Link
+              <a
                 href={"/create"}
                 className="btn btn-outline text-xl text-white rounded-full"
               >
                 Create
-              </Link>
+              </a>
               <button
                 onClick={(e) => handleSubmit(e)}
                 className="btn btn-accent text-xl text-white rounded-full"
