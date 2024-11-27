@@ -12,6 +12,13 @@ export interface RegisterResponse extends Response {
   token: string;
 }
 
+export interface HistoryType {
+  userId: number;
+  videoId: number;
+  video: VideoType;
+  watchedAt: Date;
+}
+
 export interface VideoType {
   id: number;
   title: string;

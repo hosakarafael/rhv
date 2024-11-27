@@ -5,6 +5,7 @@ import Tooltip from "./Tooltip";
 import { useUser } from "@/context/userContext";
 import { Logo } from "./Logo";
 import Link from "next/link";
+import { LoginButton } from "./LoginButton";
 
 const NavBar = () => {
   const { isLogged, updateToken, user } = useUser();
@@ -46,19 +47,6 @@ const NavBar = () => {
     );
   };
 
-  const renderLoginButton = () => {
-    return (
-      <div>
-        <Link
-          href={"/login"}
-          className="btn btn-accent text-xl text-white rounded-full"
-        >
-          Login
-        </Link>
-      </div>
-    );
-  };
-
   return (
     <div className="navbar bg-base-100 justify-between fixed z-10">
       <div>
@@ -77,7 +65,7 @@ const NavBar = () => {
           </Tooltip>
         </div>
       </div>
-      {isLogged ? renderAvatar() : renderLoginButton()}
+      {isLogged ? renderAvatar() : <LoginButton />}
     </div>
   );
 };

@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="sm:block hidden">
         <SideNav />
       </div>
-      <div className="sm:absolute left-[102px] w-[calc(100vw-102px)]">
+      <div className="sm:absolute left-[102px] sm:w-[calc(100vw-102px)]">
         {children}
       </div>
     </UserProvider>

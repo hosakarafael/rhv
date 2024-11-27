@@ -1,11 +1,30 @@
+"use client";
 import { VideoType } from "@/lib/definitions";
 import Avatar from "./Avatar";
 import { fetchVideoById, increaseView } from "@/services/publicVideoService";
 import { HandThumbUpIcon } from "@heroicons/react/24/outline";
+import { registerHistory } from "@/services/userService";
+import { useUser } from "@/context/userContext";
+import { useEffect, useState } from "react";
 
-export const Video = async ({ id }: { id: string }) => {
-  const video = await fetchVideoById(id);
-  increaseView(id);
+export const Video = ({ id }: { id: string }) => {
+  const [video, setVideo] = useState<VideoType>();
+  const { user, token } = useUser();
+
+  async function init() {
+    setVideo(await fetchVideoById(id));
+    increaseView(id);
+  }
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  useEffect(() => {
+    if (user && token) {
+      registerHistory(user.id, id, token);
+    }
+  }, [user]);
 
   const renderVideo = (video: VideoType) => {
     return (
