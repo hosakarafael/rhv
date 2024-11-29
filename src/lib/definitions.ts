@@ -36,4 +36,10 @@ export interface UserType {
   email: string;
   imageUrl: string;
   createdAt: Date;
+  subscribedUsers: SubscriptionType[];
+}
+
+export interface SubscriptionType {
+  id: number;
+  name: string;
 }

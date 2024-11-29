@@ -46,3 +46,33 @@ export const registerHistory = async (
     body: JSON.stringify({ userId, videoId }),
   });
 };
+
+export const subscribe = async (
+  subscriberId: number,
+  creatorId: number,
+  token: string
+) => {
+  const res = await fetch(`${serviceURL}/subscribe`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ subscriberId, creatorId }),
+  });
+};
+
+export const unsubscribe = async (
+  subscriberId: number,
+  creatorId: number,
+  token: string
+) => {
+  const res = await fetch(`${serviceURL}/unsubscribe`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ subscriberId, creatorId }),
+  });
+};
