@@ -4,7 +4,6 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Tooltip from "./Tooltip";
 import { useUser } from "@/context/userContext";
 import { Logo } from "./Logo";
-import Link from "next/link";
 import { LoginButton } from "./LoginButton";
 
 const NavBar = () => {

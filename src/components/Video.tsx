@@ -86,7 +86,7 @@ export const Video = ({ id }: { id: string }) => {
               <div>
                 <p className="font-bold">{video.user.name}</p>
                 <p className="text-sm text-neutral-700 dark:text-neutral-400">
-                  100 subscribers
+                  {video.user.subscribers} subscribers
                 </p>
               </div>
             </div>

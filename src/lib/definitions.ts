@@ -37,6 +37,7 @@ export interface UserType {
   imageUrl: string;
   createdAt: Date;
   subscribedUsers: SubscriptionType[];
+  subscribers: number;
 }
 
 export interface SubscriptionType {
