@@ -72,6 +72,7 @@ export default function Page() {
                 className="grow"
                 placeholder="Channel name"
                 onChange={(e) => setName(e.target.value)}
+                autoFocus
               />
             </label>
             <label className="input input-bordered flex items-center gap-2">

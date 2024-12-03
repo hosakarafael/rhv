@@ -7,7 +7,7 @@ import { Logo } from "./Logo";
 import { LoginButton } from "./LoginButton";
 
 const NavBar = () => {
-  const { isLogged, updateToken, user } = useUser();
+  const { updateToken, user } = useUser();
 
   const logout = () => {
     if (updateToken) {
@@ -64,7 +64,7 @@ const NavBar = () => {
           </Tooltip>
         </div>
       </div>
-      {isLogged ? renderAvatar() : <LoginButton />}
+      {user ? renderAvatar() : <LoginButton />}
     </div>
   );
 };

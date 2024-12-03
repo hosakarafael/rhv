@@ -5,17 +5,15 @@ import { fetchUserByEmail } from "@/services/userService";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface UserContextInterface {
-  isLogged: boolean;
   updateToken: (token: string) => void;
   token: string;
   user: UserType;
-  updateUser: (user: UserType) => void;
+  updateUser: (user: UserType | null) => void;
 }
 
 const UserContext = createContext<Partial<UserContextInterface>>({});
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isLogged, setIsLogged] = useState<boolean>(false);
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("token")
   );
@@ -32,10 +30,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (token && isValidToken(token)) {
-      setIsLogged(true);
       getUser();
     } else {
-      setIsLogged(false);
+      setUser(null);
     }
   }, [token]);
 
@@ -51,7 +48,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     <UserContext.Provider
       value={
         {
-          isLogged,
           token,
           updateToken,
           user,
