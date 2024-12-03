@@ -5,7 +5,7 @@ import { Logo } from "@/components/Logo";
 import { useUser } from "@/context/userContext";
 import { register } from "@/services/authService";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const [name, setName] = useState("");
@@ -14,6 +14,13 @@ export default function Page() {
   const { updateToken, updateUser } = useUser();
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const { user } = useUser();
+
+  useEffect(() => {
+    if (user) {
+      redirect("/");
+    }
+  }, [user]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
