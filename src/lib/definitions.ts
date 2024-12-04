@@ -16,7 +16,7 @@ export interface HistoryType {
   userId: number;
   videoId: number;
   video: VideoType;
-  watchedAt: Date;
+  watchedAt: string;
 }
 
 export interface VideoType {
@@ -26,7 +26,7 @@ export interface VideoType {
   videoUrl: string;
   views: number;
   userId: number;
-  createdAt: Date;
+  createdAt: string;
   user: UserType;
 }
 
