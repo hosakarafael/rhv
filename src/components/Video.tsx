@@ -1,22 +1,16 @@
 "use client";
-import { VideoType } from "@/lib/definitions";
+import { SubscriptionType, UserType, VideoType } from "@/lib/definitions";
 import Avatar from "./Avatar";
 import { fetchVideoById, increaseView } from "@/services/publicVideoService";
 import { HandThumbUpIcon } from "@heroicons/react/24/outline";
-import {
-  registerHistory,
-  subscribe,
-  unsubscribe,
-} from "@/services/userService";
+import { registerHistory } from "@/services/userService";
 import { useUser } from "@/context/userContext";
 import { useEffect, useState } from "react";
+import { SubscribeButton } from "./SubscribeButton";
 
 export const Video = ({ id }: { id: string }) => {
   const [video, setVideo] = useState<VideoType>();
-  const { user, token, updateUser } = useUser();
-  const [isSubscribed, setIsSubscribed] = useState(
-    user?.subscribedUsers.some((subs) => subs.id === Number(id))
-  );
+  const { user, token } = useUser();
 
   async function init() {
     setVideo(await fetchVideoById(id));
@@ -32,35 +26,6 @@ export const Video = ({ id }: { id: string }) => {
       registerHistory(user.id, id, token);
     }
   }, [user]);
-
-  useEffect(() => {
-    setIsSubscribed(
-      user?.subscribedUsers.some((subs) => subs.id === video?.userId)
-    );
-  }, [user, video]);
-
-  const handleUnsubscribe = () => {
-    if (user && token && video && updateUser) {
-      unsubscribe(user.id, video.userId, token);
-      const updatedSubscribers = user.subscribedUsers.filter(
-        (subs) => subs.id !== video.userId
-      );
-      const updatedUser = { ...user, subscribedUsers: updatedSubscribers };
-      updateUser(updatedUser);
-    }
-  };
-
-  const handleSubscribe = () => {
-    if (user && token && video && updateUser) {
-      subscribe(user.id, video.userId, token);
-      const updatedSubscribers = [
-        ...user.subscribedUsers,
-        { id: video.userId, name: video.user.name },
-      ];
-      const updatedUser = { ...user, subscribedUsers: updatedSubscribers };
-      updateUser(updatedUser);
-    }
-  };
 
   const renderVideo = (video: VideoType) => {
     return (
@@ -91,21 +56,11 @@ export const Video = ({ id }: { id: string }) => {
               </div>
             </div>
 
-            {isSubscribed ? (
-              <button
-                onClick={handleUnsubscribe}
-                className="btn btn-primary flex items-center gap-2 font-bold text-white text-lg px-4 py-2 rounded-full"
-              >
-                Unsubscribe
-              </button>
-            ) : (
-              <button
-                onClick={handleSubscribe}
-                className="btn btn-primary flex items-center gap-2 font-bold text-white text-lg px-4 py-2 rounded-full"
-              >
-                Subscribe
-              </button>
-            )}
+            <SubscribeButton
+              subscribeTo={
+                { id: video.user.id, name: video.user.name } as SubscriptionType
+              }
+            />
 
             <div className="flex items-center gap-2 bg-gray-100 dark:bg-base-100 px-5 py-2 rounded-full">
               <HandThumbUpIcon className="h-[30px] w-[30px]" />
