@@ -42,7 +42,7 @@ export default function Page() {
         <p className="mb-7">
           If you are logged out, your play history will not be displayed.
         </p>
-        <LoginButton />
+        <LoginButton continueTo="history" />
       </div>
     );
   };

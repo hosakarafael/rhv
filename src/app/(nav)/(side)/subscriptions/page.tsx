@@ -8,7 +8,7 @@ import { fetchByUserIds } from "@/services/publicVideoService";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-  const [videos, setVideos] = useState<VideoType[]>([]);
+  const [videos, setVideos] = useState<VideoType[] | null>(null);
   const { user } = useUser();
 
   async function init() {
@@ -30,10 +30,22 @@ export default function Page() {
         <p className="mb-7">
           Log in to see the latest updates from your favorite channels
         </p>
-        <LoginButton />
+        <LoginButton continueTo="subscriptions" />
       </div>
     );
   };
 
-  return <>{user ? <VideoGrid videos={videos} /> : notLoggedSubscription()}</>;
+  return (
+    <>
+      {user ? (
+        videos ? (
+          <VideoGrid videos={videos} />
+        ) : (
+          <></>
+        )
+      ) : (
+        notLoggedSubscription()
+      )}
+    </>
+  );
 }

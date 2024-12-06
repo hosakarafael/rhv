@@ -4,7 +4,7 @@ import { Alert } from "@/components/Alert";
 import { Logo } from "@/components/Logo";
 import { useUser } from "@/context/userContext";
 import { register } from "@/services/authService";
-import { redirect } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Page() {
@@ -15,6 +15,9 @@ export default function Page() {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { user } = useUser();
+
+  const searchParams = useSearchParams();
+  const continueTo = searchParams.get("continueTo");
 
   useEffect(() => {
     if (user) {
@@ -122,7 +125,7 @@ export default function Page() {
             <Alert show={isAlertVisible} type="error" message={errorMessage} />
             <div className="flex justify-end gap-3">
               <a
-                href={"/login"}
+                href={continueTo ? `/login?continueTo=${continueTo}` : "/login"}
                 className="btn btn-outline text-xl text-white rounded-full"
               >
                 Login

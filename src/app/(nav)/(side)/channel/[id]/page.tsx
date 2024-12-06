@@ -19,7 +19,9 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
         </div>
         <div>
           <h1 className="text-4xl font-bold">{user.name}</h1>
-          <p>{user.subscribers} subscribers • 20 videos</p>
+          <p>
+            {user.subscribers} subscribers • {videos.length} videos
+          </p>
           <p>Channel description</p>
           <SubscribeButton
             subscribeTo={{ id: user.id, name: user.name } as SubscriptionType}

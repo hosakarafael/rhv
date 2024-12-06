@@ -2,7 +2,8 @@
 import { useUser } from "@/context/userContext";
 import { SubscriptionType, UserType } from "@/lib/definitions";
 import { subscribe, unsubscribe } from "@/services/userService";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Modal } from "./Modal";
 
 interface SubscribeButtonProps {
   subscribeTo: SubscriptionType;
@@ -13,6 +14,7 @@ export const SubscribeButton = ({ subscribeTo }: SubscribeButtonProps) => {
   const [isSubscribed, setIsSubscribed] = useState(
     user?.subscribedUsers.some((subs) => subs.id === subscribeTo.id)
   );
+  const modalRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     setIsSubscribed(
@@ -32,6 +34,11 @@ export const SubscribeButton = ({ subscribeTo }: SubscribeButtonProps) => {
   };
 
   const handleSubscribe = () => {
+    if (!user) {
+      modalRef.current?.showModal();
+      return;
+    }
+
     if (user && token && updateUser) {
       subscribe(user.id, subscribeTo.id, token);
       const updatedSubscribers = [
@@ -53,13 +60,20 @@ export const SubscribeButton = ({ subscribeTo }: SubscribeButtonProps) => {
           Unsubscribe
         </button>
       ) : (
-        <button
-          onClick={handleSubscribe}
-          disabled={user?.id == subscribeTo.id}
-          className="btn btn-primary flex items-center gap-2 font-bold text-white text-lg px-4 py-2 rounded-full"
-        >
-          Subscribe
-        </button>
+        <>
+          <button
+            onClick={handleSubscribe}
+            disabled={user?.id == subscribeTo.id}
+            className="btn btn-primary flex items-center gap-2 font-bold text-white text-lg px-4 py-2 rounded-full"
+          >
+            Subscribe
+          </button>
+          <Modal
+            title="Do you want to subscribe to this channel?"
+            text="Please log in to subscribe."
+            ref={modalRef}
+          />
+        </>
       )}
     </>
   );
