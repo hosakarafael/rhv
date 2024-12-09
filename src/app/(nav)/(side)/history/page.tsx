@@ -4,9 +4,11 @@ import { LoginButton } from "@/components/LoginButton";
 import Tooltip from "@/components/Tooltip";
 import { useUser } from "@/context/userContext";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
 
 export default function Page() {
   const { user } = useUser();
+  const pathname = usePathname();
 
   const renderHistory = () => {
     return (
@@ -42,7 +44,7 @@ export default function Page() {
         <p className="mb-7">
           If you are logged out, your play history will not be displayed.
         </p>
-        <LoginButton continueTo="history" />
+        <LoginButton continueTo={pathname} />
       </div>
     );
   };

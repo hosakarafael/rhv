@@ -5,9 +5,11 @@ import Tooltip from "./Tooltip";
 import { useUser } from "@/context/userContext";
 import { Logo } from "./Logo";
 import { LoginButton } from "./LoginButton";
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
   const { updateToken, user } = useUser();
+  const pathname = usePathname();
 
   const logout = () => {
     if (updateToken) {
@@ -64,7 +66,7 @@ const NavBar = () => {
           </Tooltip>
         </div>
       </div>
-      {user ? renderAvatar() : <LoginButton />}
+      {user ? renderAvatar() : <LoginButton continueTo={pathname} />}
     </div>
   );
 };

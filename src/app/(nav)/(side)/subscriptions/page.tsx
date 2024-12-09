@@ -5,11 +5,13 @@ import { VideoGrid } from "@/components/VideoGrid";
 import { useUser } from "@/context/userContext";
 import { VideoType } from "@/lib/definitions";
 import { fetchByUserIds } from "@/services/publicVideoService";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Page() {
   const [videos, setVideos] = useState<VideoType[] | null>(null);
   const { user } = useUser();
+  const pathname = usePathname();
 
   async function init() {
     if (user) {
@@ -30,7 +32,7 @@ export default function Page() {
         <p className="mb-7">
           Log in to see the latest updates from your favorite channels
         </p>
-        <LoginButton continueTo="subscriptions" />
+        <LoginButton continueTo={pathname} />
       </div>
     );
   };

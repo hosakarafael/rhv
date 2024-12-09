@@ -5,11 +5,13 @@ import { useUser } from "@/context/userContext";
 import { formatDate } from "@/lib/dateUtils";
 import { VideoType } from "@/lib/definitions";
 import { fetchByUserIds } from "@/services/publicVideoService";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Page() {
   const { user } = useUser();
   const [videos, setVideos] = useState<VideoType[]>([]);
+  const pathname = usePathname();
 
   async function init() {
     if (user) {
@@ -27,7 +29,7 @@ export default function Page() {
       <div className="p-10 flex flex-col justify-center items-center mt-40">
         <h1 className="text-4xl font-extrabold mb-5">My Videos</h1>
         <p className="mb-7">Please login to see your videos.</p>
-        <LoginButton continueTo="myvideos" />
+        <LoginButton continueTo={pathname} />
       </div>
     );
   };
