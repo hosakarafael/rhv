@@ -9,25 +9,38 @@ import {
 } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { useSidebar } from "@/context/sidebarContext";
 
 export const SideNav = () => {
   const pathname = usePathname();
+  const { isMin } = useSidebar();
+
+  const baseIconContainerStyle = clsx(
+    "py-3 rounded-lg hover:bg-base-100 flex items-center",
+    { "flex-col": isMin },
+    { "pr-14": !isMin }
+  );
+  const baseIconStyle = clsx("mx-4 h-[30px] w-[30px] text-gray-500");
+  const baseIconTextStyle = clsx("text-lg text-gray-500", {
+    "text-xs font-bold": isMin,
+  });
 
   return (
-    <div className="flex flex-col p-1 fixed z-10">
+    <div className="flex flex-col m-2 fixed z-10">
       <Link href="/">
         <div
-          className={
-            "py-3 rounded-lg hover:bg-base-100 flex flex-col items-center"
-          }
+          className={clsx(baseIconContainerStyle, {
+            "bg-base-100": pathname === "/",
+          })}
         >
           <HomeIcon
-            className={clsx("mx-4 h-[30px] w-[30px] text-gray-500", {
+            className={clsx(baseIconStyle, {
               "text-white": pathname === "/",
             })}
           />
           <span
-            className={clsx("text-xs font-bold text-gray-500", {
+            className={clsx(baseIconTextStyle, {
               "text-white": pathname === "/",
             })}
           >
@@ -37,17 +50,17 @@ export const SideNav = () => {
       </Link>
       <Link href="/subscriptions">
         <div
-          className={
-            "py-3 rounded-lg hover:bg-base-100 flex flex-col items-center"
-          }
+          className={clsx(baseIconContainerStyle, {
+            "bg-base-100": pathname === "/subscriptions",
+          })}
         >
           <UserGroupIcon
-            className={clsx("mx-4 h-[30px] w-[30px] text-gray-500", {
+            className={clsx(baseIconStyle, {
               "text-white": pathname === "/subscriptions",
             })}
           />
           <span
-            className={clsx("text-xs font-bold text-gray-500", {
+            className={clsx(baseIconTextStyle, {
               "text-white": pathname === "/subscriptions",
             })}
           >
@@ -57,17 +70,17 @@ export const SideNav = () => {
       </Link>
       <Link href="/history">
         <div
-          className={
-            "py-3 rounded-lg hover:bg-base-100 flex flex-col items-center"
-          }
+          className={clsx(baseIconContainerStyle, {
+            "bg-base-100": pathname === "/history",
+          })}
         >
           <ClockIcon
-            className={clsx("mx-4 h-[30px] w-[30px] text-gray-500", {
+            className={clsx(baseIconStyle, {
               "text-white": pathname === "/history",
             })}
           />
           <span
-            className={clsx("text-xs font-bold text-gray-500", {
+            className={clsx(baseIconTextStyle, {
               "text-white": pathname === "/history",
             })}
           >
@@ -77,17 +90,17 @@ export const SideNav = () => {
       </Link>
       <Link href="/myvideos">
         <div
-          className={
-            "py-3 rounded-lg hover:bg-base-100 flex flex-col items-center"
-          }
+          className={clsx(baseIconContainerStyle, {
+            "bg-base-100": pathname === "/myvideos",
+          })}
         >
           <PlayCircleIcon
-            className={clsx("mx-4 h-[30px] w-[30px] text-gray-500", {
+            className={clsx(baseIconStyle, {
               "text-white": pathname === "/myvideos",
             })}
           />
           <span
-            className={clsx("text-xs font-bold text-gray-500", {
+            className={clsx(baseIconTextStyle, {
               "text-white": pathname === "/myvideos",
             })}
           >

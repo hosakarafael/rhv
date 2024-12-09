@@ -1,15 +1,17 @@
 "use client";
 import Avatar from "./Avatar";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Tooltip from "./Tooltip";
 import { useUser } from "@/context/userContext";
 import { Logo } from "./Logo";
 import { LoginButton } from "./LoginButton";
 import { usePathname } from "next/navigation";
+import { useSidebar } from "@/context/sidebarContext";
 
 const NavBar = () => {
   const { updateToken, user } = useUser();
   const pathname = usePathname();
+  const { toggle } = useSidebar();
 
   const logout = () => {
     if (updateToken) {
@@ -51,6 +53,13 @@ const NavBar = () => {
   return (
     <div className="navbar bg-base-100 justify-between fixed z-10">
       <div>
+        <div
+          onClick={toggle}
+          className="cursor-pointer hover:bg-slate-500 rounded-full p-2 mx-2 ease-in-out duration-300"
+        >
+          <Bars3Icon className="h-[30px] w-[30px]" />
+        </div>
+
         <Logo />
       </div>
 
