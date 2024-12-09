@@ -37,13 +37,27 @@ export default function Page() {
     );
   };
 
+  const notSubscribedAnyChannel = () => {
+    return (
+      <div className="flex justify-center pt-10">
+        <p className="text-4xl font-bold">
+          You are not subscribed to any channel!
+        </p>
+      </div>
+    );
+  };
+
   return (
     <>
       {user ? (
-        videos ? (
-          <VideoGrid videos={videos} />
+        user.subscribedUsers.length > 0 ? (
+          videos ? (
+            <VideoGrid videos={videos} />
+          ) : (
+            <></>
+          )
         ) : (
-          <></>
+          notSubscribedAnyChannel()
         )
       ) : (
         notLoggedSubscription()
