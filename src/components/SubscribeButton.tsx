@@ -1,6 +1,6 @@
 "use client";
 import { useUser } from "@/context/userContext";
-import { SubscriptionType, UserType } from "@/lib/definitions";
+import { SubscriptionType } from "@/lib/definitions";
 import { subscribe, unsubscribe } from "@/services/userService";
 import { useEffect, useRef, useState } from "react";
 import { Modal } from "./Modal";

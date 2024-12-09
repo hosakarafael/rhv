@@ -1,5 +1,5 @@
 "use client";
-import { SubscriptionType, UserType, VideoType } from "@/lib/definitions";
+import { SubscriptionType, VideoType } from "@/lib/definitions";
 import Avatar from "./Avatar";
 import { fetchVideoById, increaseView } from "@/services/publicVideoService";
 import { HandThumbUpIcon } from "@heroicons/react/24/outline";

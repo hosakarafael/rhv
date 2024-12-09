@@ -14,71 +14,87 @@ export const SideNav = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col gap-20 py-10 px-5 fixed">
-      <Tooltip label="Home">
-        <Link href="/">
-          <div
-            className={clsx({
-              "py-3 rounded-lg hover:bg-base-100": true,
-              "bg-base-100": pathname === "/",
+    <div className="flex flex-col p-1 fixed z-10">
+      <Link href="/">
+        <div
+          className={
+            "py-3 rounded-lg hover:bg-base-100 flex flex-col items-center"
+          }
+        >
+          <HomeIcon
+            className={clsx("mx-4 h-[30px] w-[30px] text-gray-500", {
+              "text-white": pathname === "/",
+            })}
+          />
+          <span
+            className={clsx("text-xs font-bold text-gray-500", {
+              "text-white": pathname === "/",
             })}
           >
-            <HomeIcon
-              className={clsx("mx-4 h-[30px] w-[30px] text-gray-500", {
-                "text-white": pathname === "/",
-              })}
-            />
-          </div>
-        </Link>
-      </Tooltip>
-      <Tooltip label="Subscriptions">
-        <Link href="/subscriptions">
-          <div
-            className={clsx({
-              "py-3 rounded-lg hover:bg-base-100": true,
-              "bg-base-100": pathname === "/subscriptions",
+            Home
+          </span>
+        </div>
+      </Link>
+      <Link href="/subscriptions">
+        <div
+          className={
+            "py-3 rounded-lg hover:bg-base-100 flex flex-col items-center"
+          }
+        >
+          <UserGroupIcon
+            className={clsx("mx-4 h-[30px] w-[30px] text-gray-500", {
+              "text-white": pathname === "/subscriptions",
+            })}
+          />
+          <span
+            className={clsx("text-xs font-bold text-gray-500", {
+              "text-white": pathname === "/subscriptions",
             })}
           >
-            <UserGroupIcon
-              className={clsx("mx-4 h-[30px] w-[30px] text-gray-500", {
-                "text-white": pathname === "/subscriptions",
-              })}
-            />
-          </div>
-        </Link>
-      </Tooltip>
-      <Tooltip label="History">
-        <Link href="/history">
-          <div
-            className={clsx({
-              "py-3 rounded-lg hover:bg-base-100": true,
-              "bg-base-100": pathname === "/history",
+            Subscriptions
+          </span>
+        </div>
+      </Link>
+      <Link href="/history">
+        <div
+          className={
+            "py-3 rounded-lg hover:bg-base-100 flex flex-col items-center"
+          }
+        >
+          <ClockIcon
+            className={clsx("mx-4 h-[30px] w-[30px] text-gray-500", {
+              "text-white": pathname === "/history",
+            })}
+          />
+          <span
+            className={clsx("text-xs font-bold text-gray-500", {
+              "text-white": pathname === "/history",
             })}
           >
-            <ClockIcon
-              className={clsx("mx-4 h-[30px] w-[30px] text-gray-500", {
-                "text-white": pathname === "/history",
-              })}
-            />
-          </div>
-        </Link>
-      </Tooltip>
-      <Tooltip label="My videos">
-        <Link href="/myvideos">
-          <div
-            className={clsx({
-              "py-3 rounded-lg hover:bg-base-100": true,
-              "bg-base-100": pathname === "/myvideos",
+            History
+          </span>
+        </div>
+      </Link>
+      <Link href="/myvideos">
+        <div
+          className={
+            "py-3 rounded-lg hover:bg-base-100 flex flex-col items-center"
+          }
+        >
+          <PlayCircleIcon
+            className={clsx("mx-4 h-[30px] w-[30px] text-gray-500", {
+              "text-white": pathname === "/myvideos",
+            })}
+          />
+          <span
+            className={clsx("text-xs font-bold text-gray-500", {
+              "text-white": pathname === "/myvideos",
             })}
           >
-            <PlayCircleIcon
-              className={clsx("mx-4 h-[30px] w-[30px] text-gray-500", {
-                "text-white": pathname === "/myvideos",
-              })}
-            />
-          </div>
-        </Link>
-      </Tooltip>
+            My videos
+          </span>
+        </div>
+      </Link>
     </div>
   );
 };
