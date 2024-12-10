@@ -7,6 +7,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 interface SidebarContextInterface {
   isMin: boolean;
   toggle: () => void;
+  update: (isMin: boolean) => void;
 }
 
 const SidebarContext = createContext<Partial<SidebarContextInterface>>({});
@@ -25,12 +26,17 @@ export const SidebarProvider = ({
     localStorage.setItem("min", String(!isMin));
   };
 
+  const update = (isMin: boolean) => {
+    setIsMin(isMin);
+  };
+
   return (
     <SidebarContext.Provider
       value={
         {
           isMin,
           toggle,
+          update,
         } as SidebarContextInterface
       }
     >
