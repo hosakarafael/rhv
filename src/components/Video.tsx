@@ -47,7 +47,7 @@ export const Video = ({ id }: { id: string }) => {
           <h1 className="text-3xl font-bold">{video.title}</h1>
           <div className="flex items-center gap-2 mt-2">
             <div className="flex gap-2 pr-2">
-              <Avatar />
+              <Avatar size="M" />
               <div>
                 <p className="font-bold">{video.user.name}</p>
                 <p className="text-sm text-neutral-700 dark:text-neutral-400">
@@ -78,7 +78,7 @@ export const Video = ({ id }: { id: string }) => {
           <p className="text-2xl font-bold">1600 Comments</p>
         </div>
         <div className="p-4 flex items-center gap-2">
-          <Avatar />
+          <Avatar size="S" />
           <div className="w-full">
             <input
               type="text"

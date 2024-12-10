@@ -29,7 +29,7 @@ const NavBar = () => {
             role="button"
             className="btn btn-ghost btn-circle avatar"
           >
-            <Avatar />
+            <Avatar size="S" />
           </div>
         </Tooltip>
         <ul

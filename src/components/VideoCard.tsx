@@ -19,7 +19,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
       <div className="flex m-3">
         <div>
           <Link href={`/channel/${video.userId}`}>
-            <Avatar />
+            <Avatar size="S" />
           </Link>
         </div>
         <div className="mx-3 mb-4">
