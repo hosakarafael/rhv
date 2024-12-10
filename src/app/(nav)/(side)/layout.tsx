@@ -7,13 +7,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const { isMin } = useSidebar();
   return (
     <>
-      <div className="sm:block hidden">
+      {/*min = display , max = display (from parent layout)*/}
+      <div className={clsx({ "sm:block hidden": isMin, "hidden ": !isMin })}>
         <SideNav />
       </div>
       <div
         className={clsx("sm:absolute", {
           "left-[102px] sm:w-[calc(100vw-120px)]": isMin,
-          "left-[240px] sm:w-[calc(100vw-240px)]": !isMin,
         })}
       >
         {children}

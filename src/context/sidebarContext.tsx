@@ -16,15 +16,23 @@ export const SidebarProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [isMin, setIsMin] = useState(false);
+  const localValue = localStorage.getItem("min");
+
+  const [isMin, setIsMin] = useState(localValue === "true" ? true : false);
 
   const toggle = () => {
     setIsMin(!isMin);
+    localStorage.setItem("min", String(!isMin));
   };
 
   return (
     <SidebarContext.Provider
-      value={{ isMin, toggle } as SidebarContextInterface}
+      value={
+        {
+          isMin,
+          toggle,
+        } as SidebarContextInterface
+      }
     >
       {children}
     </SidebarContext.Provider>

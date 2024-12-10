@@ -55,7 +55,7 @@ const NavBar = () => {
       <div>
         <div
           onClick={toggle}
-          className="cursor-pointer hover:bg-slate-500 rounded-full p-2 mx-2 ease-in-out duration-300"
+          className="cursor-pointer hover:bg-slate-500 rounded-full p-2 mx-2 ease-in-out duration-300 sm:block hidden"
         >
           <Bars3Icon className="h-[30px] w-[30px]" />
         </div>

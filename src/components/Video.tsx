@@ -91,5 +91,13 @@ export const Video = ({ id }: { id: string }) => {
     );
   };
 
-  return <>{video ? renderVideo(video) : <div>Video deleted!</div>}</>;
+  return (
+    <>
+      {video ? (
+        renderVideo(video)
+      ) : (
+        <div>Video was deleted or does not exist!</div>
+      )}
+    </>
+  );
 };
