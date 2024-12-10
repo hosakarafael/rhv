@@ -7,12 +7,17 @@ import { registerHistory } from "@/services/userService";
 import { useUser } from "@/context/userContext";
 import { useEffect, useState } from "react";
 import { SubscribeButton } from "./SubscribeButton";
+import Link from "next/link";
+import { useSidebar } from "@/context/sidebarContext";
 
 export const Video = ({ id }: { id: string }) => {
   const [video, setVideo] = useState<VideoType>();
   const { user, token } = useUser();
+  const { update: updateSidebar } = useSidebar();
 
   async function init() {
+    //update sidebar to set min = true, making it invisble on first render
+    updateSidebar && updateSidebar(true);
     setVideo(await fetchVideoById(id));
     increaseView(id);
   }
@@ -47,9 +52,13 @@ export const Video = ({ id }: { id: string }) => {
           <h1 className="text-3xl font-bold">{video.title}</h1>
           <div className="flex items-center gap-2 mt-2">
             <div className="flex gap-2 pr-2">
-              <Avatar size="M" />
+              <Link href={`/channel/${video.userId}`}>
+                <Avatar size="M" />
+              </Link>
               <div>
-                <p className="font-bold">{video.user.name}</p>
+                <Link href={`/channel/${video.userId}`}>
+                  <p className="font-bold">{video.user.name}</p>
+                </Link>
                 <p className="text-sm text-neutral-700 dark:text-neutral-400">
                   {video.user.subscribers} subscribers
                 </p>
