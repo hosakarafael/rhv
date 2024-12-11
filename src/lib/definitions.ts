@@ -1,5 +1,6 @@
 interface Response {
   message: string;
+  errorCode: string;
 }
 
 export interface AuthenticationResponse extends Response {

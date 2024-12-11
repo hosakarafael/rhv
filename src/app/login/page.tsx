@@ -42,9 +42,17 @@ export default function Page() {
     const res = await authenticate(email, password);
     if (res.message) {
       setIsAlertVisible(true);
-      switch (res.message) {
-        case "Bad credentials":
+      console.log(res.errorCode);
+
+      switch (res.errorCode) {
+        case "AS001":
           setErrorMessage("Incorrect email or password.");
+          break;
+        case "AS002":
+          setErrorMessage("Email cannot be empty.");
+          break;
+        case "AS003":
+          setErrorMessage("Password cannot be empty.");
           break;
         default:
           setErrorMessage(res.message);
