@@ -19,13 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         >
           <SideNav />
         </div>
-        <div
-          className={clsx("sm:absolute", {
-            "left-[240px] sm:w-[calc(100vw-240px)]": !isMin,
-          })}
-        >
-          {children}
-        </div>
+        {children}
       </div>
     </>
   );

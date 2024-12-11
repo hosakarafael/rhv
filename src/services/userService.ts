@@ -34,7 +34,7 @@ export const fetchHistoryByUserId = async (
 
 export const registerHistory = async (
   userId: number,
-  videoId: string,
+  videoId: number,
   token: string
 ) => {
   const res = await fetch(`${serviceURL}/history`, {

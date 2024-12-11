@@ -1,3 +1,4 @@
+"use server";
 import { VideoType } from "@/lib/definitions";
 
 const serviceURL: string = process.env.NEXT_PUBLIC_API_URL + "video/pb";
@@ -14,6 +15,7 @@ export const fetchVideoById = async (id: string): Promise<VideoType> => {
   const res = await fetch(`${serviceURL}/${id}`, {
     method: "GET",
   });
+
   return await res.json();
 };
 

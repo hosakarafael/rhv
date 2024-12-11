@@ -51,7 +51,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 justify-between fixed z-10">
+    <div className="navbar bg-base-100 justify-between fixed z-20">
       <div>
         <div
           onClick={toggle}

@@ -17,21 +17,26 @@ export const SideNav = () => {
   const { isMin } = useSidebar();
 
   const baseIconContainerStyle = clsx(
-    "py-3 rounded-lg hover:bg-base-100 flex items-center",
+    "group py-3 rounded-lg hover:dark:bg-base-100 hover:bg-gray-500 hover:text-white flex items-center",
     { "flex-col": isMin },
     { "pr-14": !isMin }
   );
-  const baseIconStyle = clsx("mx-4 h-[30px] w-[30px] text-gray-500");
-  const baseIconTextStyle = clsx("text-lg text-gray-500", {
-    "text-xs font-bold": isMin,
-  });
+  const baseIconStyle = clsx(
+    "group-hover:text-white mx-4 h-[30px] w-[30px] text-gray-500"
+  );
+  const baseIconTextStyle = clsx(
+    "group-hover:text-white text-lg text-gray-500",
+    {
+      "text-xs font-bold": isMin,
+    }
+  );
 
   return (
-    <div className="flex flex-col m-2 fixed z-10">
+    <div className="flex flex-col gap-2 p-2 fixed dark:bg-black h-screen z-10">
       <Link href="/">
         <div
           className={clsx(baseIconContainerStyle, {
-            "bg-base-100": pathname === "/",
+            "bg-gray-500 dark:bg-base-100": pathname === "/",
           })}
         >
           <HomeIcon
@@ -51,7 +56,7 @@ export const SideNav = () => {
       <Link href="/subscriptions">
         <div
           className={clsx(baseIconContainerStyle, {
-            "bg-base-100": pathname === "/subscriptions",
+            "bg-gray-500 dark:bg-base-100": pathname === "/subscriptions",
           })}
         >
           <UserGroupIcon
@@ -71,7 +76,7 @@ export const SideNav = () => {
       <Link href="/history">
         <div
           className={clsx(baseIconContainerStyle, {
-            "bg-base-100": pathname === "/history",
+            "bg-gray-500 dark:bg-base-100": pathname === "/history",
           })}
         >
           <ClockIcon
@@ -91,7 +96,7 @@ export const SideNav = () => {
       <Link href="/myvideos">
         <div
           className={clsx(baseIconContainerStyle, {
-            "bg-base-100": pathname === "/myvideos",
+            "bg-gray-500 dark:bg-base-100": pathname === "/myvideos",
           })}
         >
           <PlayCircleIcon

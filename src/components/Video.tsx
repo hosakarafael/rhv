@@ -14,12 +14,20 @@ export const Video = ({ id }: { id: string }) => {
   const [video, setVideo] = useState<VideoType>();
   const { user, token } = useUser();
   const { update: updateSidebar } = useSidebar();
+  const [loading, setLoading] = useState(true);
 
   async function init() {
-    //update sidebar to set min = true, making it invisble on first render
+    //update sidebar to set min = true, making it invisble on first
     updateSidebar && updateSidebar(true);
-    setVideo(await fetchVideoById(id));
-    increaseView(id);
+    const res = await fetchVideoById(id);
+    if (res.message && res.message == `Video with ID ${id} not found`) {
+      setVideo(undefined);
+    } else {
+      setVideo(res);
+      increaseView(id);
+    }
+
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -27,10 +35,20 @@ export const Video = ({ id }: { id: string }) => {
   }, []);
 
   useEffect(() => {
-    if (user && token) {
-      registerHistory(user.id, id, token);
+    if (user && token && video) {
+      registerHistory(user.id, video.id, token);
     }
   }, [user]);
+
+  const renderVideoDeletedOrDoesNotExist = () => {
+    return (
+      <div className="flex justify-center pt-10">
+        <p className="text-4xl font-bold">
+          Video was deleted or does not exist!
+        </p>
+      </div>
+    );
+  };
 
   const renderVideo = (video: VideoType) => {
     return (
@@ -102,10 +120,12 @@ export const Video = ({ id }: { id: string }) => {
 
   return (
     <>
-      {video ? (
+      {loading ? (
+        <div>Loading...</div>
+      ) : video ? (
         renderVideo(video)
       ) : (
-        <div>Video was deleted or does not exist!</div>
+        renderVideoDeletedOrDoesNotExist()
       )}
     </>
   );

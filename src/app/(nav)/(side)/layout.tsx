@@ -13,7 +13,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
       <div
         className={clsx("sm:absolute", {
-          "left-[102px] sm:w-[calc(100vw-120px)]": isMin,
+          "left-[102px] sm:w-[calc(100vw-102px)]": isMin,
+          "left-[240px] sm:w-[calc(100vw-240px)]": !isMin,
         })}
       >
         {children}

@@ -19,7 +19,7 @@ export interface HistoryType {
   watchedAt: string;
 }
 
-export interface VideoType {
+export interface VideoType extends Response {
   id: number;
   title: string;
   description: string;
