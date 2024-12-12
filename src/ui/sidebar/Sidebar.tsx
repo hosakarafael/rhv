@@ -16,12 +16,16 @@ import { SidebarItem } from "./SidebarItem";
 import { SidebarSubscriptionsList } from "./SidebarSubscriptionsList";
 
 export const Sidebar = () => {
+  const { isMin } = useSidebar();
+
   const renderSubscriptionsSection = () => {
     return (
       <div>
         <div className="divider border-t-2 border-gray-600 "></div>
         <div>
-          <h1 className="text-lg font-bold mx-5 mb-2">Subscriptions</h1>
+          {!isMin && (
+            <h1 className="text-lg font-bold mx-5 mb-2">Subscriptions</h1>
+          )}
           <SidebarSubscriptionsList />
         </div>
       </div>
