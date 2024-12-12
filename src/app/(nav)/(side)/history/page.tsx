@@ -1,5 +1,5 @@
 "use client";
-import { HistoryList } from "@/components/HistoryList";
+import { HistoryList } from "@/ui/history/HistoryList";
 import { LoginButton } from "@/components/LoginButton";
 import Tooltip from "@/components/Tooltip";
 import { useUser } from "@/context/userContext";

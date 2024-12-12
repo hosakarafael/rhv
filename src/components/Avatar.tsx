@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 interface AvatarProps {
-  size: "S" | "M" | "L";
+  size: "XS" | "S" | "M" | "L";
 }
 
 const Avatar = ({ size }: AvatarProps) => {
@@ -10,6 +10,7 @@ const Avatar = ({ size }: AvatarProps) => {
       <div
         className={clsx({
           "rounded-full": true,
+          "w-[30px] h-[30px]": size == "XS",
           "w-[40px] h-[40px]": size == "S",
           "w-[50px] h-[50px]": size == "M",
           "w-[120px] h-[120px]": size == "L",

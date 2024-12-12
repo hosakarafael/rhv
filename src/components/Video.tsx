@@ -20,7 +20,6 @@ export const Video = ({ id }: { id: string }) => {
     //update sidebar to set min = true, making it invisble on first
     updateSidebar && updateSidebar(true);
     const res = await fetchVideoById(id);
-    console.log(res.errorCode);
 
     if (res.errorCode == "VS001") {
       setVideo(undefined);

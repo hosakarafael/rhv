@@ -1,6 +1,6 @@
 "use client";
-import NavBar from "@/components/NavBar";
-import { SideNav } from "@/components/SideNav";
+import NavBar from "@/ui/Navbar";
+import { Sidebar } from "@/ui/sidebar/Sidebar";
 import { useSidebar } from "@/context/sidebarContext";
 import clsx from "clsx";
 
@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             "sm:block hidden": !isMin,
           })}
         >
-          <SideNav />
+          <Sidebar />
         </div>
         {children}
       </div>

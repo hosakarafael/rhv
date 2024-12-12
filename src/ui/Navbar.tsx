@@ -1,10 +1,10 @@
 "use client";
-import Avatar from "./Avatar";
+import Avatar from "../components/Avatar";
 import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import Tooltip from "./Tooltip";
+import Tooltip from "../components/Tooltip";
 import { useUser } from "@/context/userContext";
-import { Logo } from "./Logo";
-import { LoginButton } from "./LoginButton";
+import { Logo } from "../components/Logo";
+import { LoginButton } from "../components/LoginButton";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "@/context/sidebarContext";
 

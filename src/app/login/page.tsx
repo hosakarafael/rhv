@@ -42,7 +42,6 @@ export default function Page() {
     const res = await authenticate(email, password);
     if (res.message) {
       setIsAlertVisible(true);
-      console.log(res.errorCode);
 
       switch (res.errorCode) {
         case "AS001":
