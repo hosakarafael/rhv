@@ -11,7 +11,7 @@ export const SidebarSubscriptionsList = () => {
 
   return user?.subscribedUsers?.map((subs) => (
     <div key={subs.id} className="mx-2">
-      <Link href={`channel/${subs.id}`}>
+      <Link href={`/channel/${subs.id}`}>
         <div
           className={clsx(
             "flex items-center gap-3 p-2 rounded-lg  hover:dark:bg-base-100",

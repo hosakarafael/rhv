@@ -31,7 +31,7 @@ export interface VideoType extends Response {
   user: UserType;
 }
 
-export interface UserType {
+export interface UserType extends Response {
   id: number;
   name: string;
   email: string;

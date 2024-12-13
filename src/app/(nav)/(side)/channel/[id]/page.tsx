@@ -4,12 +4,19 @@ import { VideoGrid } from "@/components/VideoGrid";
 import { SubscriptionType } from "@/lib/definitions";
 import { fetchUserById } from "@/services/publicUserService";
 import { fetchByUserIds } from "@/services/publicVideoService";
+import { redirect } from "next/navigation";
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const id = params.id;
   const user = await fetchUserById(id);
+
+  if (user.errorCode == "US001") {
+    redirect("/");
+  }
+
   const videos = await fetchByUserIds([Number(id)]);
+
   return (
     <>
       <div className="flex gap-5 py-10">
