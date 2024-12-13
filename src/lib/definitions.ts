@@ -29,6 +29,7 @@ export interface VideoType extends Response {
   userId: number;
   createdAt: string;
   user: UserType;
+  likedUsers: number[];
 }
 
 export interface UserType extends Response {

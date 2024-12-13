@@ -2,19 +2,23 @@
 import { SubscriptionType, VideoType } from "@/lib/definitions";
 import Avatar from "./Avatar";
 import { fetchVideoById, increaseView } from "@/services/publicVideoService";
-import { HandThumbUpIcon } from "@heroicons/react/24/outline";
+import { HandThumbUpIcon as HandThumbUpIconOutline } from "@heroicons/react/24/outline";
+import { HandThumbUpIcon as HandThumbUpIconSolid } from "@heroicons/react/24/solid";
 import { registerHistory } from "@/services/userService";
 import { useUser } from "@/context/userContext";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SubscribeButton } from "./SubscribeButton";
 import Link from "next/link";
 import { useSidebar } from "@/context/sidebarContext";
+import { like, unlike } from "@/services/videoService";
+import { Modal } from "./Modal";
 
 export const Video = ({ id }: { id: string }) => {
   const [video, setVideo] = useState<VideoType>();
   const { user, token } = useUser();
   const { update: updateSidebar } = useSidebar();
   const [loading, setLoading] = useState(true);
+  const modalRef = useRef<HTMLDialogElement>(null);
 
   async function init() {
     //update sidebar to set min = true, making it invisble on first
@@ -41,6 +45,24 @@ export const Video = ({ id }: { id: string }) => {
     }
   }, [user]);
 
+  const handleLike = () => {
+    if (user && video && token) {
+      like(user.id, video.id, token);
+      const updatedLiked = [...video.likedUsers, user.id];
+      const updatedVideo = { ...video, likedUsers: updatedLiked };
+      setVideo(updatedVideo);
+    }
+  };
+
+  const handleUnlike = () => {
+    if (user && video && token) {
+      unlike(user.id, video.id, token);
+      const updatedLiked = video.likedUsers.filter((like) => like != user.id);
+      const updatedVideo = { ...video, likedUsers: updatedLiked };
+      setVideo(updatedVideo);
+    }
+  };
+
   const renderVideoDeletedOrDoesNotExist = () => {
     return (
       <div className="flex justify-center pt-10">
@@ -56,7 +78,7 @@ export const Video = ({ id }: { id: string }) => {
       <>
         <div
           className="relative w-full max-w-screen h-0 bg-black"
-          style={{ paddingTop: "43%" }}
+          style={{ paddingTop: "39%" }}
         >
           <video
             className="absolute top-0 left-0 w-full h-full"
@@ -90,9 +112,29 @@ export const Video = ({ id }: { id: string }) => {
               }
             />
 
-            <div className="flex items-center gap-2 bg-gray-100 dark:bg-base-100 px-5 py-2 rounded-full">
-              <HandThumbUpIcon className="h-[30px] w-[30px]" />
-              <p>7.8K</p>
+            <div
+              onClick={() => {
+                if (user) {
+                  video.likedUsers.includes(user.id)
+                    ? handleUnlike()
+                    : handleLike();
+                } else {
+                  modalRef.current?.showModal();
+                }
+              }}
+              className="flex items-center gap-2 bg-gray-100 dark:bg-base-100 px-5 py-2 rounded-full cursor-pointer"
+            >
+              {user && video.likedUsers.includes(user.id) ? (
+                <HandThumbUpIconSolid className="h-[30px] w-[30px]" />
+              ) : (
+                <HandThumbUpIconOutline className="h-[30px] w-[30px]" />
+              )}
+              <p>{video.likedUsers.length}</p>
+              <Modal
+                title="Like this video?"
+                text="Please log in to rate."
+                ref={modalRef}
+              />
             </div>
           </div>
         </div>
