@@ -1,11 +1,21 @@
+"use server";
 import { HistoryType, UserType } from "@/lib/definitions";
+import { isValidToken } from "@/lib/jwt";
+import { redirect } from "next/navigation";
 
 const serviceURL: string = process.env.NEXT_PUBLIC_API_URL + "user";
+
+function verifyToken(token: string) {
+  if (!isValidToken(token)) {
+    redirect("/logout");
+  }
+}
 
 export const fetchUserByEmail = async (
   email: string,
   token: string
 ): Promise<UserType> => {
+  verifyToken(token);
   const res = await fetch(`${serviceURL}/email/${email}`, {
     method: "GET",
     headers: {
@@ -21,6 +31,7 @@ export const fetchHistoryByUserId = async (
   userId: number,
   token: string
 ): Promise<HistoryType[]> => {
+  verifyToken(token);
   const res = await fetch(`${serviceURL}/history/${userId}`, {
     method: "GET",
     headers: {
@@ -37,6 +48,7 @@ export const registerHistory = async (
   videoId: number,
   token: string
 ) => {
+  verifyToken(token);
   const res = await fetch(`${serviceURL}/history`, {
     method: "POST",
     headers: {
@@ -52,6 +64,7 @@ export const subscribe = async (
   creatorId: number,
   token: string
 ) => {
+  verifyToken(token);
   const res = await fetch(`${serviceURL}/subscribe`, {
     method: "POST",
     headers: {
@@ -67,6 +80,7 @@ export const unsubscribe = async (
   creatorId: number,
   token: string
 ) => {
+  verifyToken(token);
   const res = await fetch(`${serviceURL}/unsubscribe`, {
     method: "POST",
     headers: {

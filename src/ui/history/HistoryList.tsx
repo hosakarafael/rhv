@@ -16,6 +16,8 @@ export const HistoryList = () => {
   async function init() {
     if (user && token) {
       const res = await fetchHistoryByUserId(user.id, token);
+      console.log(JSON.stringify(res));
+
       const groupedByDate: GroupedHistory = {};
       res.map((history) => {
         const dateObject = new Date(history.watchedAt);

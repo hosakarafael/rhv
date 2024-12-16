@@ -7,18 +7,12 @@ import { Logo } from "../components/Logo";
 import { LoginButton } from "../components/LoginButton";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "@/context/sidebarContext";
+import Link from "next/link";
 
-const NavBar = () => {
-  const { updateToken, user } = useUser();
+const Navbar = () => {
+  const { user } = useUser();
   const pathname = usePathname();
   const { toggle } = useSidebar();
-
-  const logout = () => {
-    if (updateToken) {
-      localStorage.removeItem("token");
-      updateToken("");
-    }
-  };
 
   const renderAvatar = () => {
     return (
@@ -43,7 +37,7 @@ const NavBar = () => {
             <a>Settings</a>
           </li>
           <li>
-            <button onClick={() => logout()}>Logout</button>
+            <Link href={"/logout"}>Logout</Link>
           </li>
         </ul>
       </div>
@@ -80,4 +74,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;

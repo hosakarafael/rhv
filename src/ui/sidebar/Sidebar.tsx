@@ -1,21 +1,19 @@
 "use client";
-import Link from "next/link";
-import Tooltip from "../../components/Tooltip";
+
 import {
   ClockIcon,
   HomeIcon,
   PlayCircleIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
-import clsx from "clsx";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useSidebar } from "@/context/sidebarContext";
-import Avatar from "../../components/Avatar";
 import { SidebarItem } from "./SidebarItem";
 import { SidebarSubscriptionsList } from "./SidebarSubscriptionsList";
+import { useUser } from "@/context/userContext";
 
 export const Sidebar = () => {
+  const { user } = useUser();
   const { isMin } = useSidebar();
 
   const renderSubscriptionsSection = () => {
@@ -42,7 +40,7 @@ export const Sidebar = () => {
       />
       <SidebarItem href="/history" text="History" Icon={ClockIcon} />
       <SidebarItem href="/myvideos" text="My videos" Icon={PlayCircleIcon} />
-      {renderSubscriptionsSection()}
+      {user && renderSubscriptionsSection()}
     </div>
   );
 };
