@@ -26,10 +26,17 @@ export interface VideoType extends Response {
   description: string;
   videoUrl: string;
   views: number;
-  userId: number;
   createdAt: string;
   user: UserType;
   likedUsers: number[];
+  comments: CommentType[];
+}
+
+export interface CommentType {
+  id: number;
+  videoId: number;
+  text: string;
+  user: UserType;
 }
 
 export interface UserType extends Response {

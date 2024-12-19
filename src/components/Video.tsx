@@ -1,5 +1,5 @@
 "use client";
-import { SubscriptionType, VideoType } from "@/lib/definitions";
+import { CommentType, SubscriptionType, VideoType } from "@/lib/definitions";
 import Avatar from "./Avatar";
 import { fetchVideoById, increaseView } from "@/services/publicVideoService";
 import { HandThumbUpIcon as HandThumbUpIconOutline } from "@heroicons/react/24/outline";
@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useSidebar } from "@/context/sidebarContext";
 import { like, unlike } from "@/services/videoService";
 import { Modal } from "./Modal";
+import { CommentSection } from "@/ui/video/CommentSection";
 
 export const Video = ({ id }: { id: string }) => {
   const [video, setVideo] = useState<VideoType>();
@@ -63,6 +64,14 @@ export const Video = ({ id }: { id: string }) => {
     }
   };
 
+  const addComment = (comment: CommentType) => {
+    if (video) {
+      const updatedComments = [comment, ...video.comments];
+      const updatedVideo = { ...video, comments: updatedComments };
+      setVideo(updatedVideo);
+    }
+  };
+
   const renderVideoDeletedOrDoesNotExist = () => {
     return (
       <div className="flex justify-center pt-10">
@@ -93,11 +102,11 @@ export const Video = ({ id }: { id: string }) => {
           <h1 className="text-3xl font-bold">{video.title}</h1>
           <div className="flex items-center gap-2 mt-2">
             <div className="flex gap-2 pr-2">
-              <Link href={`/channel/${video.userId}`}>
+              <Link href={`/channel/${video.user.id}`}>
                 <Avatar size="M" />
               </Link>
               <div>
-                <Link href={`/channel/${video.userId}`}>
+                <Link href={`/channel/${video.user.id}`}>
                   <p className="font-bold">{video.user.name}</p>
                 </Link>
                 <p className="text-sm text-neutral-700 dark:text-neutral-400">
@@ -144,19 +153,11 @@ export const Video = ({ id }: { id: string }) => {
             <div>{video.description}</div>
           </div>
         </div>
-        <div className="p-4">
-          <p className="text-2xl font-bold">1600 Comments</p>
-        </div>
-        <div className="p-4 flex items-center gap-2">
-          <Avatar size="S" />
-          <div className="w-full">
-            <input
-              type="text"
-              placeholder="Add a comment..."
-              className="input input-ghost w-full"
-            />
-          </div>
-        </div>
+        <CommentSection
+          videoId={video.id}
+          comments={video.comments}
+          addComment={addComment}
+        />
       </>
     );
   };

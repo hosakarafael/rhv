@@ -6,7 +6,6 @@ import {
   PlayCircleIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
-import { useState } from "react";
 import { useSidebar } from "@/context/sidebarContext";
 import { SidebarItem } from "./SidebarItem";
 import { SidebarSubscriptionsList } from "./SidebarSubscriptionsList";

@@ -1,5 +1,5 @@
 "use server";
-import { VideoType } from "@/lib/definitions";
+import { CommentType } from "@/lib/definitions";
 import { isValidToken } from "@/lib/jwt";
 import { redirect } from "next/navigation";
 
@@ -37,4 +37,22 @@ export const unlike = async (
     },
     body: JSON.stringify({ userId, videoId }),
   });
+};
+
+export const createComment = async (
+  userId: number,
+  videoId: number,
+  text: string,
+  token: string
+): Promise<CommentType> => {
+  verifyToken(token);
+  const res = await fetch(`${serviceURL}/comment`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userId, videoId, text }),
+  });
+  return await res.json();
 };
