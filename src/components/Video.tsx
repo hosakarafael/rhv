@@ -21,6 +21,7 @@ import {
 } from "@/services/videoService";
 import { Modal } from "./Modal";
 import { CommentSection } from "@/ui/video/CommentSection";
+import { formatDate } from "@/lib/textFormatter";
 
 export const Video = ({ id }: { id: string }) => {
   const [video, setVideo] = useState<VideoType>();
@@ -168,8 +169,13 @@ export const Video = ({ id }: { id: string }) => {
         </div>
         <div className="p-4">
           <div className="bg-gray-100 dark:bg-base-100 p-4 rounded-xl">
-            <p className="font-bold">{video.views} views 2 months ago</p>
-            <div>{video.description}</div>
+            <p className="font-bold">
+              {video.views} views {formatDate(video.createdAt)}
+            </p>
+            <div>
+              {video.description ??
+                "No description has been added to this video."}
+            </div>
           </div>
         </div>
         <CommentSection

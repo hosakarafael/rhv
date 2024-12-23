@@ -58,15 +58,17 @@ const Navbar = () => {
       </div>
 
       <div className="form-control">
-        <div className="flex items-center">
-          <input
-            type="text"
-            placeholder="Search"
-            className="input input-bordered md:w-96"
-          />
-          <Tooltip label="Search">
-            <MagnifyingGlassIcon className="mx-4 h-[30px] w-[30px] text-gray-500" />
-          </Tooltip>
+        <div className="flex justify-center py-4">
+          <div className="relative w-full max-w-2xl flex items-center">
+            <input
+              type="text"
+              className="sm:w-96 pl-4 pr-10 py-2 border border-gray-500 rounded-l-full rounded-r-none focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent z-10  "
+              placeholder="Search"
+            />
+            <div className="border border-gray-500 py-[7.5px] rounded-r-full z-0 cursor-pointer">
+              <MagnifyingGlassIcon className="mx-4 h-[25px] w-[25px] text-white" />
+            </div>
+          </div>
         </div>
       </div>
       {user ? renderAvatar() : <LoginButton continueTo={pathname} />}

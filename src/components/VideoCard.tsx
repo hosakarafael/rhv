@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Avatar from "./Avatar";
 import { VideoType } from "@/lib/definitions";
+import { formatDate } from "@/lib/textFormatter";
 
 interface VideoCardProps {
   video: VideoType;
@@ -18,7 +19,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
       </figure>
       <div className="flex m-3">
         <div>
-          <Link href={`/channel/${video.userId}`}>
+          <Link href={`/channel/${video.user.id}`}>
             <Avatar size="S" />
           </Link>
         </div>
@@ -26,11 +27,11 @@ const VideoCard = ({ video }: VideoCardProps) => {
           <Link href={"/video/" + video.id}>
             <h2 className="card-title">{video.title}</h2>
           </Link>
-          <Link href={`/channel/${video.userId}`}>
+          <Link href={`/channel/${video.user.id}`}>
             <p className="text-sm text-neutral-400">{video.user.name}</p>
           </Link>
           <p className="text-sm text-neutral-400">
-            {video.views} views・x month ago
+            {video.views} views・{formatDate(video.createdAt)}
           </p>
         </div>
       </div>
