@@ -69,6 +69,7 @@ export const SubscribeButton = ({ subscribeTo }: SubscribeButtonProps) => {
             Subscribe
           </button>
           <Modal
+            type="Login"
             title="Do you want to subscribe to this channel?"
             text="Please log in to subscribe."
             ref={modalRef}

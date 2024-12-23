@@ -10,7 +10,12 @@ import { useEffect, useRef, useState } from "react";
 import { SubscribeButton } from "./SubscribeButton";
 import Link from "next/link";
 import { useSidebar } from "@/context/sidebarContext";
-import { like, unlike } from "@/services/videoService";
+import {
+  createComment,
+  deleteComment,
+  like,
+  unlike,
+} from "@/services/videoService";
 import { Modal } from "./Modal";
 import { CommentSection } from "@/ui/video/CommentSection";
 
@@ -64,9 +69,19 @@ export const Video = ({ id }: { id: string }) => {
     }
   };
 
-  const addComment = (comment: CommentType) => {
-    if (video) {
+  const handleAddComment = async (text: string) => {
+    if (video && user && token) {
+      const comment = await createComment(user.id, video.id, text, token);
       const updatedComments = [comment, ...video.comments];
+      const updatedVideo = { ...video, comments: updatedComments };
+      setVideo(updatedVideo);
+    }
+  };
+
+  const handleDeleteComment = (comment: CommentType) => {
+    if (video && token) {
+      deleteComment(comment.id, token);
+      const updatedComments = video?.comments.filter((c) => c.id != comment.id);
       const updatedVideo = { ...video, comments: updatedComments };
       setVideo(updatedVideo);
     }
@@ -140,6 +155,7 @@ export const Video = ({ id }: { id: string }) => {
               )}
               <p>{video.likedUsers.length}</p>
               <Modal
+                type="Login"
                 title="Like this video?"
                 text="Please log in to rate."
                 ref={modalRef}
@@ -156,7 +172,8 @@ export const Video = ({ id }: { id: string }) => {
         <CommentSection
           videoId={video.id}
           comments={video.comments}
-          addComment={addComment}
+          onAdd={handleAddComment}
+          onDelete={handleDeleteComment}
         />
       </>
     );

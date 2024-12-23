@@ -56,3 +56,18 @@ export const createComment = async (
   });
   return await res.json();
 };
+
+export const deleteComment = async (
+  commentId: number,
+  token: string
+): Promise<CommentType> => {
+  verifyToken(token);
+  const res = await fetch(`${serviceURL}/comment/${commentId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+  return await res.json();
+};

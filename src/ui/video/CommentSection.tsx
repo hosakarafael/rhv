@@ -1,27 +1,30 @@
 import Avatar from "@/components/Avatar";
 import { CommentType } from "@/lib/definitions";
 import { CommentList } from "./CommentList";
-import { createComment } from "@/services/videoService";
 import { useUser } from "@/context/userContext";
 import { useRef, useState } from "react";
+import { Modal } from "@/components/Modal";
 
 interface CommentSectionProps {
   videoId: number;
   comments: CommentType[];
-  addComment: (comment: CommentType) => void;
+  onAdd: (text: string) => void;
+  onDelete: (comment: CommentType) => void;
 }
 
 export const CommentSection = ({
-  videoId,
   comments,
-  addComment,
+  onAdd,
+  onDelete,
 }: CommentSectionProps) => {
-  const { user, token } = useUser();
+  const { user } = useUser();
   const [text, setText] = useState("");
+  const modalRef = useRef<HTMLDialogElement>(null);
 
   const handleAddComment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) {
+      modalRef.current?.showModal();
       return;
     }
 
@@ -29,11 +32,8 @@ export const CommentSection = ({
       return;
     }
 
-    if (token) {
-      const res = await createComment(user.id, videoId, text, token);
-      setText("");
-      addComment(res);
-    }
+    setText("");
+    onAdd(text);
   };
 
   return (
@@ -55,7 +55,13 @@ export const CommentSection = ({
           </form>
         </div>
       </div>
-      <CommentList comments={comments} />
+      <CommentList comments={comments} onDelete={onDelete} />
+      <Modal
+        type="Login"
+        title="Do you want to leave a comment?"
+        text="Please log in to comment."
+        ref={modalRef}
+      />
     </>
   );
 };
