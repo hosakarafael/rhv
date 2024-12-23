@@ -58,7 +58,7 @@ const Navbar = () => {
       </div>
 
       <div className="form-control">
-        <div className="flex justify-center py-4">
+        <div className="flex justify-center">
           <div className="relative w-full max-w-2xl flex items-center">
             <input
               type="text"
