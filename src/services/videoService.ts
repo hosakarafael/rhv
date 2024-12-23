@@ -1,5 +1,5 @@
 "use server";
-import { CommentType } from "@/lib/definitions";
+import { CommentType, VideoType } from "@/lib/definitions";
 import { isValidToken } from "@/lib/jwt";
 import { redirect } from "next/navigation";
 
@@ -10,6 +10,21 @@ function verifyToken(token: string) {
     redirect("/logout");
   }
 }
+
+export const fetchAllVideosByUserId = async (
+  userId: number,
+  token: string
+): Promise<VideoType[]> => {
+  verifyToken(token);
+  const res = await fetch(`${serviceURL}/${userId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+  return await res.json();
+};
 
 export const like = async (userId: number, videoId: number, token: string) => {
   verifyToken(token);

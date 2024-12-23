@@ -4,7 +4,7 @@ import { LoginButton } from "@/components/LoginButton";
 import { VideoGrid } from "@/components/VideoGrid";
 import { useUser } from "@/context/userContext";
 import { VideoType } from "@/lib/definitions";
-import { fetchByUserIds } from "@/services/publicVideoService";
+import { fetchByUserIdsAndPublic } from "@/services/publicVideoService";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -16,7 +16,7 @@ export default function Page() {
   async function init() {
     if (user) {
       const ids = user.subscribedUsers.map((subs) => subs.id);
-      const res = await fetchByUserIds(ids);
+      const res = await fetchByUserIdsAndPublic(ids);
       setVideos(res);
     }
   }

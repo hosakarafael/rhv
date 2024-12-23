@@ -3,7 +3,7 @@ import { VideoType } from "@/lib/definitions";
 
 const serviceURL: string = process.env.NEXT_PUBLIC_API_URL + "video/pb";
 
-export const fetchAllVideos = async (): Promise<VideoType[]> => {
+export const fetchAllPublicVideos = async (): Promise<VideoType[]> => {
   const res = await fetch(serviceURL, {
     method: "GET",
   });
@@ -11,7 +11,9 @@ export const fetchAllVideos = async (): Promise<VideoType[]> => {
   return await res.json();
 };
 
-export const fetchVideoById = async (id: string): Promise<VideoType> => {
+export const fetchVideoByIdAndPublic = async (
+  id: string
+): Promise<VideoType> => {
   const res = await fetch(`${serviceURL}/${id}`, {
     method: "GET",
   });
@@ -33,7 +35,9 @@ export const increaseView = async (videoId: string) => {
   });
 };
 
-export const fetchByUserIds = async (ids: number[]): Promise<VideoType[]> => {
+export const fetchByUserIdsAndPublic = async (
+  ids: number[]
+): Promise<VideoType[]> => {
   const res = await fetch(`${serviceURL}/user-ids`, {
     method: "POST",
     body: JSON.stringify(ids),

@@ -4,18 +4,19 @@ import { LoginButton } from "@/components/LoginButton";
 import { useUser } from "@/context/userContext";
 import { VideoType } from "@/lib/definitions";
 import { capitalizeFirstLetter, formatDate } from "@/lib/textFormatter";
-import { fetchByUserIds } from "@/services/publicVideoService";
+import { fetchAllVideosByUserId } from "@/services/videoService";
+
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-  const { user } = useUser();
+  const { user, token } = useUser();
   const [videos, setVideos] = useState<VideoType[]>([]);
   const pathname = usePathname();
 
   async function init() {
-    if (user) {
-      const res = fetchByUserIds([user.id]);
+    if (user && token) {
+      const res = fetchAllVideosByUserId(user.id, token);
       setVideos(await res);
     }
   }

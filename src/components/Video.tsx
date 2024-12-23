@@ -1,7 +1,10 @@
 "use client";
 import { CommentType, SubscriptionType, VideoType } from "@/lib/definitions";
 import Avatar from "./Avatar";
-import { fetchVideoById, increaseView } from "@/services/publicVideoService";
+import {
+  fetchVideoByIdAndPublic,
+  increaseView,
+} from "@/services/publicVideoService";
 import { HandThumbUpIcon as HandThumbUpIconOutline } from "@heroicons/react/24/outline";
 import { HandThumbUpIcon as HandThumbUpIconSolid } from "@heroicons/react/24/solid";
 import { registerHistory } from "@/services/userService";
@@ -29,7 +32,7 @@ export const Video = ({ id }: { id: string }) => {
   async function init() {
     //update sidebar to set min = true, making it invisble on first
     updateSidebar && updateSidebar(true);
-    const res = await fetchVideoById(id);
+    const res = await fetchVideoByIdAndPublic(id);
 
     if (res.errorCode == "VS001") {
       setVideo(undefined);

@@ -3,7 +3,7 @@ import { SubscribeButton } from "@/components/SubscribeButton";
 import { VideoGrid } from "@/components/VideoGrid";
 import { SubscriptionType } from "@/lib/definitions";
 import { fetchUserById } from "@/services/publicUserService";
-import { fetchByUserIds } from "@/services/publicVideoService";
+import { fetchByUserIdsAndPublic } from "@/services/publicVideoService";
 import { redirect } from "next/navigation";
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
@@ -15,7 +15,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
     redirect("/");
   }
 
-  const videos = await fetchByUserIds([Number(id)]);
+  const videos = await fetchByUserIdsAndPublic([Number(id)]);
 
   return (
     <>
