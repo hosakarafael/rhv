@@ -30,6 +30,7 @@ export interface VideoType extends Response {
   user: UserType;
   likedUsers: number[];
   comments: CommentType[];
+  visibility: "PUBLIC" | "PRIVATE";
 }
 
 export interface CommentType {

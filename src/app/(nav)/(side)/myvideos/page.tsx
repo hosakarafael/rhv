@@ -2,8 +2,8 @@
 
 import { LoginButton } from "@/components/LoginButton";
 import { useUser } from "@/context/userContext";
-import { formatDate } from "@/lib/dateUtils";
 import { VideoType } from "@/lib/definitions";
+import { capitalizeFirstLetter, formatDate } from "@/lib/textFormatter";
 import { fetchByUserIds } from "@/services/publicVideoService";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -82,11 +82,11 @@ export default function Page() {
                       </div>
                     </div>
                   </td>
-                  <td>Public</td>
+                  <td>{capitalizeFirstLetter(video.visibility)}</td>
                   <td className="w-32">{formatDate(video.createdAt)}</td>
                   <td>{video.views}</td>
-                  <td>100</td>
-                  <td>10</td>
+                  <td>{video.comments.length}</td>
+                  <td>{video.likedUsers.length}</td>
                 </tr>
               );
             })}
