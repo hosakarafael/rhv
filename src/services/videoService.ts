@@ -16,7 +16,7 @@ export const fetchAllVideosByUserId = async (
   token: string
 ): Promise<VideoType[]> => {
   verifyToken(token);
-  const res = await fetch(`${serviceURL}/${userId}`, {
+  const res = await fetch(`${serviceURL}/user/${userId}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,

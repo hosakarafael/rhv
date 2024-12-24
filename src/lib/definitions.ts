@@ -18,6 +18,8 @@ export interface HistoryType {
   videoId: number;
   video: VideoType;
   watchedAt: string;
+  videoDeleted: boolean;
+  videoVisible: boolean;
 }
 
 export interface VideoType extends Response {
