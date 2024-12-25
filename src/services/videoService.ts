@@ -11,6 +11,24 @@ function verifyToken(token: string) {
   }
 }
 
+export const createVideo = async (
+  userId: number,
+  title: string,
+  description: string,
+  visibility: string,
+  token: string
+) => {
+  verifyToken(token);
+  const res = await fetch(`${serviceURL}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userId, title, description, visibility }),
+  });
+};
+
 export const fetchAllVideosByUserId = async (
   userId: number,
   token: string

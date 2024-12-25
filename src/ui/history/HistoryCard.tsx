@@ -11,7 +11,7 @@ export const HistoryCard = ({ history }: HistoryCardProps) => {
     if (history.videoDeleted) {
       return (
         <>
-          <div className="w-72 flex justify-center border rounded-2xl">
+          <div className="w-72 flex justify-center border border-gray-600 rounded-2xl">
             <TrashIcon className="w-[60px]" />
           </div>
           <h2 className="card-title w-40 md:w-72 lg:w-96 line-clamp-2 text-ellipsis">
@@ -23,7 +23,7 @@ export const HistoryCard = ({ history }: HistoryCardProps) => {
     if (!history.videoVisible) {
       return (
         <>
-          <div className="w-72 flex justify-center border rounded-2xl">
+          <div className="w-72 flex justify-center border border-gray-600 rounded-2xl">
             <LockClosedIcon className="w-[60px]" />
           </div>
           <h2 className="card-title w-40 md:w-72 lg:w-96 line-clamp-2 text-ellipsis">
@@ -35,9 +35,11 @@ export const HistoryCard = ({ history }: HistoryCardProps) => {
     return (
       <>
         <Link href={`/video/${history.videoId}`}>
-          <video className="w-72 rounded-2xl object-fill">
-            <source src="/video.mp4" type="video/mp4" />
-          </video>
+          <div className="w-72 mx-auto border border-gray-600 bg-black rounded-xl ">
+            <video className="rounded-xl object-contain aspect-video">
+              <source src="/video2.mp4" type="video/mp4" />
+            </video>
+          </div>
         </Link>
 
         <div className="mx-3 mb-4">

@@ -73,7 +73,7 @@ export default function Page() {
       <div className="flex items-center h-screen justify-center gap-3">
         <div className="flex flex-col gap-5 sm:flex-row">
           <h1 className="text-6xl">Login</h1>
-          <form className="flex flex-col gap-4 w-96">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-96">
             <label className="input input-bordered flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -122,10 +122,7 @@ export default function Page() {
               >
                 Create
               </a>
-              <button
-                onClick={(e) => handleSubmit(e)}
-                className="btn btn-accent text-xl text-white rounded-full"
-              >
+              <button className="btn btn-accent text-xl text-white rounded-full">
                 Login
               </button>
             </div>

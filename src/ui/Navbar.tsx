@@ -14,10 +14,13 @@ const Navbar = () => {
   const pathname = usePathname();
   const { toggle } = useSidebar();
 
-  const renderAvatar = () => {
+  const renderUserSection = () => {
     return (
-      <div className="dropdown dropdown-end">
-        <Tooltip label={user ? user?.name : ""} direction="left">
+      <div className="flex gap-5">
+        <Link href={"/upload"} className="btn btn-neutral rounded-full text-sm">
+          Upload video
+        </Link>
+        <div className="dropdown dropdown-end">
           <div
             tabIndex={0}
             role="button"
@@ -25,21 +28,27 @@ const Navbar = () => {
           >
             <Avatar size="S" />
           </div>
-        </Tooltip>
-        <ul
-          tabIndex={0}
-          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-        >
-          <li>
-            <a className="justify-between">Profile</a>
-          </li>
-          <li>
-            <a>Settings</a>
-          </li>
-          <li>
-            <Link href={"/logout"}>Logout</Link>
-          </li>
-        </ul>
+
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+          >
+            <div className="flex items-center gap-2 px-2 pt-2">
+              <Avatar size="S" />
+              <p>{user && user.name}</p>
+            </div>
+            <div className="divider m-1"></div>
+            <li>
+              <a className="justify-between">Profile</a>
+            </li>
+            <li>
+              <a>Settings</a>
+            </li>
+            <li>
+              <Link href={"/logout"}>Logout</Link>
+            </li>
+          </ul>
+        </div>
       </div>
     );
   };
@@ -71,7 +80,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      {user ? renderAvatar() : <LoginButton continueTo={pathname} />}
+      {user ? renderUserSection() : <LoginButton continueTo={pathname} />}
     </div>
   );
 };

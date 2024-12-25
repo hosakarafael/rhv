@@ -12,9 +12,11 @@ const VideoCard = ({ video }: VideoCardProps) => {
     <div className="card bg-base-100 w-auto mx-1 my-1">
       <figure className="px-1 pt-1">
         <Link href={"/video/" + video.id}>
-          <video className="rounded-xl">
-            <source src="/video.mp4" type="video/mp4" />
-          </video>
+          <div className="w-full mx-auto bg-black rounded-xl ">
+            <video className="rounded-xl object-contain aspect-video">
+              <source src="/video.mp4" type="video/mp4" />
+            </video>
+          </div>
         </Link>
       </figure>
       <div className="flex m-3">

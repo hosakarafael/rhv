@@ -8,7 +8,7 @@ export default async function Page() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <VideoGrid videos={videos} />;
+      <VideoGrid videos={videos} />
     </Suspense>
   );
 }
