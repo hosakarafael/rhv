@@ -1,14 +1,16 @@
+import { XMarkIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 
 interface AlertProps {
   show?: boolean;
   type: "info" | "success" | "warning" | "error";
   message: string;
+  onClose: () => void;
 }
 
-export const Alert = ({ show = false, type, message }: AlertProps) => {
+export const Alert = ({ show = false, type, message, onClose }: AlertProps) => {
   const style = clsx({
-    "alert ": true,
+    "z-20 absolute top-3 right-3 w-96 alert ": true,
     "alert-info": type == "info",
     "alert-success": type == "success",
     "alert-warning": type == "warning",
@@ -84,6 +86,9 @@ export const Alert = ({ show = false, type, message }: AlertProps) => {
           {renderIcon()}
         </svg>
         <span>{message}</span>
+        <div onClick={onClose} className="cursor-pointer">
+          <XMarkIcon className="w-[20px]" />
+        </div>
       </div>
     )
   );

@@ -1,5 +1,5 @@
 "use server";
-import { CommentType, VideoType } from "@/lib/definitions";
+import { CommentType, Response, VideoType } from "@/lib/definitions";
 import { isValidToken } from "@/lib/jwt";
 import { redirect } from "next/navigation";
 
@@ -17,7 +17,7 @@ export const createVideo = async (
   description: string,
   visibility: string,
   token: string
-) => {
+): Promise<Response> => {
   verifyToken(token);
   const res = await fetch(`${serviceURL}`, {
     method: "POST",
@@ -27,6 +27,22 @@ export const createVideo = async (
     },
     body: JSON.stringify({ userId, title, description, visibility }),
   });
+  return await res.json();
+};
+
+export const deleteVideo = async (
+  videoId: number,
+  token: string
+): Promise<Response> => {
+  verifyToken(token);
+  const res = await fetch(`${serviceURL}/${videoId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+  return await res.json();
 };
 
 export const fetchAllVideosByUserId = async (
@@ -93,7 +109,7 @@ export const createComment = async (
 export const deleteComment = async (
   commentId: number,
   token: string
-): Promise<CommentType> => {
+): Promise<Response> => {
   verifyToken(token);
   const res = await fetch(`${serviceURL}/comment/${commentId}`, {
     method: "DELETE",

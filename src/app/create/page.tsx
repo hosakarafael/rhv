@@ -15,6 +15,7 @@ export default function Page() {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { user } = useUser();
+  const [loading, setLoading] = useState(false);
 
   const searchParams = useSearchParams();
   const continueTo = searchParams.get("continueTo");
@@ -26,23 +27,27 @@ export default function Page() {
   }, [user]);
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setLoading(true);
     e.preventDefault();
 
     if (!name) {
       setIsAlertVisible(true);
       setErrorMessage("Channel name cannot be empty");
+      setLoading(false);
       return;
     }
 
     if (!email) {
       setIsAlertVisible(true);
       setErrorMessage("Email cannot be empty");
+      setLoading(false);
       return;
     }
 
     if (!password) {
       setIsAlertVisible(true);
       setErrorMessage("Password cannot be empty");
+      setLoading(false);
       return;
     }
 
@@ -50,6 +55,7 @@ export default function Page() {
     if (res.message) {
       setIsAlertVisible(true);
       setErrorMessage(res.message);
+      setLoading(false);
       return;
     }
 
@@ -59,6 +65,19 @@ export default function Page() {
       updateUser(res.user);
     }
     redirect("/");
+  };
+
+  const validate = () => {
+    if (name.length == 0) {
+      return false;
+    }
+    if (email.length == 0) {
+      return false;
+    }
+    if (password.length == 0) {
+      return false;
+    }
+    return true;
   };
 
   return (
@@ -122,7 +141,12 @@ export default function Page() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
-            <Alert show={isAlertVisible} type="error" message={errorMessage} />
+            <Alert
+              show={isAlertVisible}
+              type="error"
+              message={errorMessage}
+              onClose={() => setIsAlertVisible(false)}
+            />
             <div className="flex justify-end gap-3">
               <a
                 href={continueTo ? `/login?continueTo=${continueTo}` : "/login"}
@@ -132,9 +156,14 @@ export default function Page() {
               </a>
               <button
                 onClick={(e) => handleSubmit(e)}
-                className="btn btn-accent text-xl text-white rounded-full"
+                className="w-24 btn btn-accent text-xl text-white rounded-full"
+                disabled={!validate() || loading}
               >
-                Create Channel
+                {loading ? (
+                  <span className="loading loading-spinner loading-lg"></span>
+                ) : (
+                  "Create"
+                )}
               </button>
             </div>
           </form>

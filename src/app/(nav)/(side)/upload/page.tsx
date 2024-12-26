@@ -1,4 +1,5 @@
 "use client";
+import { Alert } from "@/components/Alert";
 import { useUser } from "@/context/userContext";
 import { createVideo } from "@/services/videoService";
 import clsx from "clsx";
@@ -10,8 +11,14 @@ export default function Page() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState("PUBLIC");
+
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [videoKey, setVideoKey] = useState<number>(0);
+
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [loading, setLoading] = useState(false);
 
   const TITLE_LENGTH = 100;
   const DESCRIPTION_LENGTH = 5000;
@@ -22,10 +29,24 @@ export default function Page() {
     }
   }, []);
 
-  const handleUpload = (e: React.FormEvent) => {
+  const handleUpload = async (e: React.FormEvent) => {
+    setLoading(true);
     e.preventDefault();
     if (token && user) {
-      createVideo(user.id, title, description, visibility, token);
+      const res = await createVideo(
+        user.id,
+        title,
+        description,
+        visibility,
+        token
+      );
+      if (res.errorCode == "VS000") {
+        redirect("/myvideos");
+      } else {
+        setIsAlertVisible(true);
+        setErrorMessage(res.message);
+        setLoading(false);
+      }
     }
   };
 
@@ -37,7 +58,8 @@ export default function Page() {
       setVideoUrl(videoObjectUrl);
       setVideoKey((prevKey) => prevKey + 1);
     } else {
-      alert("Please upload a valid video file.");
+      setIsAlertVisible(true);
+      setErrorMessage("Please upload a valid video file.");
     }
   };
 
@@ -58,6 +80,12 @@ export default function Page() {
     <div className="bg-base-100 m-5 p-5 rounded-md">
       <h1 className="text-center text-4xl font-bold">Upload video</h1>
       <div className="divider"></div>
+      <Alert
+        show={isAlertVisible}
+        type="error"
+        message={errorMessage}
+        onClose={() => setIsAlertVisible(false)}
+      />
       <form onSubmit={handleUpload}>
         <div className="flex justify-around">
           <div>
@@ -176,10 +204,14 @@ export default function Page() {
         <div className="divider"></div>
         <div className="flex justify-end">
           <button
-            className="btn btn-neutral rounded-full"
-            disabled={!validate(title, description)}
+            className="w-24 btn btn-neutral rounded-full"
+            disabled={!validate(title, description) || loading}
           >
-            Upload
+            {loading ? (
+              <span className="loading loading-spinner loading-lg"></span>
+            ) : (
+              "Upload"
+            )}
           </button>
         </div>
       </form>
