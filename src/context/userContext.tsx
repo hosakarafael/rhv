@@ -9,6 +9,7 @@ interface UserContextInterface {
   token: string;
   user: UserType;
   updateUser: (user: UserType | null) => void;
+  loadingUser: boolean;
 }
 
 const UserContext = createContext<Partial<UserContextInterface>>({});
@@ -17,22 +18,26 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("token")
   );
-  const [user, setUser] = useState<UserType | null>(null);
+  const [user, setUser] = useState<UserType | undefined | null>(undefined);
+  const [loadingUser, setLoadingUser] = useState(true);
 
   async function getUser() {
     if (token) {
       const email = getSubjectFromToken(token);
       if (email) {
         setUser(await fetchUserByEmail(email, token));
+        setLoadingUser(false);
       }
     }
   }
 
   useEffect(() => {
+    setLoadingUser(true);
     if (token && isValidToken(token)) {
       getUser();
     } else {
       setUser(null);
+      setLoadingUser(false);
     }
   }, [token]);
 
@@ -52,6 +57,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
           updateToken,
           user,
           updateUser,
+          loadingUser,
         } as UserContextInterface
       }
     >

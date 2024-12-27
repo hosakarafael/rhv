@@ -1,7 +1,9 @@
 "use client";
 
+import { Alert } from "@/components/Alert";
 import { LoginButton } from "@/components/LoginButton";
 import { Modal } from "@/components/Modal";
+import Tooltip from "@/components/Tooltip";
 import { useUser } from "@/context/userContext";
 import { VideoType } from "@/lib/definitions";
 import { capitalizeFirstLetter, formatDate } from "@/lib/textFormatter";
@@ -16,6 +18,8 @@ export default function Page() {
   const [videos, setVideos] = useState<VideoType[]>([]);
   const pathname = usePathname();
   const modalRef = useRef<HTMLDialogElement>(null);
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function init() {
     if (user && token) {
@@ -38,41 +42,65 @@ export default function Page() {
     );
   };
 
-  const handleDeleteVideo = (videoId: number) => {
+  const noVideoFound = () => {
+    return (
+      <div className="p-10 flex flex-col justify-center items-center mt-40">
+        <h1 className="text-4xl font-extrabold mb-5">My Videos</h1>
+        <p className="mb-7">
+          You do not have any videos yet, upload video to see here
+        </p>
+      </div>
+    );
+  };
+
+  const handleDeleteVideo = async (videoId: number) => {
     if (token) {
-      deleteVideo(videoId, token);
+      const res = await deleteVideo(videoId, token);
+      if (res.errorCode == "VS000") {
+        setIsAlertVisible(false);
+        const updatedVideos = videos.filter((video) => video.id != videoId);
+        setVideos(updatedVideos);
+      } else {
+        setIsAlertVisible(true);
+        setErrorMessage(res.message);
+      }
     }
   };
 
   const renderActionSection = () => {
     return (
-      <div className="flex">
-        <div className="hover:bg-base-100 cursor-pointer w-[40px] p-2 rounded-full">
-          <PencilIcon />
-        </div>
-        <div
-          onClick={() => modalRef.current?.showModal()}
-          className="hover:bg-base-100 cursor-pointer w-[40px] p-2 rounded-full"
-        >
-          <TrashIcon />
-        </div>
+      <div className="flex p-2">
+        <Tooltip label="Edit">
+          <div className="hover:bg-base-100 cursor-pointer w-[40px] p-2 rounded-full">
+            <PencilIcon />
+          </div>
+        </Tooltip>
+        <Tooltip label="Delete">
+          <div
+            onClick={() => modalRef.current?.showModal()}
+            className="hover:bg-base-100 cursor-pointer w-[40px] p-2 rounded-full"
+          >
+            <TrashIcon />
+          </div>
+        </Tooltip>
       </div>
     );
   };
 
   const renderMyVideos = () => {
     return (
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto py-3">
+        <Alert
+          show={isAlertVisible}
+          type="error"
+          message={errorMessage}
+          onClose={() => setIsAlertVisible(false)}
+        />
         <h1 className="text-4xl font-extrabold my-5">My Videos</h1>
         <table className="table">
           {/* head */}
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
               <th>Video</th>
               <th>Visibility</th>
               <th>Date</th>
@@ -86,11 +114,6 @@ export default function Page() {
             {videos.map((video) => {
               return (
                 <tr key={video.id} className="group">
-                  <th>
-                    <label>
-                      <input type="checkbox" className="checkbox" />
-                    </label>
-                  </th>
                   <td>
                     <div className="flex gap-3">
                       <div className="flex items-center justify-center">
@@ -103,7 +126,9 @@ export default function Page() {
                       <div>
                         <div className="font-bold">{video.title}</div>
                         <div className="text-sm opacity-50 text-ellipsis line-clamp-1">
-                          {video.description ?? "No description"}
+                          {video.description.length != 0
+                            ? video.description
+                            : "No description"}
                         </div>
                         <div className="hidden group-hover:block absolute">
                           {renderActionSection()}
@@ -134,5 +159,13 @@ export default function Page() {
     );
   };
 
-  return <>{user ? renderMyVideos() : notLoggedMyVideos()}</>;
+  return (
+    <>
+      {user
+        ? videos.length > 0
+          ? renderMyVideos()
+          : noVideoFound()
+        : notLoggedMyVideos()}
+    </>
+  );
 }

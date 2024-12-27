@@ -43,7 +43,7 @@ export const Modal = ({
             </button>
             <button
               onClick={onYes}
-              className="btn btn-neutral text-xl text-white rounded-full"
+              className="btn btn-primary text-xl text-white rounded-full"
             >
               Yes
             </button>

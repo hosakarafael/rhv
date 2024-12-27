@@ -3,10 +3,14 @@ import Navbar from "@/ui/Navbar";
 import { Sidebar } from "@/ui/sidebar/Sidebar";
 import { useSidebar } from "@/context/sidebarContext";
 import clsx from "clsx";
+import { useUser } from "@/context/userContext";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { isMin } = useSidebar();
-  return (
+  const { loadingUser } = useUser();
+  return loadingUser ? (
+    <div></div>
+  ) : (
     <>
       <Navbar />
       <div className="absolute h-[calc(100vh-64px)] overflow-auto w-screen dark:bg-black top-16">

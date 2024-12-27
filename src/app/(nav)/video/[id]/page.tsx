@@ -1,4 +1,3 @@
-import Avatar from "@/components/Avatar";
 import { Video } from "@/components/Video";
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
