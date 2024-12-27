@@ -11,6 +11,22 @@ function verifyToken(token: string) {
   }
 }
 
+export const fetchVideoById = async (
+  id: string,
+  token: string
+): Promise<VideoType> => {
+  verifyToken(token);
+  const res = await fetch(`${serviceURL}/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  return await res.json();
+};
+
 export const createVideo = async (
   userId: number,
   title: string,
@@ -41,6 +57,25 @@ export const deleteVideo = async (
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
+  });
+  return await res.json();
+};
+
+export const editVideo = async (
+  id: number,
+  title: string,
+  description: string,
+  visibility: string,
+  token: string
+): Promise<Response> => {
+  verifyToken(token);
+  const res = await fetch(`${serviceURL}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id, title, description, visibility }),
   });
   return await res.json();
 };

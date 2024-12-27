@@ -108,8 +108,7 @@ export default function Page() {
                 })}
                 value={title}
                 onChange={(e) => {
-                  const value = e.currentTarget.value;
-                  setTitle(value);
+                  setTitle(e.currentTarget.value);
                 }}
               />
               <div className="label w-96">
@@ -142,8 +141,7 @@ export default function Page() {
                 placeholder="Tell viewers about your video"
                 value={description}
                 onChange={(e) => {
-                  const value = e.currentTarget.value;
-                  setDescription(value);
+                  setDescription(e.currentTarget.value);
                 }}
               ></textarea>
               <div className="label w-96">

@@ -9,6 +9,7 @@ import { VideoType } from "@/lib/definitions";
 import { capitalizeFirstLetter, formatDate } from "@/lib/textFormatter";
 import { deleteVideo, fetchAllVideosByUserId } from "@/services/videoService";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -67,13 +68,15 @@ export default function Page() {
     }
   };
 
-  const renderActionSection = () => {
+  const renderActionSection = (videoId: number) => {
     return (
       <div className="flex p-2">
         <Tooltip label="Edit">
-          <div className="hover:bg-base-100 cursor-pointer w-[40px] p-2 rounded-full">
-            <PencilIcon />
-          </div>
+          <Link href={"/edit/" + videoId}>
+            <div className="hover:bg-base-100 cursor-pointer w-[40px] p-2 rounded-full">
+              <PencilIcon />
+            </div>
+          </Link>
         </Tooltip>
         <Tooltip label="Delete">
           <div
@@ -131,7 +134,7 @@ export default function Page() {
                             : "No description"}
                         </div>
                         <div className="hidden group-hover:block absolute">
-                          {renderActionSection()}
+                          {renderActionSection(video.id)}
                         </div>
                         <Modal
                           type="Cancel/Yes"
