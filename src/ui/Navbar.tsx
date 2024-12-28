@@ -5,14 +5,21 @@ import Tooltip from "../components/Tooltip";
 import { useUser } from "@/context/userContext";
 import { Logo } from "../components/Logo";
 import { LoginButton } from "../components/LoginButton";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { useSidebar } from "@/context/sidebarContext";
 import Link from "next/link";
+import { useState } from "react";
 
 const Navbar = () => {
   const { user } = useUser();
   const pathname = usePathname();
   const { toggle } = useSidebar();
+  const [query, setQuery] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    redirect("/search?query=" + query);
+  };
 
   const renderUserSection = () => {
     return (
@@ -68,16 +75,20 @@ const Navbar = () => {
 
       <div className="form-control">
         <div className="flex justify-center">
-          <div className="relative w-full max-w-2xl flex items-center">
-            <input
-              type="text"
-              className="sm:w-96 pl-4 pr-10 py-2 border border-gray-500 rounded-l-full rounded-r-none focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent z-10  "
-              placeholder="Search"
-            />
-            <div className="border border-gray-500 py-[7.5px] rounded-r-full z-0 cursor-pointer">
-              <MagnifyingGlassIcon className="mx-4 h-[25px] w-[25px] text-white" />
+          <form onSubmit={handleSubmit}>
+            <div className="relative w-full max-w-2xl flex items-center">
+              <input
+                type="text"
+                className="sm:w-96 pl-4 pr-10 py-2 border border-gray-500 rounded-l-full rounded-r-none focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent z-10  "
+                placeholder="Search"
+                value={query}
+                onChange={(e) => setQuery(e.currentTarget.value)}
+              />
+              <button className="border border-gray-500 py-[7.5px] rounded-r-full z-0 cursor-pointer">
+                <MagnifyingGlassIcon className="mx-4 h-[25px] w-[25px] text-white" />
+              </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
       {user ? renderUserSection() : <LoginButton continueTo={pathname} />}

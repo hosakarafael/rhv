@@ -24,5 +24,9 @@ export default function Page() {
     init();
   }, [loadingUser]);
 
-  return loading ? <MyVideosSkeleton /> : <MyVideos videos={videos} />;
+  return loading ? (
+    <MyVideosSkeleton />
+  ) : (
+    <MyVideos videos={videos} updateVideos={(videos) => setVideos(videos)} />
+  );
 }

@@ -16,9 +16,10 @@ import { useRef, useState } from "react";
 
 interface MyVideosProps {
   videos: VideoType[];
+  updateVideos: (videos: VideoType[]) => void;
 }
 
-export const MyVideos = ({ videos }: MyVideosProps) => {
+export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
   const { user, token } = useUser();
   const pathname = usePathname();
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -53,7 +54,7 @@ export const MyVideos = ({ videos }: MyVideosProps) => {
       if (res.errorCode == "VS000") {
         setIsAlertVisible(false);
         const updatedVideos = videos.filter((video) => video.id != videoId);
-        //setVideos(updatedVideos);
+        updateVideos(updatedVideos);
       } else {
         setIsAlertVisible(true);
         setErrorMessage(res.message);
@@ -61,11 +62,11 @@ export const MyVideos = ({ videos }: MyVideosProps) => {
     }
   };
 
-  const renderActionSection = () => {
+  const renderActionSection = (videoId: number) => {
     return (
       <div className="flex p-2">
         <Tooltip label="Edit">
-          <Link href={"/edit/"}>
+          <Link href={"/edit/" + videoId}>
             <div className="hover:bg-base-100 cursor-pointer w-[40px] p-2 rounded-full">
               <PencilIcon />
             </div>
@@ -128,7 +129,7 @@ export const MyVideos = ({ videos }: MyVideosProps) => {
                                 : "No description"}
                             </div>
                             <div className="hidden group-hover:block absolute">
-                              {renderActionSection()}
+                              {renderActionSection(video.id)}
                             </div>
                             <Modal
                               type="Cancel/Yes"

@@ -53,7 +53,7 @@ export const Video = ({ id }: { id: string }) => {
     if (user && token && video) {
       registerHistory(user.id, video.id, token);
     }
-  }, [user]);
+  }, [user, token]);
 
   const handleLike = () => {
     if (user && video && token) {

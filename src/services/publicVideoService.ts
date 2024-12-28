@@ -47,3 +47,11 @@ export const fetchByUserIdsAndPublic = async (
   });
   return await res.json();
 };
+
+export const searchVideos = async (query: string): Promise<VideoType[]> => {
+  const res = await fetch(`${serviceURL}/search/${query}`, {
+    method: "GET",
+  });
+
+  return await res.json();
+};
