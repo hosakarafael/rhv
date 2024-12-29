@@ -12,7 +12,7 @@ interface EditVideoFormProps {
 }
 
 export const EditVideoForm = ({ id }: EditVideoFormProps) => {
-  const { token } = useUser();
+  const { token, user } = useUser();
 
   const [video, setVideo] = useState<VideoType | null>(null);
   const [title, setTitle] = useState("");
@@ -28,8 +28,11 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
   const DESCRIPTION_LENGTH = 5000;
 
   async function init() {
-    if (token) {
+    if (token && user) {
       const res = await fetchVideoById(id, token);
+      if (res.user.id != user.id) {
+        redirect("/");
+      }
       setVideo(res);
       setTitle(res.title);
       setDescription(res.description);
@@ -179,8 +182,14 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
                   <span className="label-text">Preview</span>
                 </div>
                 <div className="w-80 mx-auto border bg-black rounded-xl ">
-                  <video className="rounded-xl object-contain aspect-video">
-                    <source src="/video.mp4" type="video/mp4" />
+                  <video
+                    controls
+                    className="rounded-xl object-contain aspect-video"
+                  >
+                    <source
+                      src={`https://res.cloudinary.com/dbk6d8pgh/video/upload/videos/${video.id}/video.mp4`}
+                      type="video/mp4"
+                    />
                   </video>
                 </div>
               </div>

@@ -114,7 +114,10 @@ export const Video = ({ id }: { id: string }) => {
             autoPlay
             controlsList="nodownload"
           >
-            <source src="/video.mp4" type="video/mp4" />
+            <source
+              src={`https://res.cloudinary.com/dbk6d8pgh/video/upload/videos/${video.id}/video.mp4`}
+              type="video/mp4"
+            />
           </video>
         </div>
         <div className="p-4">

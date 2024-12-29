@@ -10,6 +10,7 @@ import { capitalizeFirstLetter, formatDate } from "@/lib/textFormatter";
 import { deleteVideo, fetchAllVideosByUserId } from "@/services/videoService";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import Image from "next/image";
 
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
@@ -116,9 +117,13 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
                         <div className="flex gap-3">
                           <div className="flex items-center justify-center">
                             <div className="h-24 w-40 mx-auto bg-black rounded-xl ">
-                              <video className="rounded-xl object-contain aspect-video">
-                                <source src="/video2.mp4" type="video/mp4" />
-                              </video>
+                              <Image
+                                className="rounded-xl object-contain aspect-video"
+                                src={`https://res.cloudinary.com/dbk6d8pgh/image/upload/videos/${video.id}/thumbnail.jpg`}
+                                alt="Thumbnail"
+                                width={400}
+                                height={200}
+                              />
                             </div>
                           </div>
                           <div>

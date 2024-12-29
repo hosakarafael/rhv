@@ -202,6 +202,7 @@ export default function Page() {
                 <div className="w-80 mx-auto border bg-black rounded-xl ">
                   <video
                     key={videoKey}
+                    controls
                     className="rounded-xl object-contain aspect-video"
                   >
                     <source src={videoUrl} type="video/mp4" />
