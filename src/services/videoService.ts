@@ -32,16 +32,22 @@ export const createVideo = async (
   title: string,
   description: string,
   visibility: string,
+  videoFile: File,
   token: string
 ): Promise<Response> => {
   verifyToken(token);
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("userId", userId.toString());
+  formData.append("visibility", visibility);
+  formData.append("videoFile", videoFile);
   const res = await fetch(`${serviceURL}`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ userId, title, description, visibility }),
+    body: formData,
   });
   return await res.json();
 };

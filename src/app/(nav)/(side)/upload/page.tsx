@@ -12,6 +12,7 @@ export default function Page() {
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState("PUBLIC");
 
+  const [videoFile, setVideoFile] = useState<File | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [videoKey, setVideoKey] = useState<number>(0);
 
@@ -32,12 +33,19 @@ export default function Page() {
   const handleUpload = async (e: React.FormEvent) => {
     setLoading(true);
     e.preventDefault();
+    if (videoFile == null) {
+      setIsAlertVisible(true);
+      setErrorMessage("Upload a video file");
+      return;
+    }
+
     if (token && user) {
       const res = await createVideo(
         user.id,
         title,
         description,
         visibility,
+        videoFile,
         token
       );
       if (res.errorCode == "VS000") {
@@ -55,6 +63,7 @@ export default function Page() {
 
     if (file && file.type.startsWith("video/")) {
       const videoObjectUrl = URL.createObjectURL(file);
+      setVideoFile(file);
       setVideoUrl(videoObjectUrl);
       setVideoKey((prevKey) => prevKey + 1);
     } else {
@@ -71,6 +80,9 @@ export default function Page() {
       return false;
     }
     if (description.length > DESCRIPTION_LENGTH) {
+      return false;
+    }
+    if (videoFile == null) {
       return false;
     }
     return true;
@@ -173,7 +185,7 @@ export default function Page() {
           <div className="flex flex-col gap-5">
             <label className="form-control w-full max-w-xs">
               <div className="label">
-                <span className="label-text">Video file</span>
+                <span className="label-text">Video file (required)</span>
               </div>
               <input
                 type="file"

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Avatar from "./Avatar";
 import { VideoType } from "@/lib/definitions";
 import { formatDate } from "@/lib/textFormatter";
+import Image from "next/image";
 
 interface VideoCardProps {
   video: VideoType;
@@ -13,9 +14,13 @@ const VideoCard = ({ video }: VideoCardProps) => {
       <figure className="px-1 pt-1">
         <Link href={"/video/" + video.id}>
           <div className="w-full mx-auto bg-black rounded-xl ">
-            <video className="rounded-xl object-contain aspect-video">
-              <source src="/video.mp4" type="video/mp4" />
-            </video>
+            <Image
+              className="rounded-xl object-contain aspect-video"
+              src={`https://res.cloudinary.com/dbk6d8pgh/image/upload/videos/${video.id}/thumbnail.jpg`}
+              alt="Thumbnail"
+              width={400}
+              height={200}
+            />
           </div>
         </Link>
       </figure>
