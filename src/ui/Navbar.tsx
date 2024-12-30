@@ -1,13 +1,20 @@
 "use client";
 import Avatar from "../components/Avatar";
-import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  EllipsisVerticalIcon,
+  MagnifyingGlassIcon,
+  ArrowRightStartOnRectangleIcon,
+  MoonIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 import { useUser } from "@/context/userContext";
 import { Logo } from "../components/Logo";
 import { LoginButton } from "../components/LoginButton";
 import { redirect, usePathname } from "next/navigation";
 import { useSidebar } from "@/context/sidebarContext";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 import { useTheme } from "@/context/themeContext";
 
@@ -23,6 +30,58 @@ const Navbar = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     redirect("/search?query=" + query);
+  };
+
+  const renderThemeMenuItem = () => {
+    return (
+      <li>
+        <div
+          onClick={() => setShowThemeMenu(!showThemeMenu)}
+          className={clsx("menu-dropdown-toggle", {
+            "menu-dropdown-show": showThemeMenu,
+          })}
+        >
+          <MoonIcon className="w-[20px] my-2" />
+          Theme
+        </div>
+        <ul
+          className={clsx("menu-dropdown", {
+            "menu-dropdown-show": showThemeMenu,
+          })}
+        >
+          <li>
+            <button
+              className={clsx({
+                active: activeTheme == "light",
+              })}
+              onClick={() => updateTheme && updateTheme("light")}
+            >
+              <div className="my-2">Light</div>
+            </button>
+          </li>
+          <li>
+            <button
+              className={clsx({
+                active: activeTheme == "dark",
+              })}
+              onClick={() => updateTheme && updateTheme("dark")}
+            >
+              <div className="my-2">Dark</div>
+            </button>
+          </li>
+          <li>
+            <button
+              className={clsx({
+                active: activeTheme == "system",
+              })}
+              onClick={() => updateTheme && updateTheme("system")}
+            >
+              <div className="my-2">System</div>
+            </button>
+          </li>
+        </ul>
+      </li>
+    );
   };
 
   const renderUserSection = () => {
@@ -67,62 +126,48 @@ const Navbar = () => {
             </div>
             <div className="divider m-1"></div>
             <li>
-              <Link href={"/channel/" + user?.id} className="justify-between">
-                My channel
-              </Link>
+              <div>
+                <UserIcon className="w-[20px]" />
+                <Link href={"/channel/" + user?.id} className="my-2">
+                  My channel
+                </Link>
+              </div>
             </li>
+            {renderThemeMenuItem()}
             <li>
-              <span
-                onClick={() => setShowThemeMenu(!showThemeMenu)}
-                className={clsx("menu-dropdown-toggle", {
-                  "menu-dropdown-show": showThemeMenu,
-                })}
-              >
-                Theme
-              </span>
-              <ul
-                className={clsx("menu-dropdown", {
-                  "menu-dropdown-show": showThemeMenu,
-                })}
-              >
-                <li>
-                  <button
-                    className={clsx({
-                      active: activeTheme == "light",
-                    })}
-                    onClick={() => updateTheme && updateTheme("light")}
-                  >
-                    Light
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={clsx({
-                      active: activeTheme == "dark",
-                    })}
-                    onClick={() => updateTheme && updateTheme("dark")}
-                  >
-                    Dark
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={clsx({
-                      active: activeTheme == "system",
-                    })}
-                    onClick={() => updateTheme && updateTheme("system")}
-                  >
-                    System
-                  </button>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <Link href={"/logout"}>Logout</Link>
+              <div>
+                <ArrowRightStartOnRectangleIcon className="w-[20px]" />
+                <Link className="my-2" href={"/logout"}>
+                  Logout
+                </Link>
+              </div>
             </li>
           </ul>
         </div>
+      </div>
+    );
+  };
+
+  const renderGuestSection = () => {
+    return (
+      <div className="flex gap-5">
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle dark:text-white"
+          >
+            <EllipsisVerticalIcon className="w-[30px]" />
+          </div>
+
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow dark:text-white"
+          >
+            {renderThemeMenuItem()}
+          </ul>
+        </div>
+        <LoginButton continueTo={pathname} />
       </div>
     );
   };
@@ -158,7 +203,7 @@ const Navbar = () => {
           </form>
         </div>
       </div>
-      {user ? renderUserSection() : <LoginButton continueTo={pathname} />}
+      {user ? renderUserSection() : renderGuestSection()}
     </div>
   );
 };
