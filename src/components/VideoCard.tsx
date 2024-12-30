@@ -27,7 +27,12 @@ const VideoCard = ({ video }: VideoCardProps) => {
       <div className="flex m-3">
         <div>
           <Link href={`/channel/${video.user.id}`}>
-            <Avatar size="S" />
+            <Avatar
+              size="S"
+              userId={video.user.id}
+              username={video.user.name}
+              profileImageUrl={video.user.profileImageUrl}
+            />
           </Link>
         </div>
         <div className="mx-3 mb-4">
@@ -35,9 +40,9 @@ const VideoCard = ({ video }: VideoCardProps) => {
             <h2 className="card-title dark:text-white">{video.title}</h2>
           </Link>
           <Link href={`/channel/${video.user.id}`}>
-            <p className="text-sm text-neutral-400">{video.user.name}</p>
+            <p className="text-sm dark:text-neutral-400">{video.user.name}</p>
           </Link>
-          <p className="text-sm text-neutral-400">
+          <p className="text-sm dark:text-neutral-400">
             {video.views} views・{formatDate(video.createdAt)}
           </p>
         </div>

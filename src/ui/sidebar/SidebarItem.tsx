@@ -21,7 +21,7 @@ export const SidebarItem = ({
 
   const baseIconContainerStyle = clsx(
     "group py-3 rounded-lg hover:dark:bg-neutral-800 hover:bg-gray-200 flex items-center",
-    { "flex-col": isMin },
+    { "flex-col w-24": isMin },
     { "pr-14": !isMin }
   );
   const baseIconStyle = clsx("mx-4 h-[30px] w-[30px] dark:text-white");

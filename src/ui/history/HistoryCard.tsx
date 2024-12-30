@@ -12,10 +12,10 @@ export const HistoryCard = ({ history }: HistoryCardProps) => {
     if (history.videoDeleted) {
       return (
         <>
-          <div className="w-72 flex justify-center border border-gray-600 rounded-2xl">
+          <div className="w-72 flex justify-center border border-gray-600 rounded-2xl dark:text-white">
             <TrashIcon className="w-[60px]" />
           </div>
-          <h2 className="card-title w-40 md:w-72 lg:w-96 line-clamp-2 text-ellipsis">
+          <h2 className="card-title w-40 md:w-72 lg:w-96 line-clamp-2 text-ellipsis dark:text-white">
             Sorry, this video was deleted!
           </h2>
         </>
@@ -24,10 +24,10 @@ export const HistoryCard = ({ history }: HistoryCardProps) => {
     if (!history.videoVisible) {
       return (
         <>
-          <div className="w-72 flex justify-center border border-gray-600 rounded-2xl">
+          <div className="w-72 flex justify-center border border-gray-600 rounded-2xl dark:text-white">
             <LockClosedIcon className="w-[60px]" />
           </div>
-          <h2 className="card-title w-40 md:w-72 lg:w-96 line-clamp-2 text-ellipsis">
+          <h2 className="card-title w-40 md:w-72 lg:w-96 line-clamp-2 text-ellipsis dark:text-white">
             User changed this video to private!
           </h2>
         </>

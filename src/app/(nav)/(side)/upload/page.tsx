@@ -119,7 +119,7 @@ export default function Page() {
                 <input
                   type="text"
                   placeholder="Add title that describes your video"
-                  className={clsx("input input-bordered w-96", {
+                  className={clsx("input input-bordered w-96 dark:text-white", {
                     "border-error focus:border-error":
                       title.length > TITLE_LENGTH,
                   })}
@@ -152,7 +152,7 @@ export default function Page() {
                 </div>
                 <textarea
                   className={clsx(
-                    "textarea textarea-bordered h-40 resize-none",
+                    "textarea textarea-bordered h-40 resize-none dark:text-white",
                     {
                       "border-error focus:border-error":
                         description.length > DESCRIPTION_LENGTH,
@@ -180,7 +180,7 @@ export default function Page() {
                   <span className={labelBaseStyle}>Visibility</span>
                 </div>
                 <select
-                  className="select select-bordered"
+                  className="select select-bordered dark:text-white"
                   value={visibility}
                   onChange={(e) => setVisibility(e.currentTarget.value)}
                 >
@@ -198,7 +198,7 @@ export default function Page() {
                 <input
                   type="file"
                   accept="video/*"
-                  className="file-input file-input-bordered w-full max-w-xs"
+                  className="file-input file-input-bordered w-full max-w-xs dark:text-white"
                   onChange={handleFileChange}
                 />
               </label>

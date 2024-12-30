@@ -1,9 +1,9 @@
-import Avatar from "@/components/Avatar";
 import { SubscribeButton } from "@/components/SubscribeButton";
 import { VideoGrid } from "@/components/VideoGrid";
 import { SubscriptionType } from "@/lib/definitions";
 import { fetchUserById } from "@/services/publicUserService";
 import { fetchByUserIdsAndPublic } from "@/services/publicVideoService";
+import { ProfileImage } from "@/ui/channel/ProfileImage";
 import { redirect } from "next/navigation";
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
@@ -19,8 +19,8 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
   return (
     <>
-      <div className="flex gap-5 py-10">
-        <Avatar size="L" />
+      <div className="flex gap-5 py-10 mx-5">
+        <ProfileImage user={user} />
         <div>
           <h1 className="text-4xl font-bold dark:text-white">{user.name}</h1>
           <p className="text-sm text-neutral-700 dark:text-neutral-400">

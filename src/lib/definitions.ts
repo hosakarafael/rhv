@@ -47,7 +47,7 @@ export interface UserType extends Response {
   id: number;
   name: string;
   email: string;
-  imageUrl: string;
+  profileImageUrl: string;
   createdAt: Date;
   subscribedUsers: SubscriptionType[];
   subscribers: number;
@@ -56,4 +56,5 @@ export interface UserType extends Response {
 export interface SubscriptionType {
   id: number;
   name: string;
+  profileImageUrl: string;
 }

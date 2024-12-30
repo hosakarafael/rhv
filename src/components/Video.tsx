@@ -122,7 +122,12 @@ export const Video = ({ id }: { id: string }) => {
           <div className="flex items-center gap-2 mt-2">
             <div className="flex gap-2 pr-2">
               <Link href={`/channel/${video.user.id}`}>
-                <Avatar size="M" />
+                <Avatar
+                  size="M"
+                  userId={video.user.id}
+                  username={video.user.name}
+                  profileImageUrl={video.user.profileImageUrl}
+                />
               </Link>
               <div>
                 <Link href={`/channel/${video.user.id}`}>

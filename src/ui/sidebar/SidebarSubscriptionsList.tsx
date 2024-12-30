@@ -18,7 +18,12 @@ export const SidebarSubscriptionsList = () => {
             { "justify-center": isMin }
           )}
         >
-          <Avatar size="XS" />
+          <Avatar
+            size="XS"
+            userId={subs.id}
+            username={subs.name}
+            profileImageUrl={subs.profileImageUrl}
+          />
           {!isMin && <span className="dark:text-white">{subs.name}</span>}
         </div>
       </Link>

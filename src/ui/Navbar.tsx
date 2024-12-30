@@ -9,6 +9,7 @@ import { useSidebar } from "@/context/sidebarContext";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { useTheme } from "@/context/themeContext";
 
 const Navbar = () => {
   const { user } = useUser();
@@ -17,69 +18,7 @@ const Navbar = () => {
   const [query, setQuery] = useState("");
 
   const [showThemeMenu, setShowThemeMenu] = useState(false);
-  const [activeTheme, setActiveTheme] = useState<string>("system");
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-
-    if (savedTheme === "system" || !savedTheme) {
-      applySystemTheme();
-      setActiveTheme("system");
-    } else {
-      applyTheme(savedTheme);
-      setActiveTheme(savedTheme);
-    }
-
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleSystemThemeChange = () => {
-      if (activeTheme === "system") {
-        applySystemTheme();
-      }
-    };
-
-    mediaQuery.addEventListener("change", handleSystemThemeChange);
-
-    return () => {
-      mediaQuery.removeEventListener("change", handleSystemThemeChange);
-    };
-  }, [activeTheme]);
-
-  const applyTheme = (theme: string) => {
-    if (theme === "dark") {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("dark");
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else if (theme === "light") {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-      document.documentElement.setAttribute("data-theme", "light");
-    }
-  };
-
-  const handleThemeChange = (newTheme: string) => {
-    setActiveTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    if (newTheme === "system") {
-      applySystemTheme();
-    } else {
-      applyTheme(newTheme);
-    }
-  };
-
-  const applySystemTheme = () => {
-    const systemPrefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    if (systemPrefersDark) {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.remove("light");
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      document.documentElement.classList.add("light");
-      document.documentElement.classList.remove("dark");
-      document.documentElement.setAttribute("data-theme", "light");
-    }
-  };
+  const { activeTheme, updateTheme } = useTheme();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,7 +40,14 @@ const Navbar = () => {
             role="button"
             className="btn btn-ghost btn-circle avatar"
           >
-            <Avatar size="S" />
+            {user && (
+              <Avatar
+                size="S"
+                userId={user.id}
+                username={user.name}
+                profileImageUrl={user.profileImageUrl}
+              />
+            )}
           </div>
 
           <ul
@@ -109,12 +55,21 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow dark:text-white"
           >
             <div className="flex items-center gap-2 px-2 pt-2">
-              <Avatar size="S" />
+              {user && (
+                <Avatar
+                  size="S"
+                  userId={user.id}
+                  username={user.name}
+                  profileImageUrl={user.profileImageUrl}
+                />
+              )}
               <p>{user && user.name}</p>
             </div>
             <div className="divider m-1"></div>
             <li>
-              <a className="justify-between">My channel</a>
+              <Link href={"/channel/" + user?.id} className="justify-between">
+                My channel
+              </Link>
             </li>
             <li>
               <span
@@ -135,7 +90,7 @@ const Navbar = () => {
                     className={clsx({
                       active: activeTheme == "light",
                     })}
-                    onClick={() => handleThemeChange("light")}
+                    onClick={() => updateTheme && updateTheme("light")}
                   >
                     Light
                   </button>
@@ -145,7 +100,7 @@ const Navbar = () => {
                     className={clsx({
                       active: activeTheme == "dark",
                     })}
-                    onClick={() => handleThemeChange("dark")}
+                    onClick={() => updateTheme && updateTheme("dark")}
                   >
                     Dark
                   </button>
@@ -155,7 +110,7 @@ const Navbar = () => {
                     className={clsx({
                       active: activeTheme == "system",
                     })}
-                    onClick={() => handleThemeChange("system")}
+                    onClick={() => updateTheme && updateTheme("system")}
                   >
                     System
                   </button>
@@ -191,12 +146,12 @@ const Navbar = () => {
             <div className="relative w-full max-w-2xl flex items-center">
               <input
                 type="text"
-                className="sm:w-96 pl-4 pr-10 py-2 border border-neutral-600 rounded-l-full rounded-r-none focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent z-10 dark:bg-black dark:text-white"
+                className="sm:w-96 pl-4 pr-10 py-2 border border-gray-300 dark:border-neutral-600 rounded-l-full rounded-r-none focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent z-10 dark:bg-black dark:text-white"
                 placeholder="Search"
                 value={query}
                 onChange={(e) => setQuery(e.currentTarget.value)}
               />
-              <button className="border border-neutral-600 py-[7.5px] rounded-r-full border-l-0 z-0 cursor-pointer bg-gray-200 dark:bg-neutral-800">
+              <button className="border border-gray-300 dark:border-neutral-600 py-[7.5px] rounded-r-full border-l-0 z-0 cursor-pointer bg-gray-200 dark:bg-neutral-800">
                 <MagnifyingGlassIcon className="mx-4 h-[25px] w-[25px] dark:text-white" />
               </button>
             </div>

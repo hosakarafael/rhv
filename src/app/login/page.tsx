@@ -85,7 +85,7 @@ export default function Page() {
   return (
     <div className="p-2">
       <Logo />
-      <div className="flex items-center h-screen justify-center gap-3">
+      <div className="flex items-center h-screen justify-center gap-3 dark:text-white">
         <div className="flex flex-col gap-5 sm:flex-row">
           <h1 className="text-6xl">Login</h1>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-96">

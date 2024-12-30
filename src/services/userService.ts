@@ -90,3 +90,20 @@ export const unsubscribe = async (
     body: JSON.stringify({ subscriberId, creatorId }),
   });
 };
+
+export const uploadProfileImage = async (
+  profileFile: File,
+  token: string
+): Promise<UserType> => {
+  verifyToken(token);
+  const formData = new FormData();
+  formData.append("profileImageFile", profileFile);
+  const res = await fetch(`${serviceURL}/upload`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+  return await res.json();
+};

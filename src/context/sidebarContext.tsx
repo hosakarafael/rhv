@@ -1,8 +1,6 @@
 "use client";
-import { UserType } from "@/lib/definitions";
-import { getSubjectFromToken, isValidToken } from "@/lib/jwt";
-import { fetchUserByEmail } from "@/services/userService";
-import { createContext, useContext, useEffect, useState } from "react";
+
+import { createContext, useContext, useState } from "react";
 
 interface SidebarContextInterface {
   isMin: boolean;

@@ -25,10 +25,10 @@ export const Sidebar = () => {
   const renderSubscriptionsSection = () => {
     return (
       <div>
-        <div className="border-t-2 border-neutral-400"></div>
+        <div className="border-t-2 my-2 border-neutral-400"></div>
         <div>
           {!isMin && (
-            <h1 className="text-lg font-bold mx-5 my-5 dark:text-white">
+            <h1 className="text-lg font-bold mx-5 dark:text-white">
               Subscriptions
             </h1>
           )}
