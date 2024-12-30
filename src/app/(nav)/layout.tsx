@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   ) : (
     <>
       <Navbar />
-      <div className="absolute h-[calc(100vh-64px)] overflow-auto w-screen dark:bg-black top-16">
+      <div className="absolute h-[calc(100vh-64px)] overflow-auto w-screen bg-white dark:bg-black top-16">
         {/* min = hidden , max = displayed*/}
         <div
           className={clsx({

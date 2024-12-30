@@ -22,7 +22,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
       <div className="flex gap-5 py-10">
         <Avatar size="L" />
         <div>
-          <h1 className="text-4xl font-bold">{user.name}</h1>
+          <h1 className="text-4xl font-bold dark:text-white">{user.name}</h1>
           <p className="text-sm text-neutral-700 dark:text-neutral-400">
             {user.subscribers} subscribers • {videos.length} videos
           </p>
@@ -44,10 +44,10 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
           type="radio"
           name="tabs"
           role="tab"
-          className="tab"
+          className="tab dark:text-white"
           aria-label="Home"
         />
-        <div role="tabpanel" className="tab-content">
+        <div role="tabpanel" className="tab-content dark:text-white">
           Tab content 1
         </div>
 
@@ -55,7 +55,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
           type="radio"
           name="tabs"
           role="tab"
-          className="tab"
+          className="tab dark:text-white"
           aria-label="Videos"
           defaultChecked
         />

@@ -10,12 +10,12 @@ interface VideoCardProps {
 
 const VideoCard = ({ video }: VideoCardProps) => {
   return (
-    <div className="card bg-base-100 w-auto mx-1 my-1">
+    <div className="card w-auto mx-1 my-1">
       <figure className="px-1 pt-1">
         <Link href={"/video/" + video.id}>
           <div className="w-full mx-auto bg-black rounded-xl ">
             <Image
-              className="w-56 rounded-xl object-contain aspect-video"
+              className="rounded-xl object-contain aspect-video"
               src={video.thumbnailUrl}
               alt="Thumbnail"
               width={400}
@@ -32,7 +32,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
         </div>
         <div className="mx-3 mb-4">
           <Link href={"/video/" + video.id}>
-            <h2 className="card-title">{video.title}</h2>
+            <h2 className="card-title dark:text-white">{video.title}</h2>
           </Link>
           <Link href={`/channel/${video.user.id}`}>
             <p className="text-sm text-neutral-400">{video.user.name}</p>

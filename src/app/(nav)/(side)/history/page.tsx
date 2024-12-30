@@ -14,7 +14,9 @@ export default function Page() {
     return (
       <div className="p-10 flex justify-center">
         <div className="mb-10">
-          <h1 className="text-4xl font-extrabold mb-5">Watch history</h1>
+          <h1 className="text-4xl font-extrabold mb-5 dark:text-white">
+            Watch history
+          </h1>
           <div className="form-control">
             <div className="flex items-center">
               <input
@@ -40,7 +42,9 @@ export default function Page() {
   const notLoggedHistory = () => {
     return (
       <div className="p-10 flex flex-col justify-center items-center mt-40">
-        <h1 className="text-4xl font-extrabold mb-5">Watch history</h1>
+        <h1 className="text-4xl font-extrabold mb-5 dark:text-white">
+          Watch history
+        </h1>
         <p className="mb-7">
           If you are logged out, your play history will not be displayed.
         </p>

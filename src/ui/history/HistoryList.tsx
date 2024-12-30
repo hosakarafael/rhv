@@ -40,7 +40,7 @@ export const HistoryList = () => {
       {Object.entries(histories).map(([date, entries]) => {
         return (
           <div key={date}>
-            <h1 className="text-2xl font-bold my-10">{date}</h1>
+            <h1 className="text-2xl font-bold my-10 dark:text-white">{date}</h1>
             {entries.map((h) => {
               return <HistoryCard key={h.videoId} history={h} />;
             })}

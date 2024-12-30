@@ -14,12 +14,12 @@ export const SidebarSubscriptionsList = () => {
       <Link href={`/channel/${subs.id}`}>
         <div
           className={clsx(
-            "flex items-center gap-3 p-2 rounded-lg  hover:dark:bg-base-100",
+            "flex items-center gap-3 p-2 rounded-lg  hover:bg-gray-200 hover:dark:bg-neutral-800",
             { "justify-center": isMin }
           )}
         >
           <Avatar size="XS" />
-          {!isMin && <span>{subs.name}</span>}
+          {!isMin && <span className="dark:text-white">{subs.name}</span>}
         </div>
       </Link>
     </div>

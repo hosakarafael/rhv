@@ -30,8 +30,10 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
   const notLoggedMyVideos = () => {
     return (
       <div className="p-10 flex flex-col justify-center items-center mt-40">
-        <h1 className="text-4xl font-extrabold mb-5">My Videos</h1>
-        <p className="mb-7">Please login to see your videos.</p>
+        <h1 className="text-4xl font-extrabold mb-5 dark:text-white">
+          My Videos
+        </h1>
+        <p className="mb-7 dark:text-white">Please login to see your videos.</p>
         <LoginButton continueTo={pathname} />
       </div>
     );
@@ -41,7 +43,7 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
     return (
       <tr className="group">
         <td className="mb-7">
-          <p className="text-2xl font-bold p-4">
+          <p className="text-2xl font-bold p-4 dark:text-white">
             You do not have any videos yet, upload video to see here
           </p>
         </td>
@@ -68,7 +70,7 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
       <div className="flex p-2">
         <Tooltip label="Edit">
           <Link href={"/edit/" + videoId}>
-            <div className="hover:bg-base-100 cursor-pointer w-[40px] p-2 rounded-full">
+            <div className="hover:bg-gray-200 hover:dark:bg-neutral-800 cursor-pointer w-[40px] p-2 rounded-full dark:text-white">
               <PencilIcon />
             </div>
           </Link>
@@ -76,7 +78,7 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
         <Tooltip label="Delete">
           <div
             onClick={() => modalRef.current?.showModal()}
-            className="hover:bg-base-100 cursor-pointer w-[40px] p-2 rounded-full"
+            className="hover:bg-gray-200 hover:dark:bg-neutral-800 cursor-pointer w-[40px] p-2 rounded-full dark:text-white"
           >
             <TrashIcon />
           </div>
@@ -88,17 +90,18 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
   const renderMyVideos = () => {
     return (
       <div className="overflow-x-auto py-3">
-        <h1 className="text-4xl font-extrabold my-5">My Videos</h1>
+        <h1 className="text-4xl font-extrabold my-5 dark:text-white">
+          My Videos
+        </h1>
         <table className="table">
           <thead>
             <tr>
-              <th>Video</th>
-              <th>Visibility</th>
-              <th>Date</th>
-              <th>Views</th>
-              <th>Comments</th>
-              <th>Likes</th>
-              <th></th>
+              <th className="dark:text-white">Video</th>
+              <th className="dark:text-white">Visibility</th>
+              <th className="dark:text-white">Date</th>
+              <th className="dark:text-white">Views</th>
+              <th className="dark:text-white">Comments</th>
+              <th className="dark:text-white">Likes</th>
             </tr>
           </thead>
           <tbody>
@@ -116,7 +119,7 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
                       <td>
                         <div className="flex gap-3">
                           <div className="flex items-center justify-center">
-                            <div className="h-24 w-40 mx-auto bg-black rounded-xl ">
+                            <div className="h-24 w-44 mx-auto bg-black rounded-xl ">
                               <Image
                                 className="rounded-xl object-contain aspect-video"
                                 src={video.thumbnailUrl}
@@ -127,8 +130,10 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
                             </div>
                           </div>
                           <div>
-                            <div className="font-bold">{video.title}</div>
-                            <div className="text-sm opacity-50 text-ellipsis line-clamp-1">
+                            <div className="font-bold dark:text-white">
+                              {video.title}
+                            </div>
+                            <div className="text-sm opacity-50 text-ellipsis line-clamp-1 dark:text-white">
                               {video.description.length != 0
                                 ? video.description
                                 : "No description"}
@@ -148,11 +153,19 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
                           </div>
                         </div>
                       </td>
-                      <td>{capitalizeFirstLetter(video.visibility)}</td>
-                      <td className="w-32">{formatDate(video.createdAt)}</td>
-                      <td>{video.views}</td>
-                      <td>{video.comments.length}</td>
-                      <td>{video.likedUsers.length}</td>
+                      <td className="dark:text-white">
+                        {capitalizeFirstLetter(video.visibility)}
+                      </td>
+                      <td className="w-32 dark:text-white">
+                        {formatDate(video.createdAt)}
+                      </td>
+                      <td className="dark:text-white">{video.views}</td>
+                      <td className="dark:text-white">
+                        {video.comments.length}
+                      </td>
+                      <td className="dark:text-white">
+                        {video.likedUsers.length}
+                      </td>
                     </tr>
                   );
                 })}

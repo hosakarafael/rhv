@@ -9,7 +9,7 @@ export const VideoGrid = ({ videos }: VideoGridProps) => {
   const noVideoFound = () => {
     return (
       <div className="flex justify-center pt-10">
-        <p className="text-4xl font-bold">No video found!</p>
+        <p className="text-4xl font-bold dark:text-white">No video found!</p>
       </div>
     );
   };

@@ -88,144 +88,153 @@ export default function Page() {
     return true;
   };
 
+  const labelBaseStyle = clsx("label-text-alt dark:text-white");
+
   return (
-    <div className="bg-base-100 m-5 p-5 rounded-md">
-      <h1 className="text-center text-4xl font-bold">Upload video</h1>
-      <div className="divider"></div>
-      <Alert
-        show={isAlertVisible}
-        type="error"
-        message={errorMessage}
-        onClose={() => setIsAlertVisible(false)}
-      />
-      <form onSubmit={handleUpload}>
-        <div className="flex justify-around">
-          <div>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span
-                  className={clsx("label-text-alt", {
-                    "text-error": title.length > TITLE_LENGTH,
-                  })}
-                >
-                  Title (required)
-                </span>
-              </div>
-              <input
-                type="text"
-                placeholder="Add title that describes your video"
-                className={clsx("input input-bordered w-96", {
-                  "border-error focus:border-error":
-                    title.length > TITLE_LENGTH,
-                })}
-                value={title}
-                onChange={(e) => {
-                  setTitle(e.currentTarget.value);
-                }}
-              />
-              <div className="label w-96">
-                <span className="label-text-alt"></span>
-                <span
-                  className={clsx("label-text-alt", {
-                    "text-error": title.length > TITLE_LENGTH,
-                  })}
-                >
-                  {title.length}/{TITLE_LENGTH}
-                </span>
-              </div>
-            </label>
-
-            <label className="form-control">
-              <div className="label">
-                <span
-                  className={clsx("label-text-alt", {
-                    "text-error": description.length > DESCRIPTION_LENGTH,
-                  })}
-                >
-                  Description
-                </span>
-              </div>
-              <textarea
-                className={clsx("textarea textarea-bordered h-40 resize-none", {
-                  "border-error focus:border-error":
-                    description.length > DESCRIPTION_LENGTH,
-                })}
-                placeholder="Tell viewers about your video"
-                value={description}
-                onChange={(e) => {
-                  setDescription(e.currentTarget.value);
-                }}
-              ></textarea>
-              <div className="label w-96">
-                <span className="label-text-alt"></span>
-                <span
-                  className={clsx("label-text-alt", {
-                    "text-error": description.length > DESCRIPTION_LENGTH,
-                  })}
-                >
-                  {description.length}/5000
-                </span>
-              </div>
-            </label>
-            <label className="form-control w-96">
-              <div className="label">
-                <span className="label-text">Visibility</span>
-              </div>
-              <select
-                className="select select-bordered"
-                value={visibility}
-                onChange={(e) => setVisibility(e.currentTarget.value)}
-              >
-                <option value={"PUBLIC"}>Public</option>
-                <option value={"PRIVATE"}>Private</option>
-              </select>
-            </label>
-          </div>
-
-          <div className="flex flex-col gap-5">
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Video file (required)</span>
-              </div>
-              <input
-                type="file"
-                accept="video/*"
-                className="file-input file-input-bordered file-input-primary w-full max-w-xs"
-                onChange={handleFileChange}
-              />
-            </label>
-            {videoUrl && (
-              <div>
+    <div className="p-5">
+      <div className="bg-neutral-100 dark:bg-neutral-800 rounded-md">
+        <h1 className="text-center text-4xl font-bold dark:text-white p-5">
+          Upload video
+        </h1>
+        <div className="border-t-2 border-neutral-400"></div>
+        <Alert
+          show={isAlertVisible}
+          type="error"
+          message={errorMessage}
+          onClose={() => setIsAlertVisible(false)}
+        />
+        <form onSubmit={handleUpload}>
+          <div className="flex justify-around p-5">
+            <div>
+              <label className="form-control w-full max-w-xs">
                 <div className="label">
-                  <span className="label-text">Preview</span>
-                </div>
-                <div className="w-80 mx-auto border bg-black rounded-xl ">
-                  <video
-                    key={videoKey}
-                    controls
-                    className="rounded-xl object-contain aspect-video"
+                  <span
+                    className={clsx(labelBaseStyle, {
+                      "text-error": title.length > TITLE_LENGTH,
+                    })}
                   >
-                    <source src={videoUrl} type="video/mp4" />
-                  </video>
+                    Title (required)
+                  </span>
                 </div>
-              </div>
-            )}
+                <input
+                  type="text"
+                  placeholder="Add title that describes your video"
+                  className={clsx("input input-bordered w-96", {
+                    "border-error focus:border-error":
+                      title.length > TITLE_LENGTH,
+                  })}
+                  value={title}
+                  onChange={(e) => {
+                    setTitle(e.currentTarget.value);
+                  }}
+                />
+                <div className="label w-96">
+                  <span className="label-text-alt"></span>
+                  <span
+                    className={clsx(labelBaseStyle, {
+                      "text-error": title.length > TITLE_LENGTH,
+                    })}
+                  >
+                    {title.length}/{TITLE_LENGTH}
+                  </span>
+                </div>
+              </label>
+
+              <label className="form-control">
+                <div className="label">
+                  <span
+                    className={clsx(labelBaseStyle, {
+                      "text-error": description.length > DESCRIPTION_LENGTH,
+                    })}
+                  >
+                    Description
+                  </span>
+                </div>
+                <textarea
+                  className={clsx(
+                    "textarea textarea-bordered h-40 resize-none",
+                    {
+                      "border-error focus:border-error":
+                        description.length > DESCRIPTION_LENGTH,
+                    }
+                  )}
+                  placeholder="Tell viewers about your video"
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.currentTarget.value);
+                  }}
+                ></textarea>
+                <div className="label w-96">
+                  <span className="label-text-alt"></span>
+                  <span
+                    className={clsx(labelBaseStyle, {
+                      "text-error": description.length > DESCRIPTION_LENGTH,
+                    })}
+                  >
+                    {description.length}/5000
+                  </span>
+                </div>
+              </label>
+              <label className="form-control w-96">
+                <div className="label">
+                  <span className={labelBaseStyle}>Visibility</span>
+                </div>
+                <select
+                  className="select select-bordered"
+                  value={visibility}
+                  onChange={(e) => setVisibility(e.currentTarget.value)}
+                >
+                  <option value={"PUBLIC"}>Public</option>
+                  <option value={"PRIVATE"}>Private</option>
+                </select>
+              </label>
+            </div>
+
+            <div className="flex flex-col gap-5">
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className={labelBaseStyle}>Video file (required)</span>
+                </div>
+                <input
+                  type="file"
+                  accept="video/*"
+                  className="file-input file-input-bordered w-full max-w-xs"
+                  onChange={handleFileChange}
+                />
+              </label>
+              {videoUrl && (
+                <div>
+                  <div className="label">
+                    <span className={labelBaseStyle}>Preview</span>
+                  </div>
+                  <div className="w-80 mx-auto border bg-black rounded-xl ">
+                    <video
+                      key={videoKey}
+                      controls
+                      className="rounded-xl object-contain aspect-video"
+                    >
+                      <source src={videoUrl} type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-        <div className="divider"></div>
-        <div className="flex justify-end">
-          <button
-            className="w-24 btn btn-neutral rounded-full"
-            disabled={!validate(title, description) || loading}
-          >
-            {loading ? (
-              <span className="loading loading-spinner loading-lg"></span>
-            ) : (
-              "Upload"
-            )}
-          </button>
-        </div>
-      </form>
+          <div className="border-t-2 border-neutral-400"></div>
+          <div className="flex justify-end p-5">
+            <button
+              className="w-24 btn btn-neutral dark:bg-white dark:text-black  rounded-full"
+              disabled={!validate(title, description) || loading}
+            >
+              {loading ? (
+                <span className="loading loading-spinner loading-lg"></span>
+              ) : (
+                "Upload"
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

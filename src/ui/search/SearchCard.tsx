@@ -24,7 +24,7 @@ export const SearchCard = ({ video }: SearchCardProps) => {
       </Link>
 
       <div className="mx-3 mb-4">
-        <h2 className="card-title w-40 md:w-72 lg:w-96 line-clamp-2 text-ellipsis">
+        <h2 className="card-title w-40 md:w-72 lg:w-96 line-clamp-2 text-ellipsis dark:text-white">
           {video.title}
         </h2>
         <Link href={`/channel/${video.user.id}`}>
