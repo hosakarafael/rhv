@@ -186,10 +186,7 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
                     controls
                     className="rounded-xl object-contain aspect-video"
                   >
-                    <source
-                      src={`https://res.cloudinary.com/dbk6d8pgh/video/upload/videos/${video.id}/video.mp4`}
-                      type="video/mp4"
-                    />
+                    <source src={video.videoUrl} type="video/mp4" />
                   </video>
                 </div>
               </div>

@@ -2,6 +2,7 @@ import Avatar from "@/components/Avatar";
 import { VideoType } from "@/lib/definitions";
 import { formatDate } from "@/lib/textFormatter";
 import Link from "next/link";
+import Image from "next/image";
 
 interface SearchCardProps {
   video: VideoType;
@@ -12,9 +13,13 @@ export const SearchCard = ({ video }: SearchCardProps) => {
     <div className="flex gap-5 my-3">
       <Link href={`/video/${video.id}`}>
         <div className="mx-auto border border-gray-600 bg-black rounded-xl ">
-          <video className="w-[500px] rounded-xl object-contain aspect-video">
-            <source src="/video2.mp4" type="video/mp4" />
-          </video>
+          <Image
+            className="w-[500px] rounded-xl object-contain aspect-video"
+            src={video.thumbnailUrl}
+            alt="Thumbnail"
+            width={500}
+            height={200}
+          />
         </div>
       </Link>
 

@@ -1,6 +1,7 @@
 import { HistoryType } from "@/lib/definitions";
 import { LockClosedIcon, TrashIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import Image from "next/image";
 
 interface HistoryCardProps {
   history: HistoryType;
@@ -36,9 +37,13 @@ export const HistoryCard = ({ history }: HistoryCardProps) => {
       <>
         <Link href={`/video/${history.videoId}`}>
           <div className="w-72 mx-auto border border-gray-600 bg-black rounded-xl ">
-            <video className="rounded-xl object-contain aspect-video">
-              <source src="/video2.mp4" type="video/mp4" />
-            </video>
+            <Image
+              className="rounded-xl object-contain aspect-video"
+              src={history.video.thumbnailUrl}
+              alt="Thumbnail"
+              width={400}
+              height={200}
+            />
           </div>
         </Link>
 

@@ -15,8 +15,8 @@ const VideoCard = ({ video }: VideoCardProps) => {
         <Link href={"/video/" + video.id}>
           <div className="w-full mx-auto bg-black rounded-xl ">
             <Image
-              className="rounded-xl object-contain aspect-video"
-              src={`https://res.cloudinary.com/dbk6d8pgh/image/upload/videos/${video.id}/thumbnail.jpg`}
+              className="w-56 rounded-xl object-contain aspect-video"
+              src={video.thumbnailUrl}
               alt="Thumbnail"
               width={400}
               height={200}

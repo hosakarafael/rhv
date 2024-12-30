@@ -53,7 +53,7 @@ export const Video = ({ id }: { id: string }) => {
     if (user && token && video) {
       registerHistory(user.id, video.id, token);
     }
-  }, [user, token]);
+  }, [user, token, video]);
 
   const handleLike = () => {
     if (user && video && token) {
@@ -114,10 +114,7 @@ export const Video = ({ id }: { id: string }) => {
             autoPlay
             controlsList="nodownload"
           >
-            <source
-              src={`https://res.cloudinary.com/dbk6d8pgh/video/upload/videos/${video.id}/video.mp4`}
-              type="video/mp4"
-            />
+            <source src={video.videoUrl} type="video/mp4" />
           </video>
         </div>
         <div className="p-4">

@@ -27,6 +27,7 @@ export interface VideoType extends Response {
   title: string;
   description: string;
   videoUrl: string;
+  thumbnailUrl: string;
   views: number;
   createdAt: string;
   user: UserType;

@@ -119,7 +119,7 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
                             <div className="h-24 w-40 mx-auto bg-black rounded-xl ">
                               <Image
                                 className="rounded-xl object-contain aspect-video"
-                                src={`https://res.cloudinary.com/dbk6d8pgh/image/upload/videos/${video.id}/thumbnail.jpg`}
+                                src={video.thumbnailUrl}
                                 alt="Thumbnail"
                                 width={400}
                                 height={200}
