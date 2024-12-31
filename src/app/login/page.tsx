@@ -138,7 +138,7 @@ export default function Page() {
                 href={
                   continueTo ? `/create?continueTo=${continueTo}` : "/create"
                 }
-                className="btn btn-outline text-xl text-white rounded-full"
+                className="btn btn-neutral dark:btn-outline text-xl dark:text-white rounded-full"
               >
                 Create
               </a>

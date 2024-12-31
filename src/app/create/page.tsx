@@ -150,9 +150,9 @@ export default function Page() {
             <div className="flex justify-end gap-3">
               <a
                 href={continueTo ? `/login?continueTo=${continueTo}` : "/login"}
-                className="btn btn-outline text-xl text-white rounded-full"
+                className="btn btn-neutral dark:btn-outline text-xl dark:text-white rounded-full"
               >
-                Login
+                Back
               </a>
               <button
                 onClick={(e) => handleSubmit(e)}
