@@ -29,7 +29,7 @@ const Avatar = ({ size, userId, username, profileImageUrl }: AvatarProps) => {
     <div>
       <div
         className={clsx({
-          "rounded-full flex justify-center items-center ": true,
+          "rounded-full flex justify-center items-center avatar": true,
           [backgroundColor]: backgroundColor,
           "w-[30px] h-[30px]": size == "XS",
           "w-[40px] h-[40px]": size == "S",

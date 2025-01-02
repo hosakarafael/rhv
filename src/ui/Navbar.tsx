@@ -94,11 +94,7 @@ const Navbar = () => {
           Upload video
         </Link>
         <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
+          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             {user && (
               <Avatar
                 size="S"
