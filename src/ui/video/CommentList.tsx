@@ -22,7 +22,12 @@ export const CommentList = ({ comments, onDelete }: CommentListProps) => {
             className="p-4 flex items-center gap-5 justify-between"
           >
             <div className="flex gap-5">
-              <Avatar size="S" />
+              <Avatar
+                size="S"
+                userId={comment.user.id}
+                username={comment.user.name}
+                profileImageUrl={comment.user.profileImageUrl}
+              />
               <div>
                 <span>{comment.user.name}</span>
                 <span className="text-xs mx-2 text-gray-400">3 years ago</span>

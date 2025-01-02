@@ -31,22 +31,30 @@ export const HistoryList = () => {
     }
   }
 
+  const renderHistories = () => {
+    return Object.entries(histories).map(([date, entries]) => {
+      return (
+        <div key={date}>
+          <h1 className="text-2xl font-bold my-10 dark:text-white">{date}</h1>
+          {entries.map((h) => {
+            return <HistoryCard key={h.videoId} history={h} />;
+          })}
+        </div>
+      );
+    });
+  };
+
   useEffect(() => {
     init();
   }, [user]);
 
-  return (
-    <>
-      {Object.entries(histories).map(([date, entries]) => {
-        return (
-          <div key={date}>
-            <h1 className="text-2xl font-bold my-10 dark:text-white">{date}</h1>
-            {entries.map((h) => {
-              return <HistoryCard key={h.videoId} history={h} />;
-            })}
-          </div>
-        );
-      })}
-    </>
+  return Object.entries(histories).length == 0 ? (
+    <div>
+      <h1 className="text-2xl font-bold my-10 dark:text-white">
+        No history found, watch any videos to see here
+      </h1>
+    </div>
+  ) : (
+    renderHistories()
   );
 };

@@ -42,7 +42,14 @@ export const CommentSection = ({
         <p className="text-2xl font-bold">{comments.length} Comments</p>
       </div>
       <div className="p-4 flex items-center gap-2">
-        <Avatar size="S" />
+        {user && (
+          <Avatar
+            size="S"
+            userId={user.id}
+            username={user.name}
+            profileImageUrl={user.profileImageUrl}
+          />
+        )}
         <div className="w-full">
           <form onSubmit={(e) => handleAddComment(e)}>
             <input

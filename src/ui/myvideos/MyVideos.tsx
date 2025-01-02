@@ -41,13 +41,13 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
 
   const noVideoFound = () => {
     return (
-      <tr className="group">
-        <td className="mb-7">
+      <div className="group">
+        <div className="mb-7">
           <p className="text-2xl font-bold p-4 dark:text-white">
             You do not have any videos yet, upload video to see here
           </p>
-        </td>
-      </tr>
+        </div>
+      </div>
     );
   };
 
@@ -111,66 +111,61 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
               message={errorMessage}
               onClose={() => setIsAlertVisible(false)}
             />
-            {videos.length == 0
-              ? noVideoFound()
-              : videos.map((video) => {
-                  return (
-                    <tr key={video.id} className="group">
-                      <td>
-                        <div className="flex gap-3">
-                          <div className="flex items-center justify-center">
-                            <div className="h-24 w-44 mx-auto bg-black rounded-xl ">
-                              <Image
-                                className="rounded-xl object-contain aspect-video"
-                                src={video.thumbnailUrl}
-                                alt="Thumbnail"
-                                width={400}
-                                height={200}
-                              />
-                            </div>
-                          </div>
-                          <div>
-                            <div className="font-bold dark:text-white">
-                              {video.title}
-                            </div>
-                            <div className="text-sm opacity-50 text-ellipsis line-clamp-1 dark:text-white">
-                              {video.description.length != 0
-                                ? video.description
-                                : "No description"}
-                            </div>
-                            <div className="hidden group-hover:block absolute">
-                              {renderActionSection(video.id)}
-                            </div>
-                            <Modal
-                              type="Cancel/Yes"
-                              onYes={() => {
-                                handleDeleteVideo(video.id);
-                              }}
-                              title="Delete video"
-                              text="Delete your video permanently?"
-                              ref={modalRef}
-                            />
-                          </div>
+            {videos.map((video) => {
+              return (
+                <tr key={video.id} className="group">
+                  <td>
+                    <div className="flex gap-3">
+                      <div className="flex items-center justify-center">
+                        <div className="h-24 w-44 mx-auto bg-black rounded-xl ">
+                          <Image
+                            className="rounded-xl object-contain aspect-video"
+                            src={video.thumbnailUrl}
+                            alt="Thumbnail"
+                            width={400}
+                            height={200}
+                          />
                         </div>
-                      </td>
-                      <td className="dark:text-white">
-                        {capitalizeFirstLetter(video.visibility)}
-                      </td>
-                      <td className="w-32 dark:text-white">
-                        {formatDate(video.createdAt)}
-                      </td>
-                      <td className="dark:text-white">{video.views}</td>
-                      <td className="dark:text-white">
-                        {video.comments.length}
-                      </td>
-                      <td className="dark:text-white">
-                        {video.likedUsers.length}
-                      </td>
-                    </tr>
-                  );
-                })}
+                      </div>
+                      <div>
+                        <div className="font-bold dark:text-white">
+                          {video.title}
+                        </div>
+                        <div className="text-sm opacity-50 text-ellipsis line-clamp-1 dark:text-white">
+                          {video.description.length != 0
+                            ? video.description
+                            : "No description"}
+                        </div>
+                        <div className="hidden group-hover:block absolute">
+                          {renderActionSection(video.id)}
+                        </div>
+                        <Modal
+                          type="Cancel/Yes"
+                          onYes={() => {
+                            handleDeleteVideo(video.id);
+                          }}
+                          title="Delete video"
+                          text="Delete your video permanently?"
+                          ref={modalRef}
+                        />
+                      </div>
+                    </div>
+                  </td>
+                  <td className="dark:text-white">
+                    {capitalizeFirstLetter(video.visibility)}
+                  </td>
+                  <td className="w-32 dark:text-white">
+                    {formatDate(video.createdAt)}
+                  </td>
+                  <td className="dark:text-white">{video.views}</td>
+                  <td className="dark:text-white">{video.comments.length}</td>
+                  <td className="dark:text-white">{video.likedUsers.length}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
+        {videos.length == 0 && noVideoFound()}
       </div>
     );
   };
