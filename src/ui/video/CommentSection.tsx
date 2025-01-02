@@ -39,7 +39,9 @@ export const CommentSection = ({
   return (
     <>
       <div className="p-4">
-        <p className="text-2xl font-bold">{comments.length} Comments</p>
+        <p className="text-2xl font-bold dark:text-white">
+          {comments.length} Comments
+        </p>
       </div>
       <div className="p-4 flex items-center gap-2">
         {user && (

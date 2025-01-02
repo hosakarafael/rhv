@@ -110,10 +110,13 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
                   <input
                     type="text"
                     placeholder="Add title that describes your video"
-                    className={clsx("input input-bordered w-96", {
-                      "border-error focus:border-error":
-                        title.length > TITLE_LENGTH,
-                    })}
+                    className={clsx(
+                      "input input-bordered w-96 dark:text-white",
+                      {
+                        "border-error focus:border-error":
+                          title.length > TITLE_LENGTH,
+                      }
+                    )}
                     value={title}
                     onChange={(e) => {
                       setTitle(e.currentTarget.value);
@@ -171,7 +174,7 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
                     <span className={labelBaseStyle}>Visibility</span>
                   </div>
                   <select
-                    className="select select-bordered"
+                    className="select select-bordered dark:text-white"
                     value={visibility}
                     onChange={(e) => setVisibility(e.currentTarget.value)}
                   >

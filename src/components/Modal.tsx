@@ -53,7 +53,10 @@ export const Modal = ({
   };
 
   return (
-    <dialog ref={ref} className="modal modal-bottom sm:modal-middle">
+    <dialog
+      ref={ref}
+      className="modal modal-bottom sm:modal-middle dark:text-white"
+    >
       <div className="modal-box">
         <h3 className="font-bold text-lg">{title}</h3>
         <p className="py-4">{text}</p>

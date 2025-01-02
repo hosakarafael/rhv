@@ -118,7 +118,7 @@ export const Video = ({ id }: { id: string }) => {
           </video>
         </div>
         <div className="p-4">
-          <h1 className="text-3xl font-bold">{video.title}</h1>
+          <h1 className="text-3xl font-bold dark:text-white">{video.title}</h1>
           <div className="flex items-center gap-2 mt-2">
             <div className="flex gap-2 pr-2">
               <Link href={`/channel/${video.user.id}`}>
@@ -131,7 +131,7 @@ export const Video = ({ id }: { id: string }) => {
               </Link>
               <div>
                 <Link href={`/channel/${video.user.id}`}>
-                  <p className="font-bold">{video.user.name}</p>
+                  <p className="font-bold dark:text-white">{video.user.name}</p>
                 </Link>
                 <p className="text-sm text-neutral-700 dark:text-neutral-400">
                   {video.user.subscribers} subscribers
@@ -155,7 +155,7 @@ export const Video = ({ id }: { id: string }) => {
                   modalRef.current?.showModal();
                 }
               }}
-              className="flex items-center gap-2 bg-gray-100 dark:bg-base-100 px-5 py-2 rounded-full cursor-pointer"
+              className="flex items-center gap-2 bg-gray-100 dark:bg-base-100 dark:text-white px-5 py-2 rounded-full cursor-pointer"
             >
               {user && video.likedUsers.includes(user.id) ? (
                 <HandThumbUpIconSolid className="h-[30px] w-[30px]" />
@@ -173,7 +173,7 @@ export const Video = ({ id }: { id: string }) => {
           </div>
         </div>
         <div className="p-4">
-          <div className="bg-gray-100 dark:bg-base-100 p-4 rounded-xl">
+          <div className="bg-gray-100 dark:bg-base-100 dark:text-white p-4 rounded-xl">
             <p className="font-bold">
               {video.views} views {formatDate(video.createdAt)}
             </p>
