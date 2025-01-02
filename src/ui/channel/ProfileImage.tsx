@@ -20,26 +20,45 @@ export const ProfileImage = ({ user, updateUser }: ProfileImageProps) => {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const MAX_FILE_SIZE = 1 * 1024 * 1024;
+
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setLoading(true);
     const file = event.target.files?.[0];
 
-    if (file && file.type.startsWith("image/")) {
-      if (token) {
-        const res = await uploadProfileImage(file, token);
-        if (res.errorCode == "US000") {
-          updateUser(res);
-        } else {
-          setIsAlertVisible(true);
-          setErrorMessage(res.message);
-        }
-      }
-    } else {
+    if (!file) {
       setIsAlertVisible(true);
-      setErrorMessage("Please upload a valid video file.");
+      setErrorMessage("File cannot be empty!");
+      setLoading(false);
+      return;
     }
+
+    if (file.size > MAX_FILE_SIZE) {
+      setIsAlertVisible(true);
+      setErrorMessage("File max size is 1MB");
+      setLoading(false);
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      setIsAlertVisible(true);
+      setErrorMessage("Please upload a valid image file.");
+      setLoading(false);
+      return;
+    }
+
+    if (token) {
+      const res = await uploadProfileImage(file, token);
+      if (res.errorCode == "US000") {
+        updateUser(res);
+      } else {
+        setIsAlertVisible(true);
+        setErrorMessage(res.message);
+      }
+    }
+
     setLoading(false);
   };
 
@@ -56,37 +75,44 @@ export const ProfileImage = ({ user, updateUser }: ProfileImageProps) => {
           className="hidden"
           onChange={handleFileChange}
           ref={ref}
+          disabled={loading}
         />
       </div>
     );
   };
 
   return (
-    <div className="relative group">
+    <>
       <Alert
         show={isAlertVisible}
         type="error"
         message={errorMessage}
         onClose={() => setIsAlertVisible(false)}
       />
-      <div
-        className={clsx("w-full h-auto", {
-          "transition-opacity duration-300 group-hover:opacity-50":
-            loggedUser && user.id == loggedUser.id,
-        })}
-      >
-        {loading ? (
-          <span className="loading loading-spinner w-[120px] h-[120px] dark:bg-white"></span>
+      <div className="relative group">
+        <div
+          className={clsx("w-full h-auto", {
+            "transition-opacity duration-300 group-hover:opacity-50":
+              loggedUser && user.id == loggedUser.id,
+          })}
+        >
+          {loading ? (
+            <span className="loading loading-spinner w-[120px] h-[120px] dark:bg-white"></span>
+          ) : (
+            <Avatar
+              size="L"
+              userId={user.id}
+              username={user.name}
+              profileImageUrl={user.profileImageUrl}
+            />
+          )}
+        </div>
+        {loggedUser && user.id == loggedUser.id ? (
+          renderHiddenFileInput()
         ) : (
-          <Avatar
-            size="L"
-            userId={user.id}
-            username={user.name}
-            profileImageUrl={user.profileImageUrl}
-          />
+          <></>
         )}
       </div>
-      {loggedUser && user.id == loggedUser.id ? renderHiddenFileInput() : <></>}
-    </div>
+    </>
   );
 };

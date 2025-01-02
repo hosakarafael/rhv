@@ -23,6 +23,7 @@ export default function Page() {
 
   const TITLE_LENGTH = 100;
   const DESCRIPTION_LENGTH = 5000;
+  const MAX_FILE_SIZE = 100 * 1024 * 1024;
 
   useEffect(() => {
     if (!user) {
@@ -61,15 +62,28 @@ export default function Page() {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
-    if (file && file.type.startsWith("video/")) {
-      const videoObjectUrl = URL.createObjectURL(file);
-      setVideoFile(file);
-      setVideoUrl(videoObjectUrl);
-      setVideoKey((prevKey) => prevKey + 1);
-    } else {
+    if (!file) {
+      setIsAlertVisible(true);
+      setErrorMessage("File cannot be empty!");
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      setIsAlertVisible(true);
+      setErrorMessage("File max size is 100MB");
+      return;
+    }
+
+    if (!file.type.startsWith("video/")) {
       setIsAlertVisible(true);
       setErrorMessage("Please upload a valid video file.");
+      return;
     }
+
+    const videoObjectUrl = URL.createObjectURL(file);
+    setVideoFile(file);
+    setVideoUrl(videoObjectUrl);
+    setVideoKey((prevKey) => prevKey + 1);
   };
 
   const validate = (title: string, description: string) => {
@@ -127,6 +141,7 @@ export default function Page() {
                   onChange={(e) => {
                     setTitle(e.currentTarget.value);
                   }}
+                  disabled={loading}
                 />
                 <div className="label w-96">
                   <span className="label-text-alt"></span>
@@ -163,6 +178,7 @@ export default function Page() {
                   onChange={(e) => {
                     setDescription(e.currentTarget.value);
                   }}
+                  disabled={loading}
                 ></textarea>
                 <div className="label w-96">
                   <span className="label-text-alt"></span>
@@ -183,6 +199,7 @@ export default function Page() {
                   className="select select-bordered dark:text-white"
                   value={visibility}
                   onChange={(e) => setVisibility(e.currentTarget.value)}
+                  disabled={loading}
                 >
                   <option value={"PUBLIC"}>Public</option>
                   <option value={"PRIVATE"}>Private</option>
@@ -200,6 +217,7 @@ export default function Page() {
                   accept="video/*"
                   className="file-input file-input-bordered w-full max-w-xs dark:text-white"
                   onChange={handleFileChange}
+                  disabled={loading}
                 />
               </label>
               {videoUrl && (
