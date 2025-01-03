@@ -1,0 +1,11 @@
+{
+  "LoginPage": {
+    "title": "Login",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Senha",
+    "passwordPlaceholder": "Senha",
+    "createBtn": "Criar",
+    "loginBtn": "Login"
+  }
+}
