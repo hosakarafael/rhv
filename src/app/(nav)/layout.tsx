@@ -1,5 +1,5 @@
 "use client";
-import Navbar from "@/ui/Navbar";
+import Navbar from "@/ui/navbar/Navbar";
 import { Sidebar } from "@/ui/sidebar/Sidebar";
 import { useSidebar } from "@/context/sidebarContext";
 import clsx from "clsx";

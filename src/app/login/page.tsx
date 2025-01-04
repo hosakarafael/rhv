@@ -7,6 +7,7 @@ import { authenticate } from "@/services/authService";
 import { redirect, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { GuestMenu } from "@/ui/navbar/GuestMenu";
 
 export default function Page() {
   const t = useTranslations("LoginPage");
@@ -86,7 +87,10 @@ export default function Page() {
 
   return (
     <div className="p-2">
-      <Logo />
+      <div className="flex justify-between">
+        <Logo />
+        <GuestMenu />
+      </div>
       <div className="flex items-center h-screen justify-center gap-3 dark:text-white">
         <div className="flex flex-col gap-5 sm:flex-row">
           <h1 className="text-6xl">{t("title")}</h1>
