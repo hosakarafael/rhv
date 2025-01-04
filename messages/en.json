@@ -6,7 +6,24 @@
     "passwordLabel": "Password",
     "passwordPlaceholder": "Password",
     "createBtn": "Create",
-    "loginBtn": "Login"
+    "loginBtn": "Login",
+    "errorEmailEmpty": "Email cannot be empty",
+    "errorPasswordEmpty": "Password cannot be empty",
+    "errorIncorrectEmailOrPassword": "Incorrect email or password."
+  },
+  "CreatePage": {
+    "title": "Create",
+    "nameLabel": "Channel name",
+    "namePlaceholder": "Channel name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Password",
+    "backBtn": "Back",
+    "createBtn": "Create",
+    "errorNameEmpty": "Channel name cannot be empty",
+    "errorEmailEmpty": "Email cannot be empty",
+    "errorPasswordEmpty": "Password cannot be empty"
   },
 
   "Navbar": {

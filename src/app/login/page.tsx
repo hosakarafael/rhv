@@ -34,14 +34,14 @@ export default function Page() {
 
     if (!email) {
       setIsAlertVisible(true);
-      setErrorMessage("Email cannot be empty");
+      setErrorMessage(t("errorEmailEmpty"));
       setLoading(false);
       return;
     }
 
     if (!password) {
       setIsAlertVisible(true);
-      setErrorMessage("Password cannot be empty");
+      setErrorMessage(t("errorPasswordEmpty"));
       setLoading(false);
       return;
     }
@@ -52,13 +52,13 @@ export default function Page() {
 
       switch (res.errorCode) {
         case "AS001":
-          setErrorMessage("Incorrect email or password.");
+          setErrorMessage(t("errorIncorrectEmailOrPassword"));
           break;
         case "AS002":
-          setErrorMessage("Email cannot be empty.");
+          setErrorMessage(t("errorEmailEmpty"));
           break;
         case "AS003":
-          setErrorMessage("Password cannot be empty.");
+          setErrorMessage(t("errorPasswordEmpty"));
           break;
         default:
           setErrorMessage(res.message);

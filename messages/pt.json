@@ -6,7 +6,24 @@
     "passwordLabel": "Senha",
     "passwordPlaceholder": "Senha",
     "createBtn": "Criar",
-    "loginBtn": "Login"
+    "loginBtn": "Login",
+    "errorEmailEmpty": "Email não deve ser vazio",
+    "errorPasswordEmpty": "Senha não deve ser vazio",
+    "errorIncorrectEmailOrPassword": "Email or senha incorreto"
+  },
+  "CreatePage": {
+    "title": "Criar",
+    "nameLabel": "Nome do canal",
+    "namePlaceholder": "Nome do canal",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Senha",
+    "passwordPlaceholder": "Senha",
+    "backBtn": "Voltar",
+    "createBtn": "Criar",
+    "errorNameEmpty": "Nome do canal não deve ser vazio",
+    "errorEmailEmpty": "Email não deve ser vazio",
+    "errorPasswordEmpty": "Senha não deve ser vazio"
   },
 
   "Navbar": {
