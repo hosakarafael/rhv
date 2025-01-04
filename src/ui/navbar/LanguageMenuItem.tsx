@@ -3,8 +3,10 @@ import { LanguageIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { useState } from "react";
 import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export const LanguageMenuItem = () => {
+  const t = useTranslations("LanguageMenuItem");
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const locale = useLocale();
 
@@ -22,7 +24,7 @@ export const LanguageMenuItem = () => {
         })}
       >
         <LanguageIcon className="w-[20px] my-2" />
-        Language
+        {t("language")}
       </div>
       <ul
         className={clsx("menu-dropdown", {

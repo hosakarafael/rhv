@@ -4,6 +4,7 @@ import { Alert } from "@/components/Alert";
 import { Logo } from "@/components/Logo";
 import { useUser } from "@/context/userContext";
 import { register } from "@/services/authService";
+import { GuestMenu } from "@/ui/navbar/GuestMenu";
 import { redirect, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -81,8 +82,13 @@ export default function Page() {
   };
 
   return (
-    <div className="p-2">
-      <Logo />
+    <div>
+      <div className="absolute w-screen p-2">
+        <div className="flex justify-between">
+          <Logo />
+          <GuestMenu />
+        </div>
+      </div>
       <div className="flex items-center h-screen justify-center gap-3 dark:text-white">
         <div className="flex flex-col gap-5 sm:flex-row">
           <h1 className="text-6xl">Create</h1>

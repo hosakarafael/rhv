@@ -7,5 +7,21 @@
     "passwordPlaceholder": "Senha",
     "createBtn": "Criar",
     "loginBtn": "Login"
+  },
+
+  "Navbar": {
+    "searchPlaceholder": "Pesquisar",
+    "uploadBtn": "Carregar video",
+    "myChannel": "Meu canal",
+    "logout": "Logout"
+  },
+  "ThemeMenuItem": {
+    "theme": "Tema",
+    "light": "Claro",
+    "dark": "Escuro",
+    "system": "Dispositivo"
+  },
+  "LanguageMenuItem": {
+    "language": "Idioma"
   }
 }

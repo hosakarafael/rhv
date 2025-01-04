@@ -1,11 +1,6 @@
 "use client";
-import Avatar from "../../components/Avatar";
-import {
-  Bars3Icon,
-  MagnifyingGlassIcon,
-  ArrowRightStartOnRectangleIcon,
-  UserIcon,
-} from "@heroicons/react/24/outline";
+
+import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useUser } from "@/context/userContext";
 import { Logo } from "../../components/Logo";
 import { LoginButton } from "../../components/LoginButton";
@@ -14,10 +9,11 @@ import { useSidebar } from "@/context/sidebarContext";
 import Link from "next/link";
 import { useState } from "react";
 import { GuestMenu } from "./GuestMenu";
-import { ThemeMenuItem } from "./ThemeMenuItem";
 import { UserMenu } from "./UserMenu";
+import { useTranslations } from "next-intl";
 
 const Navbar = () => {
+  const t = useTranslations("Navbar");
   const { user } = useUser();
   const pathname = usePathname();
   const { toggle } = useSidebar();
@@ -35,7 +31,7 @@ const Navbar = () => {
           href={"/upload"}
           className="btn dark:btn-neutral rounded-full text-sm"
         >
-          Upload video
+          {t("uploadBtn")}
         </Link>
         <UserMenu />
       </div>
@@ -71,7 +67,7 @@ const Navbar = () => {
               <input
                 type="text"
                 className="sm:w-96 pl-4 pr-10 py-2 border border-gray-300 dark:border-neutral-600 rounded-l-full rounded-r-none focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent z-10 dark:bg-black dark:text-white"
-                placeholder="Search"
+                placeholder={t("searchPlaceholder")}
                 value={query}
                 onChange={(e) => setQuery(e.currentTarget.value)}
               />

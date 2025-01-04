@@ -3,8 +3,10 @@ import { useTheme } from "@/context/themeContext";
 import { MoonIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export const ThemeMenuItem = () => {
+  const t = useTranslations("ThemeMenuItem");
   const { activeTheme, updateTheme } = useTheme();
   const [showThemeMenu, setShowThemeMenu] = useState(false);
 
@@ -17,7 +19,7 @@ export const ThemeMenuItem = () => {
         })}
       >
         <MoonIcon className="w-[20px] my-2" />
-        Theme
+        {t("theme")}
       </div>
       <ul
         className={clsx("menu-dropdown", {
@@ -31,7 +33,7 @@ export const ThemeMenuItem = () => {
             })}
             onClick={() => updateTheme && updateTheme("light")}
           >
-            <div className="my-2">Light</div>
+            <div className="my-2">{t("light")}</div>
           </button>
         </li>
         <li>
@@ -41,7 +43,7 @@ export const ThemeMenuItem = () => {
             })}
             onClick={() => updateTheme && updateTheme("dark")}
           >
-            <div className="my-2">Dark</div>
+            <div className="my-2">{t("dark")}</div>
           </button>
         </li>
         <li>
@@ -51,7 +53,7 @@ export const ThemeMenuItem = () => {
             })}
             onClick={() => updateTheme && updateTheme("system")}
           >
-            <div className="my-2">System</div>
+            <div className="my-2">{t("system")}</div>
           </button>
         </li>
       </ul>

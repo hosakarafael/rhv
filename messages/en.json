@@ -7,5 +7,21 @@
     "passwordPlaceholder": "Password",
     "createBtn": "Create",
     "loginBtn": "Login"
+  },
+
+  "Navbar": {
+    "searchPlaceholder": "Search",
+    "uploadBtn": "Upload video",
+    "myChannel": "My channel",
+    "logout": "Logout"
+  },
+  "ThemeMenuItem": {
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "LanguageMenuItem": {
+    "language": "Language"
   }
 }

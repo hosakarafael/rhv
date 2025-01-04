@@ -86,12 +86,14 @@ export default function Page() {
   };
 
   return (
-    <div className="p-2">
-      <div className="flex justify-between">
-        <Logo />
-        <GuestMenu />
+    <div>
+      <div className="absolute w-screen p-2">
+        <div className="flex justify-between">
+          <Logo />
+          <GuestMenu />
+        </div>
       </div>
-      <div className="flex items-center h-screen justify-center gap-3 dark:text-white">
+      <div className="h-screen overflow-hidden flex items-center justify-center gap-3 dark:text-white">
         <div className="flex flex-col gap-5 sm:flex-row">
           <h1 className="text-6xl">{t("title")}</h1>
           <form onSubmit={handleSubmit} className="flex flex-col gap-1 w-96">

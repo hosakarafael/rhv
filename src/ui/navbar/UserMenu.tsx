@@ -5,8 +5,10 @@ import Link from "next/link";
 import { ThemeMenuItem } from "./ThemeMenuItem";
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import { LanguageMenuItem } from "./LanguageMenuItem";
+import { useTranslations } from "next-intl";
 
 export const UserMenu = () => {
+  const t = useTranslations("Navbar");
   const { user } = useUser();
 
   return (
@@ -42,7 +44,7 @@ export const UserMenu = () => {
           <div>
             <UserIcon className="w-[20px]" />
             <Link href={"/channel/" + user?.id} className="my-2">
-              My channel
+              {t("myChannel")}
             </Link>
           </div>
         </li>
@@ -52,7 +54,7 @@ export const UserMenu = () => {
           <div>
             <ArrowRightStartOnRectangleIcon className="w-[20px]" />
             <Link className="my-2" href={"/logout"}>
-              Logout
+              {t("logout")}
             </Link>
           </div>
         </li>
