@@ -1,4 +1,8 @@
 {
+  "Common": {
+    "view": "{count, plural, =0 {# visualização} =1 {# visualização} other {# visualizações}}"
+  },
+
   "LoginPage": {
     "title": "Login",
     "emailLabel": "Email",
@@ -29,6 +33,13 @@
     "loginSubscriptionsTitle": "Subscrições",
     "loginSubscriptionsMessage": "Faça login para ver as últimas atualizações de seus canais favoritos",
     "noSubscription": "Você não está inscrito em nenhum canal!"
+  },
+  "HistoryPage": {
+    "title": "Histórico de visualizações",
+    "loginHistory": "Se você estiver deslogado, seu histórico de visualizações não será exibido.",
+    "noHistory": "Nenhum histórico encontrado, assista qualquer vídeo para ver aqui",
+    "videoDeletedMessage": "Desculpe, este vídeo foi deletado!",
+    "videoPrivateMessage": "O usuário alterou este vídeo para privado!"
   },
 
   "Navbar": {

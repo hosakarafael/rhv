@@ -5,8 +5,10 @@ import Tooltip from "@/components/Tooltip";
 import { useUser } from "@/context/userContext";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function Page() {
+  const t = useTranslations("HistoryPage");
   const { user } = useUser();
   const pathname = usePathname();
 
@@ -15,20 +17,9 @@ export default function Page() {
       <div className="p-10 flex justify-center">
         <div className="mb-10">
           <h1 className="text-4xl font-extrabold mb-5 dark:text-white">
-            Watch history
+            {t("title")}
           </h1>
-          <div className="form-control">
-            <div className="flex items-center">
-              <input
-                type="text"
-                placeholder="Search"
-                className="input input-bordered w-72 md:w-96"
-              />
-              <Tooltip label="Search">
-                <MagnifyingGlassIcon className="mx-4 h-[30px] w-[30px] text-gray-500" />
-              </Tooltip>
-            </div>
-          </div>
+
           <div className="flex">
             <div>
               <HistoryList />
@@ -42,10 +33,8 @@ export default function Page() {
   const notLoggedHistory = () => {
     return (
       <div className="p-10 flex flex-col justify-center items-center mt-40 dark:text-white">
-        <h1 className="text-4xl font-extrabold mb-5">Watch history</h1>
-        <p className="mb-7">
-          If you are logged out, your play history will not be displayed.
-        </p>
+        <h1 className="text-4xl font-extrabold mb-5">{t("title")}</h1>
+        <p className="mb-7">{t("loginHistory")}</p>
         <LoginButton continueTo={pathname} />
       </div>
     );

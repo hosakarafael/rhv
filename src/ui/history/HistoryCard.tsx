@@ -2,12 +2,15 @@ import { HistoryType } from "@/lib/definitions";
 import { LockClosedIcon, TrashIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface HistoryCardProps {
   history: HistoryType;
 }
 
 export const HistoryCard = ({ history }: HistoryCardProps) => {
+  const t = useTranslations("HistoryPage");
+  const tCommon = useTranslations("Common");
   const renderHistory = () => {
     if (history.videoDeleted) {
       return (
@@ -16,7 +19,7 @@ export const HistoryCard = ({ history }: HistoryCardProps) => {
             <TrashIcon className="w-[60px]" />
           </div>
           <h2 className="card-title w-40 md:w-72 lg:w-96 line-clamp-2 text-ellipsis dark:text-white">
-            Sorry, this video was deleted!
+            {t("videoDeletedMessage")}
           </h2>
         </>
       );
@@ -28,7 +31,7 @@ export const HistoryCard = ({ history }: HistoryCardProps) => {
             <LockClosedIcon className="w-[60px]" />
           </div>
           <h2 className="card-title w-40 md:w-72 lg:w-96 line-clamp-2 text-ellipsis dark:text-white">
-            User changed this video to private!
+            {t("videoPrivateMessage")}
           </h2>
         </>
       );
@@ -53,7 +56,8 @@ export const HistoryCard = ({ history }: HistoryCardProps) => {
           </h2>
           <Link href={`/channel/${history.userId}`}>
             <p className="text-sm text-neutral-400">
-              {history.video.user.name} • {history.video.views} views
+              {history.video.user.name} •{" "}
+              {tCommon("view", { count: history.video.views })}
             </p>
           </Link>
           <p className="text-sm text-neutral-400 mt-4 w-40 md:w-72 lg:w-96 text-ellipsis line-clamp-3">

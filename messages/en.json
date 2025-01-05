@@ -1,4 +1,8 @@
 {
+  "Common": {
+    "view": "{count, plural, =0 {# view} =1 {# view} other {# views}}"
+  },
+
   "LoginPage": {
     "title": "Login",
     "emailLabel": "Email",
@@ -29,6 +33,13 @@
     "loginSubscriptionsTitle": "Subscriptions",
     "loginSubscriptions": "Log in to see the latest updates from your favorite channels",
     "noSubscription": "You are not subscribed to any channel!"
+  },
+  "HistoryPage": {
+    "title": "Watch history",
+    "loginHistory": "If you are logged out, your play history will not be displayed.",
+    "noHistory": "No history found, watch any videos to see here",
+    "videoDeletedMessage": "Sorry, this video was deleted!",
+    "videoPrivateMessage": "User changed this video to private!"
   },
 
   "Navbar": {
