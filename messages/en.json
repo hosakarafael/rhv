@@ -40,5 +40,12 @@
   },
   "LanguageMenuItem": {
     "language": "Language"
+  },
+  "Sidebar": {
+    "home": "Home",
+    "subscriptions": "Subscriptions",
+    "history": "History",
+    "myVideos": "My videos",
+    "subscriptionsTitle": "Subscriptions"
   }
 }

@@ -17,8 +17,10 @@ import { useSidebar } from "@/context/sidebarContext";
 import { SidebarItem } from "./SidebarItem";
 import { SidebarSubscriptionsList } from "./SidebarSubscriptionsList";
 import { useUser } from "@/context/userContext";
+import { useTranslations } from "next-intl";
 
 export const Sidebar = () => {
+  const t = useTranslations("Sidebar");
   const { user } = useUser();
   const { isMin } = useSidebar();
 
@@ -29,7 +31,7 @@ export const Sidebar = () => {
         <div>
           {!isMin && (
             <h1 className="text-lg font-bold mx-5 dark:text-white">
-              Subscriptions
+              {t("subscriptionsTitle")}
             </h1>
           )}
           <SidebarSubscriptionsList />
@@ -42,25 +44,25 @@ export const Sidebar = () => {
     <div className="flex flex-col gap-2 p-2 fixed dark:bg-black h-screen z-10 overflow-auto">
       <SidebarItem
         href="/"
-        text="Home"
+        text={t("home")}
         Icon={HomeIcon}
         ActiveIcon={HomeIconSolid}
       />
       <SidebarItem
         href="/subscriptions"
-        text="Subscriptions"
+        text={t("subscriptions")}
         Icon={UserGroupIcon}
         ActiveIcon={UserGroupIconSolid}
       />
       <SidebarItem
         href="/history"
-        text="History"
+        text={t("history")}
         Icon={ClockIcon}
         ActiveIcon={ClockIconSolid}
       />
       <SidebarItem
         href="/myvideos"
-        text="My videos"
+        text={t("myVideos")}
         Icon={PlayCircleIcon}
         ActiveIcon={PlayCircleIconSolid}
       />

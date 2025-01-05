@@ -40,5 +40,12 @@
   },
   "LanguageMenuItem": {
     "language": "Idioma"
+  },
+  "Sidebar": {
+    "home": "Início",
+    "subscriptions": "Subscrições",
+    "history": "Histórico",
+    "myVideos": "Meus vídeos",
+    "subscriptionsTitle": "Subscrições"
   }
 }
