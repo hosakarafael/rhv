@@ -1,6 +1,7 @@
 {
   "Common": {
-    "view": "{count, plural, =0 {# view} =1 {# view} other {# views}}"
+    "viewCount": "{count, plural, =0 {# view} =1 {# view} other {# views}}",
+    "noDescription": "No description has been added to this video."
   },
 
   "LoginPage": {
@@ -41,6 +42,21 @@
     "videoDeletedMessage": "Sorry, this video was deleted!",
     "videoPrivateMessage": "User changed this video to private!"
   },
+  "MyVideosPage": {
+    "title": "My videos",
+    "loginMyVideos": "Please login to see your videos.",
+    "noVideosYet": "You do not have any videos yet, upload video to see here",
+    "tableVideo": "Video",
+    "tableVisibility": "Visibility",
+    "tableDate": "Date",
+    "tableViews": "Views",
+    "tableComments": "Comments",
+    "tableLikes": "Likes",
+    "tooltipEdit": "Edit",
+    "tooltipDelete": "Delete",
+    "deleteDialogTitle": "Delete video",
+    "deleteDialogText": "Delete your video permanently?"
+  },
 
   "Navbar": {
     "searchPlaceholder": "Search",
@@ -66,5 +82,10 @@
   },
   "VideoGrid": {
     "noVideo": "No video found!"
+  },
+  "Modal": {
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "close": "Close"
   }
 }

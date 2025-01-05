@@ -1,5 +1,6 @@
 import { LoginButton } from "./LoginButton";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface ModalProps {
   type?: "Close" | "Login" | "Cancel/Yes";
@@ -17,20 +18,21 @@ export const Modal = ({
   onYes,
 }: ModalProps) => {
   const pathname = usePathname();
+  const t = useTranslations("Modal");
 
   const renderButtonsSection = () => {
     switch (type) {
       case "Close":
         return (
           <button className="btn btn-neutral text-xl text-white rounded-full">
-            Close
+            {t("close")}
           </button>
         );
       case "Login":
         return (
           <div className="flex gap-2">
             <button className="btn btn-neutral text-xl text-white rounded-full">
-              Close
+              {t("close")}
             </button>
             <LoginButton continueTo={pathname} />
           </div>
@@ -39,13 +41,13 @@ export const Modal = ({
         return (
           <div className="flex gap-2">
             <button className="btn btn-neutral text-xl text-white rounded-full">
-              Cancel
+              {t("cancel")}
             </button>
             <button
               onClick={onYes}
               className="btn btn-primary text-xl text-white rounded-full"
             >
-              Yes
+              {t("yes")}
             </button>
           </div>
         );

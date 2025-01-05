@@ -41,7 +41,7 @@ export const Sidebar = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2 p-2 fixed dark:bg-black h-screen z-10 overflow-auto">
+    <div className="flex flex-col gap-2 p-2 fixed bg-white dark:bg-black h-screen z-10 overflow-auto">
       <SidebarItem
         href="/"
         text={t("home")}

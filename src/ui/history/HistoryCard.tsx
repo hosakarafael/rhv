@@ -57,7 +57,7 @@ export const HistoryCard = ({ history }: HistoryCardProps) => {
           <Link href={`/channel/${history.userId}`}>
             <p className="text-sm text-neutral-400">
               {history.video.user.name} •{" "}
-              {tCommon("view", { count: history.video.views })}
+              {tCommon("viewCount", { count: history.video.views })}
             </p>
           </Link>
           <p className="text-sm text-neutral-400 mt-4 w-40 md:w-72 lg:w-96 text-ellipsis line-clamp-3">

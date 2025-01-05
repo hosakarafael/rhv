@@ -14,6 +14,7 @@ import Image from "next/image";
 
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface MyVideosProps {
   videos: VideoType[];
@@ -21,6 +22,8 @@ interface MyVideosProps {
 }
 
 export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
+  const tCommon = useTranslations("Common");
+  const t = useTranslations("MyVideosPage");
   const { user, token } = useUser();
   const pathname = usePathname();
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -31,9 +34,9 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
     return (
       <div className="p-10 flex flex-col justify-center items-center mt-40">
         <h1 className="text-4xl font-extrabold mb-5 dark:text-white">
-          My Videos
+          {t("title")}
         </h1>
-        <p className="mb-7 dark:text-white">Please login to see your videos.</p>
+        <p className="mb-7 dark:text-white">{t("loginMyVideos")}</p>
         <LoginButton continueTo={pathname} />
       </div>
     );
@@ -44,7 +47,7 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
       <div className="group">
         <div className="mb-7">
           <p className="text-2xl font-bold p-4 dark:text-white">
-            You do not have any videos yet, upload video to see here
+            {t("noVideosYet")}
           </p>
         </div>
       </div>
@@ -68,14 +71,14 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
   const renderActionSection = (videoId: number) => {
     return (
       <div className="flex p-2">
-        <Tooltip label="Edit">
+        <Tooltip label={t("tooltipEdit")}>
           <Link href={"/edit/" + videoId}>
             <div className="hover:bg-gray-200 hover:dark:bg-neutral-800 cursor-pointer w-[40px] p-2 rounded-full dark:text-white">
               <PencilIcon />
             </div>
           </Link>
         </Tooltip>
-        <Tooltip label="Delete">
+        <Tooltip label={t("tooltipDelete")}>
           <div
             onClick={() => modalRef.current?.showModal()}
             className="hover:bg-gray-200 hover:dark:bg-neutral-800 cursor-pointer w-[40px] p-2 rounded-full dark:text-white"
@@ -91,17 +94,17 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
     return (
       <div className="overflow-x-auto py-3">
         <h1 className="text-4xl font-extrabold my-5 dark:text-white">
-          My Videos
+          {t("title")}
         </h1>
         <table className="table">
           <thead>
             <tr>
-              <th className="dark:text-white">Video</th>
-              <th className="dark:text-white">Visibility</th>
-              <th className="dark:text-white">Date</th>
-              <th className="dark:text-white">Views</th>
-              <th className="dark:text-white">Comments</th>
-              <th className="dark:text-white">Likes</th>
+              <th className="dark:text-white">{t("tableVideo")}</th>
+              <th className="dark:text-white">{t("tableVisibility")}</th>
+              <th className="dark:text-white">{t("tableDate")}</th>
+              <th className="dark:text-white">{t("tableViews")}</th>
+              <th className="dark:text-white">{t("tableComments")}</th>
+              <th className="dark:text-white">{t("tableLikes")}</th>
             </tr>
           </thead>
           <tbody>
@@ -134,7 +137,7 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
                         <div className="text-sm opacity-50 text-ellipsis line-clamp-1 dark:text-white">
                           {video.description.length != 0
                             ? video.description
-                            : "No description"}
+                            : tCommon("noDescription")}
                         </div>
                         <div className="hidden group-hover:block absolute">
                           {renderActionSection(video.id)}
@@ -144,8 +147,8 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
                           onYes={() => {
                             handleDeleteVideo(video.id);
                           }}
-                          title="Delete video"
-                          text="Delete your video permanently?"
+                          title={t("deleteDialogTitle")}
+                          text={t("deleteDialogText")}
                           ref={modalRef}
                         />
                       </div>
