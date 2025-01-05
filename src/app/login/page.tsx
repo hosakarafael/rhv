@@ -6,8 +6,8 @@ import { useUser } from "@/context/userContext";
 import { authenticate } from "@/services/authService";
 import { redirect, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
 import { GuestMenu } from "@/ui/navbar/GuestMenu";
+import { useTranslations } from "next-intl";
 
 export default function Page() {
   const t = useTranslations("LoginPage");

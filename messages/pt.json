@@ -25,6 +25,11 @@
     "errorEmailEmpty": "Email não deve ser vazio",
     "errorPasswordEmpty": "Senha não deve ser vazio"
   },
+  "SubscriptionsPage": {
+    "loginSubscriptionsTitle": "Subscrições",
+    "loginSubscriptionsMessage": "Faça login para ver as últimas atualizações de seus canais favoritos",
+    "noSubscription": "Você não está inscrito em nenhum canal!"
+  },
 
   "Navbar": {
     "searchPlaceholder": "Pesquisar",
@@ -47,5 +52,8 @@
     "history": "Histórico",
     "myVideos": "Meus vídeos",
     "subscriptionsTitle": "Subscrições"
+  },
+  "VideoGrid": {
+    "noVideo": "Nenhum vídeo foi encontrando!"
   }
 }

@@ -25,6 +25,11 @@
     "errorEmailEmpty": "Email cannot be empty",
     "errorPasswordEmpty": "Password cannot be empty"
   },
+  "SubscriptionsPage": {
+    "loginSubscriptionsTitle": "Subscriptions",
+    "loginSubscriptions": "Log in to see the latest updates from your favorite channels",
+    "noSubscription": "You are not subscribed to any channel!"
+  },
 
   "Navbar": {
     "searchPlaceholder": "Search",
@@ -47,5 +52,8 @@
     "history": "History",
     "myVideos": "My videos",
     "subscriptionsTitle": "Subscriptions"
+  },
+  "VideoGrid": {
+    "noVideo": "No video found!"
   }
 }
