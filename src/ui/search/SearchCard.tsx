@@ -3,12 +3,14 @@ import { VideoType } from "@/lib/definitions";
 import { formatDate } from "@/lib/textFormatter";
 import Link from "next/link";
 import Image from "next/image";
+import { useLocale } from "next-intl";
 
 interface SearchCardProps {
   video: VideoType;
 }
 
 export const SearchCard = ({ video }: SearchCardProps) => {
+  const locale = useLocale();
   return (
     <div className="flex gap-5 my-3">
       <Link href={`/video/${video.id}`}>
@@ -29,11 +31,16 @@ export const SearchCard = ({ video }: SearchCardProps) => {
         </h2>
         <Link href={`/channel/${video.user.id}`}>
           <p className="text-sm text-neutral-400">
-            {video.views} views • {formatDate(video.createdAt)}
+            {video.views} views • {formatDate(video.createdAt, locale)}
           </p>
         </Link>
         <div className="flex gap-2 items-center my-2 text-neutral-400">
-          <Avatar size="XS" />
+          <Avatar
+            size="XS"
+            userId={video.user.id}
+            username={video.user.name}
+            profileImageUrl={video.user.profileImageUrl}
+          />
           <span className="text-sm">{video.user.name}</span>
         </div>
         <p className="text-sm text-neutral-400 w-40 md:w-72 lg:w-96 text-ellipsis line-clamp-3">

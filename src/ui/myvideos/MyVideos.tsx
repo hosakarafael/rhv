@@ -6,15 +6,15 @@ import { Modal } from "@/components/Modal";
 import Tooltip from "@/components/Tooltip";
 import { useUser } from "@/context/userContext";
 import { VideoType } from "@/lib/definitions";
-import { capitalizeFirstLetter, formatDate } from "@/lib/textFormatter";
-import { deleteVideo, fetchAllVideosByUserId } from "@/services/videoService";
+import { formatDate } from "@/lib/textFormatter";
+import { deleteVideo } from "@/services/videoService";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
 
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 interface MyVideosProps {
   videos: VideoType[];
@@ -22,6 +22,7 @@ interface MyVideosProps {
 }
 
 export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
+  const locale = useLocale();
   const tCommon = useTranslations("Common");
   const t = useTranslations("MyVideosPage");
   const { user, token } = useUser();
@@ -158,7 +159,7 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
                     {tCommon(video.visibility.toLowerCase())}
                   </td>
                   <td className="w-32 dark:text-white">
-                    {formatDate(video.createdAt)}
+                    {formatDate(video.createdAt, locale)}
                   </td>
                   <td className="dark:text-white">{video.views}</td>
                   <td className="dark:text-white">{video.comments.length}</td>

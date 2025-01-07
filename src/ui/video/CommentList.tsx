@@ -13,6 +13,7 @@ interface CommentListProps {
 }
 
 export const CommentList = ({ comments, onDelete }: CommentListProps) => {
+  const locale = useLocale();
   const t = useTranslations("CommentSection");
   const tCommon = useTranslations("Common");
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -35,7 +36,7 @@ export const CommentList = ({ comments, onDelete }: CommentListProps) => {
               <div>
                 <span className="dark:text-white">{comment.user.name}</span>
                 <span className="text-xs mx-2 text-gray-400">
-                  {formatDate(comment.createdAt)}
+                  {formatDate(comment.createdAt, locale)}
                 </span>
                 <p className="dark:text-white">{comment.text}</p>
               </div>

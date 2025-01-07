@@ -21,7 +21,7 @@ export const fetchVideoByIdAndPublic = async (
   return await res.json();
 };
 
-export const increaseView = async (videoId: string) => {
+export const increaseView = async (videoId: number) => {
   const resIp = await fetch("https://api.ipify.org?format=json");
   const data: { ip: string } = await resIp.json();
 

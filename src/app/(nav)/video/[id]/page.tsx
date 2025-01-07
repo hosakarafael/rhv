@@ -1,8 +1,31 @@
-import { Video } from "@/components/Video";
+"use client";
+import { Video } from "@/ui/video/Video";
+import { VideoType } from "@/lib/definitions";
+import { fetchVideoByIdAndPublic } from "@/services/publicVideoService";
+import { use, useEffect, useState } from "react";
+import { VideoSkeleton } from "@/ui/video/VideoSkeleton";
 
-export default async function Page(props: { params: Promise<{ id: string }> }) {
-  const params = await props.params;
-  const id = params.id;
+export default function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
+  const [video, setVideo] = useState<VideoType | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  return <Video id={id} />;
+  useEffect(() => {
+    async function init() {
+      if (id) {
+        setLoading(true);
+        const res = fetchVideoByIdAndPublic(id as string);
+        setVideo(await res);
+        setLoading(false);
+      }
+    }
+
+    init();
+  }, []);
+
+  return loading ? (
+    <VideoSkeleton />
+  ) : (
+    <Video video={video} updateVideo={(video) => setVideo(video)} />
+  );
 }

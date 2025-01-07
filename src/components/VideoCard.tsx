@@ -3,12 +3,14 @@ import Avatar from "./Avatar";
 import { VideoType } from "@/lib/definitions";
 import { formatDate } from "@/lib/textFormatter";
 import Image from "next/image";
+import { useLocale } from "next-intl";
 
 interface VideoCardProps {
   video: VideoType;
 }
 
 const VideoCard = ({ video }: VideoCardProps) => {
+  const locale = useLocale();
   return (
     <div className="card w-auto mx-1 my-1">
       <figure className="px-1 pt-1">
@@ -43,7 +45,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
             <p className="text-sm dark:text-neutral-400">{video.user.name}</p>
           </Link>
           <p className="text-sm dark:text-neutral-400">
-            {video.views} views・{formatDate(video.createdAt)}
+            {video.views} views・{formatDate(video.createdAt, locale)}
           </p>
         </div>
       </div>

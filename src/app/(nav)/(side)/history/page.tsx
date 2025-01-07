@@ -1,9 +1,7 @@
 "use client";
 import { HistoryList } from "@/ui/history/HistoryList";
 import { LoginButton } from "@/components/LoginButton";
-import Tooltip from "@/components/Tooltip";
 import { useUser } from "@/context/userContext";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 

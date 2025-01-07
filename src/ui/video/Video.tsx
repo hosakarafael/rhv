@@ -1,6 +1,6 @@
 "use client";
 import { CommentType, SubscriptionType, VideoType } from "@/lib/definitions";
-import Avatar from "./Avatar";
+import Avatar from "../../components/Avatar";
 import {
   fetchVideoByIdAndPublic,
   increaseView,
@@ -10,7 +10,7 @@ import { HandThumbUpIcon as HandThumbUpIconSolid } from "@heroicons/react/24/sol
 import { registerHistory } from "@/services/userService";
 import { useUser } from "@/context/userContext";
 import { useEffect, useRef, useState } from "react";
-import { SubscribeButton } from "./SubscribeButton";
+import { SubscribeButton } from "../../components/SubscribeButton";
 import Link from "next/link";
 import { useSidebar } from "@/context/sidebarContext";
 import {
@@ -19,33 +19,30 @@ import {
   like,
   unlike,
 } from "@/services/videoService";
-import { Modal } from "./Modal";
+import { Modal } from "../../components/Modal";
 import { CommentSection } from "@/ui/video/CommentSection";
 import { formatDate } from "@/lib/textFormatter";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
-export const Video = ({ id }: { id: string }) => {
+interface VideoProps {
+  video: VideoType | null;
+  updateVideo: (video: VideoType) => void;
+}
+
+export const Video = ({ video, updateVideo }: VideoProps) => {
   const tCommon = useTranslations("Common");
+  const locale = useLocale();
   const t = useTranslations("VideoPage");
-  const [video, setVideo] = useState<VideoType>();
   const { user, token } = useUser();
   const { update: updateSidebar } = useSidebar();
-  const [loading, setLoading] = useState(true);
   const modalRef = useRef<HTMLDialogElement>(null);
 
   async function init() {
     //update sidebar to set min = true, making it invisble on first
     updateSidebar && updateSidebar(true);
-    const res = await fetchVideoByIdAndPublic(id);
-
-    if (res.errorCode == "VS001") {
-      setVideo(undefined);
-    } else {
-      setVideo(res);
-      increaseView(id);
+    if (video) {
+      increaseView(video.id);
     }
-
-    setLoading(false);
   }
 
   useEffect(() => {
@@ -63,7 +60,7 @@ export const Video = ({ id }: { id: string }) => {
       like(user.id, video.id, token);
       const updatedLiked = [...video.likedUsers, user.id];
       const updatedVideo = { ...video, likedUsers: updatedLiked };
-      setVideo(updatedVideo);
+      updateVideo(updatedVideo);
     }
   };
 
@@ -72,7 +69,7 @@ export const Video = ({ id }: { id: string }) => {
       unlike(user.id, video.id, token);
       const updatedLiked = video.likedUsers.filter((like) => like != user.id);
       const updatedVideo = { ...video, likedUsers: updatedLiked };
-      setVideo(updatedVideo);
+      updateVideo(updatedVideo);
     }
   };
 
@@ -81,7 +78,7 @@ export const Video = ({ id }: { id: string }) => {
       const comment = await createComment(user.id, video.id, text, token);
       const updatedComments = [comment, ...video.comments];
       const updatedVideo = { ...video, comments: updatedComments };
-      setVideo(updatedVideo);
+      updateVideo(updatedVideo);
     }
   };
 
@@ -90,7 +87,7 @@ export const Video = ({ id }: { id: string }) => {
       deleteComment(comment.id, token);
       const updatedComments = video?.comments.filter((c) => c.id != comment.id);
       const updatedVideo = { ...video, comments: updatedComments };
-      setVideo(updatedVideo);
+      updateVideo(updatedVideo);
     }
   };
 
@@ -185,7 +182,7 @@ export const Video = ({ id }: { id: string }) => {
               {tCommon("viewCount", {
                 count: video.views,
               })}{" "}
-              {formatDate(video.createdAt)}
+              {formatDate(video.createdAt, locale)}
             </p>
             <div>
               {video.description ? video.description : tCommon("noDescription")}
@@ -202,15 +199,5 @@ export const Video = ({ id }: { id: string }) => {
     );
   };
 
-  return (
-    <>
-      {loading ? (
-        <div>Loading...</div>
-      ) : video ? (
-        renderVideo(video)
-      ) : (
-        renderVideoDeletedOrDoesNotExist()
-      )}
-    </>
-  );
+  return <>{video ? renderVideo(video) : renderVideoDeletedOrDoesNotExist()}</>;
 };
