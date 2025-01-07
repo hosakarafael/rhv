@@ -22,8 +22,11 @@ import {
 import { Modal } from "./Modal";
 import { CommentSection } from "@/ui/video/CommentSection";
 import { formatDate } from "@/lib/textFormatter";
+import { useTranslations } from "next-intl";
 
 export const Video = ({ id }: { id: string }) => {
+  const tCommon = useTranslations("Common");
+  const t = useTranslations("VideoPage");
   const [video, setVideo] = useState<VideoType>();
   const { user, token } = useUser();
   const { update: updateSidebar } = useSidebar();
@@ -94,9 +97,7 @@ export const Video = ({ id }: { id: string }) => {
   const renderVideoDeletedOrDoesNotExist = () => {
     return (
       <div className="flex justify-center pt-10">
-        <p className="text-4xl font-bold">
-          Video was deleted or does not exist!
-        </p>
+        <p className="text-4xl font-bold">{t("videoDeletedOrNotExist")}</p>
       </div>
     );
   };
@@ -134,14 +135,20 @@ export const Video = ({ id }: { id: string }) => {
                   <p className="font-bold dark:text-white">{video.user.name}</p>
                 </Link>
                 <p className="text-sm text-neutral-700 dark:text-neutral-400">
-                  {video.user.subscribers} subscribers
+                  {tCommon("subscriberCount", {
+                    count: video.user.subscribers,
+                  })}
                 </p>
               </div>
             </div>
 
             <SubscribeButton
               subscribeTo={
-                { id: video.user.id, name: video.user.name } as SubscriptionType
+                {
+                  id: video.user.id,
+                  name: video.user.name,
+                  profileImageUrl: video.user.profileImageUrl,
+                } as SubscriptionType
               }
             />
 
@@ -165,8 +172,8 @@ export const Video = ({ id }: { id: string }) => {
               <p>{video.likedUsers.length}</p>
               <Modal
                 type="Login"
-                title="Like this video?"
-                text="Please log in to rate."
+                title={t("modalTitleNoLoginLike")}
+                text={t("modalTextNoLoginLike")}
                 ref={modalRef}
               />
             </div>
@@ -175,11 +182,13 @@ export const Video = ({ id }: { id: string }) => {
         <div className="p-4">
           <div className="bg-gray-100 dark:bg-base-100 dark:text-white p-4 rounded-xl">
             <p className="font-bold">
-              {video.views} views {formatDate(video.createdAt)}
+              {tCommon("viewCount", {
+                count: video.views,
+              })}{" "}
+              {formatDate(video.createdAt)}
             </p>
             <div>
-              {video.description ??
-                "No description has been added to this video."}
+              {video.description ? video.description : tCommon("noDescription")}
             </div>
           </div>
         </div>

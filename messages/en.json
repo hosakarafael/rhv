@@ -1,17 +1,35 @@
 {
   "Common": {
+    "login": "Log in",
+    "logout": "Log out",
+    "delete": "Delete",
+    "edit": "Edit",
     "viewCount": "{count, plural, =0 {# view} =1 {# view} other {# views}}",
+    "subscriberCount": "{count, plural, =0 {# subscriber} =1 {# subscriber} other {# subscribers}}",
+    "commentCount": "{count, plural, =0 {# comment} =1 {# comment} other {# comments}}",
     "noDescription": "No description has been added to this video."
   },
 
+  "VideoPage": {
+    "videoDeletedOrNotExist": "Video was deleted or does not exist!",
+    "modalTitleNoLoginLike": "Like this video?",
+    "modalTextNoLoginLike": "Please log in to rate."
+  },
+  "CommentSection": {
+    "addCommentPlaceholder": "Add a comment...",
+    "modalTitleNoLoginComment": "Do you want to leave a comment?",
+    "modalTextNoLoginComment": "Please log in to comment.",
+    "modalDeleteTitle": "Delete comment",
+    "modalDeleteText": "Delete your comment permanently?"
+  },
   "LoginPage": {
-    "title": "Login",
+    "title": "Log in",
     "emailLabel": "Email",
     "emailPlaceholder": "Email",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Password",
     "createBtn": "Create",
-    "loginBtn": "Login",
+    "loginBtn": "Log in",
     "errorEmailEmpty": "Email cannot be empty",
     "errorPasswordEmpty": "Password cannot be empty",
     "errorIncorrectEmailOrPassword": "Incorrect email or password."
@@ -44,7 +62,7 @@
   },
   "MyVideosPage": {
     "title": "My videos",
-    "loginMyVideos": "Please login to see your videos.",
+    "loginMyVideos": "Please log in to see your videos.",
     "noVideosYet": "You do not have any videos yet, upload video to see here",
     "tableVideo": "Video",
     "tableVisibility": "Visibility",
@@ -52,17 +70,18 @@
     "tableViews": "Views",
     "tableComments": "Comments",
     "tableLikes": "Likes",
-    "tooltipEdit": "Edit",
-    "tooltipDelete": "Delete",
     "deleteDialogTitle": "Delete video",
     "deleteDialogText": "Delete your video permanently?"
+  },
+  "SearchPage": {
+    "noResultTitle": "No results found",
+    "noResultMessage": "Try different keywords"
   },
 
   "Navbar": {
     "searchPlaceholder": "Search",
     "uploadBtn": "Upload video",
-    "myChannel": "My channel",
-    "logout": "Logout"
+    "myChannel": "My channel"
   },
   "ThemeMenuItem": {
     "theme": "Theme",
@@ -87,5 +106,11 @@
     "cancel": "Cancel",
     "yes": "Yes",
     "close": "Close"
+  },
+  "SubscribeButton": {
+    "subscribe": "Subscribe",
+    "unsubscribe": "Unsubscribe",
+    "modalTitle": "Want to subscribe to this channel?",
+    "modalText": "Sign in to subscribe to this channel."
   }
 }

@@ -4,6 +4,7 @@ import { Modal } from "@/components/Modal";
 import { CommentType } from "@/lib/definitions";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 
 interface CommentListProps {
   comments: CommentType[];
@@ -11,6 +12,8 @@ interface CommentListProps {
 }
 
 export const CommentList = ({ comments, onDelete }: CommentListProps) => {
+  const t = useTranslations("CommentSection");
+  const tCommon = useTranslations("Common");
   const modalRef = useRef<HTMLDialogElement>(null);
 
   return (
@@ -46,7 +49,7 @@ export const CommentList = ({ comments, onDelete }: CommentListProps) => {
               >
                 <li>
                   <div onClick={() => modalRef.current?.showModal()}>
-                    Delete
+                    {tCommon("delete")}
                   </div>
                 </li>
               </ul>
@@ -56,8 +59,8 @@ export const CommentList = ({ comments, onDelete }: CommentListProps) => {
               onYes={() => {
                 onDelete(comment);
               }}
-              title="Delete comment"
-              text="Delete your comment permanently?"
+              title={t("modalDeleteTitle")}
+              text={t("modalDeleteText")}
               ref={modalRef}
             />
           </div>

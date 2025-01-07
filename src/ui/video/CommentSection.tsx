@@ -4,6 +4,7 @@ import { CommentList } from "./CommentList";
 import { useUser } from "@/context/userContext";
 import { useRef, useState } from "react";
 import { Modal } from "@/components/Modal";
+import { useTranslations } from "next-intl";
 
 interface CommentSectionProps {
   videoId: number;
@@ -17,16 +18,14 @@ export const CommentSection = ({
   onAdd,
   onDelete,
 }: CommentSectionProps) => {
+  const tCommon = useTranslations("Common");
+  const t = useTranslations("CommentSection");
   const { user } = useUser();
   const [text, setText] = useState("");
   const modalRef = useRef<HTMLDialogElement>(null);
 
   const handleAddComment = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) {
-      modalRef.current?.showModal();
-      return;
-    }
 
     if (!text) {
       return;
@@ -40,7 +39,7 @@ export const CommentSection = ({
     <>
       <div className="p-4">
         <p className="text-2xl font-bold dark:text-white">
-          {comments.length} Comments
+          {tCommon("commentCount", { count: comments.length })}
         </p>
       </div>
       <div className="p-4 flex items-center gap-2">
@@ -55,8 +54,13 @@ export const CommentSection = ({
         <div className="w-full">
           <form onSubmit={(e) => handleAddComment(e)}>
             <input
+              onClick={() => {
+                if (!user) {
+                  modalRef.current?.showModal();
+                }
+              }}
               type="text"
-              placeholder="Add a comment..."
+              placeholder={t("addCommentPlaceholder")}
               className="input input-ghost w-full"
               onChange={(e) => setText(e.target.value)}
               value={text}
@@ -67,8 +71,8 @@ export const CommentSection = ({
       <CommentList comments={comments} onDelete={onDelete} />
       <Modal
         type="Login"
-        title="Do you want to leave a comment?"
-        text="Please log in to comment."
+        title={t("modalTitleNoLoginComment")}
+        text={t("modalTextNoLoginComment")}
         ref={modalRef}
       />
     </>

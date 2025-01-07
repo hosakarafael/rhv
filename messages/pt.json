@@ -1,11 +1,29 @@
 {
   "Common": {
-    "view": "{count, plural, =0 {# visualização} =1 {# visualização} other {# visualizações}}",
+    "login": "Fazer login",
+    "logout": "Sair",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "viewCount": "{count, plural, =0 {# visualização} =1 {# visualização} other {# visualizações}}",
+    "subscriberCount": "{count, plural, =0 {# inscrito} =1 {# inscrito} other {# inscritos}}",
+    "commentCount": "{count, plural, =0 {# comentário} =1 {# comentário} other {# comentários}}",
     "noDescription": "Nenhuma descrição foi adicionada à este vídeo."
   },
 
+  "VideoPage": {
+    "videoDeletedOrNotExist": "O vídeo foi excluído ou não existe!",
+    "modalTitleNoLoginLike": "Gostou deste vídeo?",
+    "modalTextNoLoginLike": "Faça login para que sua opinião seja levada em conta."
+  },
+  "CommentSection": {
+    "addCommentPlaceholder": "Adicione um comentário...",
+    "modalTitleNoLoginComment": "Deseja deixar um comentário?",
+    "modalTextNoLoginComment": "Faça login para comentar.",
+    "modalDeleteTitle": "Excluir comentário",
+    "modalDeleteText": "Excluir seu comentário permanentemente?"
+  },
   "LoginPage": {
-    "title": "Login",
+    "title": "Fazer login",
     "emailLabel": "Email",
     "emailPlaceholder": "Email",
     "passwordLabel": "Senha",
@@ -31,7 +49,7 @@
     "errorPasswordEmpty": "Senha não deve ser vazio"
   },
   "SubscriptionsPage": {
-    "loginSubscriptionsTitle": "Subscrições",
+    "loginSubscriptionsTitle": "Inscrições",
     "loginSubscriptionsMessage": "Faça login para ver as últimas atualizações de seus canais favoritos",
     "noSubscription": "Você não está inscrito em nenhum canal!"
   },
@@ -44,25 +62,26 @@
   },
   "MyVideosPage": {
     "title": "Meus vídeos",
-    "loginMyVideos": "Please login to see your videos.",
-    "noVideosYet": "You do not have any videos yet, upload video to see here",
+    "loginMyVideos": "Faça login para ver seus vídeos.",
+    "noVideosYet": "Você ainda não tem nenhum vídeo, carregue um vídeo para ver aqui",
     "tableVideo": "Video",
     "tableVisibility": "Visibilidade",
     "tableDate": "Data",
     "tableViews": "Visualizações",
     "tableComments": "Comentários",
     "tableLikes": "Gostos",
-    "tooltipEdit": "Editar",
-    "tooltipDelete": "Deletar",
-    "deleteDialogTitle": "Deletar vídeo",
-    "deleteDialogText": "Deletar seu vídeo permanentemente?"
+    "deleteDialogTitle": "Excluir vídeo",
+    "deleteDialogText": "Excluir seu vídeo permanentemente?"
+  },
+  "SearchPage": {
+    "noResultTitle": "Nenhum resultado encontrado",
+    "noResultMessage": "Use palavras-chave diferentes"
   },
 
   "Navbar": {
     "searchPlaceholder": "Pesquisar",
     "uploadBtn": "Carregar video",
-    "myChannel": "Meu canal",
-    "logout": "Logout"
+    "myChannel": "Meu canal"
   },
   "ThemeMenuItem": {
     "theme": "Tema",
@@ -75,10 +94,10 @@
   },
   "Sidebar": {
     "home": "Início",
-    "subscriptions": "Subscrições",
+    "subscriptions": "Inscrições",
     "history": "Histórico",
     "myVideos": "Meus vídeos",
-    "subscriptionsTitle": "Subscrições"
+    "subscriptionsTitle": "Inscrições"
   },
   "VideoGrid": {
     "noVideo": "Nenhum vídeo foi encontrando!"
@@ -87,5 +106,11 @@
     "cancel": "Cancelar",
     "yes": "Sim",
     "close": "Fechar"
+  },
+  "SubscribeButton": {
+    "subscribe": "Inscrever-se",
+    "unsubscribe": "Cancelar Inscrição",
+    "modalTitle": "Quer se inscrever neste canal?",
+    "modalText": "Faça login para se inscrever neste canal."
   }
 }

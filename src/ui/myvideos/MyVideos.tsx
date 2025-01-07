@@ -71,14 +71,14 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
   const renderActionSection = (videoId: number) => {
     return (
       <div className="flex p-2">
-        <Tooltip label={t("tooltipEdit")}>
+        <Tooltip label={tCommon("edit")}>
           <Link href={"/edit/" + videoId}>
             <div className="hover:bg-gray-200 hover:dark:bg-neutral-800 cursor-pointer w-[40px] p-2 rounded-full dark:text-white">
               <PencilIcon />
             </div>
           </Link>
         </Tooltip>
-        <Tooltip label={t("tooltipDelete")}>
+        <Tooltip label={tCommon("delete")}>
           <div
             onClick={() => modalRef.current?.showModal()}
             className="hover:bg-gray-200 hover:dark:bg-neutral-800 cursor-pointer w-[40px] p-2 rounded-full dark:text-white"

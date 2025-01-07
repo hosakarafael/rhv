@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 
 export const UserMenu = () => {
   const t = useTranslations("Navbar");
+  const tCommon = useTranslations("Common");
   const { user } = useUser();
 
   return (
@@ -41,22 +42,22 @@ export const UserMenu = () => {
         </div>
         <div className="divider m-1"></div>
         <li>
-          <div>
-            <UserIcon className="w-[20px]" />
-            <Link href={"/channel/" + user?.id} className="my-2">
+          <Link href={"/channel/" + user?.id}>
+            <div className="flex gap-2 my-2">
+              <UserIcon className="w-[20px]" />
               {t("myChannel")}
-            </Link>
-          </div>
+            </div>
+          </Link>
         </li>
         <ThemeMenuItem />
         <LanguageMenuItem />
         <li>
-          <div>
-            <ArrowRightStartOnRectangleIcon className="w-[20px]" />
-            <Link className="my-2" href={"/logout"}>
-              {t("logout")}
-            </Link>
-          </div>
+          <Link href={"/logout"}>
+            <div className="flex gap-2 my-2">
+              <ArrowRightStartOnRectangleIcon className="w-[20px]" />
+              {tCommon("logout")}
+            </div>
+          </Link>
         </li>
       </ul>
     </div>

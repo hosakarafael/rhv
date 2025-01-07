@@ -51,7 +51,11 @@ export const Channel = ({ id }: ChannelProps) => {
             <div className="pt-2">
               <SubscribeButton
                 subscribeTo={
-                  { id: user.id, name: user.name } as SubscriptionType
+                  {
+                    id: user.id,
+                    name: user.name,
+                    profileImageUrl: user.profileImageUrl,
+                  } as SubscriptionType
                 }
               />
             </div>

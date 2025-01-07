@@ -4,12 +4,14 @@ import { SubscriptionType } from "@/lib/definitions";
 import { subscribe, unsubscribe } from "@/services/userService";
 import { useEffect, useRef, useState } from "react";
 import { Modal } from "./Modal";
+import { useTranslations } from "next-intl";
 
 interface SubscribeButtonProps {
   subscribeTo: SubscriptionType;
 }
 
 export const SubscribeButton = ({ subscribeTo }: SubscribeButtonProps) => {
+  const t = useTranslations("SubscribeButton");
   const { user, token, updateUser } = useUser();
   const [isSubscribed, setIsSubscribed] = useState(
     user?.subscribedUsers.some((subs) => subs.id === subscribeTo.id)
@@ -43,7 +45,11 @@ export const SubscribeButton = ({ subscribeTo }: SubscribeButtonProps) => {
       subscribe(user.id, subscribeTo.id, token);
       const updatedSubscribers = [
         ...user.subscribedUsers,
-        { id: subscribeTo.id, name: subscribeTo.name },
+        {
+          id: subscribeTo.id,
+          name: subscribeTo.name,
+          profileImageUrl: subscribeTo.profileImageUrl,
+        },
       ];
       const updatedUser = { ...user, subscribedUsers: updatedSubscribers };
       updateUser(updatedUser);
@@ -57,7 +63,7 @@ export const SubscribeButton = ({ subscribeTo }: SubscribeButtonProps) => {
           onClick={handleUnsubscribe}
           className="btn btn-primary flex items-center gap-2 font-bold text-white text-lg px-4 py-2 rounded-full"
         >
-          Unsubscribe
+          {t("unsubscribe")}
         </button>
       ) : (
         <>
@@ -66,12 +72,12 @@ export const SubscribeButton = ({ subscribeTo }: SubscribeButtonProps) => {
             disabled={user?.id == subscribeTo.id}
             className="btn btn-primary flex items-center gap-2 font-bold text-white text-lg px-4 py-2 rounded-full"
           >
-            Subscribe
+            {t("subscribe")}
           </button>
           <Modal
             type="Login"
-            title="Do you want to subscribe to this channel?"
-            text="Please log in to subscribe."
+            title={t("modalTitle")}
+            text={t("modalText")}
             ref={modalRef}
           />
         </>
