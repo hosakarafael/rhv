@@ -4,7 +4,8 @@ import { Modal } from "@/components/Modal";
 import { CommentType } from "@/lib/definitions";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { useRef } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { formatDate } from "@/lib/textFormatter";
 
 interface CommentListProps {
   comments: CommentType[];
@@ -33,7 +34,9 @@ export const CommentList = ({ comments, onDelete }: CommentListProps) => {
               />
               <div>
                 <span className="dark:text-white">{comment.user.name}</span>
-                <span className="text-xs mx-2 text-gray-400">3 years ago</span>
+                <span className="text-xs mx-2 text-gray-400">
+                  {formatDate(comment.createdAt)}
+                </span>
                 <p className="dark:text-white">{comment.text}</p>
               </div>
             </div>

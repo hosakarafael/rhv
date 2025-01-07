@@ -41,6 +41,7 @@ export interface CommentType {
   videoId: number;
   text: string;
   user: UserType;
+  createdAt: string;
 }
 
 export interface UserType extends Response {
@@ -48,7 +49,7 @@ export interface UserType extends Response {
   name: string;
   email: string;
   profileImageUrl: string;
-  createdAt: Date;
+  createdAt: string;
   subscribedUsers: SubscriptionType[];
   subscribers: number;
 }
