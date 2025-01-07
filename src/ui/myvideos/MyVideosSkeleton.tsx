@@ -1,16 +1,20 @@
+import { useTranslations } from "next-intl";
+
 export const MyVideosSkeleton = () => {
+  const tCommon = useTranslations("Common");
+  const t = useTranslations("MyVideosPage");
   return (
     <div className="overflow-x-auto py-3">
-      <h1 className="text-4xl font-extrabold my-5">My Videos</h1>
+      <h1 className="text-4xl font-extrabold my-5">{t("title")}</h1>
       <table className="table">
         <thead>
           <tr>
-            <th>Video</th>
-            <th>Visibility</th>
-            <th>Date</th>
-            <th>Views</th>
-            <th>Comments</th>
-            <th>Likes</th>
+            <th>{t("tableVideo")}</th>
+            <th>{t("tableVisibility")}</th>
+            <th>{t("tableDate")}</th>
+            <th>{t("tableViews")}</th>
+            <th>{t("tableComments")}</th>
+            <th>{t("tableLikes")}</th>
             <th></th>
           </tr>
         </thead>

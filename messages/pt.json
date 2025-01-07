@@ -4,6 +4,17 @@
     "logout": "Sair",
     "delete": "Excluir",
     "edit": "Editar",
+    "public": "Público",
+    "private": "Privado",
+    "chooseFile": "Escolha o arquivo",
+    "noFileChosen": "Nenhum arquivo escolhido",
+    "titleLabel": "Título (obrigatório)",
+    "titlePlaceholder": "Adicione um título que descreva seu vídeo",
+    "descriptionLabel": "Descrição",
+    "descriptionPlaceholder": "Informe os espectadores sobre seu vídeo",
+    "visibilityLabel": "Visibilidade",
+    "previewLabel": "Prévia",
+    "errorTitleEmpty": "Título não deve ser vazio",
     "viewCount": "{count, plural, =0 {# visualização} =1 {# visualização} other {# visualizações}}",
     "subscriberCount": "{count, plural, =0 {# inscrito} =1 {# inscrito} other {# inscritos}}",
     "commentCount": "{count, plural, =0 {# comentário} =1 {# comentário} other {# comentários}}",
@@ -64,7 +75,7 @@
     "title": "Meus vídeos",
     "loginMyVideos": "Faça login para ver seus vídeos.",
     "noVideosYet": "Você ainda não tem nenhum vídeo, carregue um vídeo para ver aqui",
-    "tableVideo": "Video",
+    "tableVideo": "Vídeo",
     "tableVisibility": "Visibilidade",
     "tableDate": "Data",
     "tableViews": "Visualizações",
@@ -77,10 +88,22 @@
     "noResultTitle": "Nenhum resultado encontrado",
     "noResultMessage": "Use palavras-chave diferentes"
   },
+  "UploadPage": {
+    "title": "Enviar vídeo",
+    "videoFileLabel": "Arquivo de vídeo (obrigatório)",
+    "uploadBtn": "Enviar",
+    "errorFileEmpty": "Video file não deve ser vazio!",
+    "errorFileSize": "O tamanho máximo do arquivo é de 100 MB",
+    "errorInvalidFile": "Faça upload de um arquivo de vídeo válido."
+  },
+  "EditPage": {
+    "title": "Editar vídeo",
+    "saveBtn": "Salvar"
+  },
 
   "Navbar": {
     "searchPlaceholder": "Pesquisar",
-    "uploadBtn": "Carregar video",
+    "uploadBtn": "Enviar video",
     "myChannel": "Meu canal"
   },
   "ThemeMenuItem": {

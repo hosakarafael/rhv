@@ -6,12 +6,15 @@ import { editVideo, fetchVideoById } from "@/services/videoService";
 import clsx from "clsx";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface EditVideoFormProps {
   id: string;
 }
 
 export const EditVideoForm = ({ id }: EditVideoFormProps) => {
+  const t = useTranslations("EditPage");
+  const tCommon = useTranslations("Common");
   const { token, user } = useUser();
 
   const [video, setVideo] = useState<VideoType | null>(null);
@@ -47,6 +50,14 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
   const handleEdit = async (e: React.FormEvent) => {
     setLoading(true);
     e.preventDefault();
+
+    if (!title) {
+      setIsAlertVisible(true);
+      setErrorMessage(tCommon("errorTitleEmpty"));
+      setLoading(false);
+      return;
+    }
+
     if (token) {
       const res = await editVideo(
         Number(id),
@@ -85,7 +96,7 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
       <div className="p-5">
         <div className="bg-neutral-100 dark:bg-neutral-800 rounded-md">
           <h1 className="text-center text-4xl font-bold dark:text-white p-5">
-            Edit video
+            {t("title")}
           </h1>
           <div className="border-t-2 border-neutral-400"></div>
           <Alert
@@ -95,7 +106,7 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
             onClose={() => setIsAlertVisible(false)}
           />
           <form onSubmit={handleEdit}>
-            <div className="flex justify-around p-5">
+            <div className="grid lg:grid-cols-2 p-5 justify-center">
               <div>
                 <label className="form-control w-full max-w-xs">
                   <div className="label">
@@ -104,12 +115,12 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
                         "text-error": title.length > TITLE_LENGTH,
                       })}
                     >
-                      Title (required)
+                      {tCommon("titleLabel")}
                     </span>
                   </div>
                   <input
                     type="text"
-                    placeholder="Add title that describes your video"
+                    placeholder={tCommon("titlePlaceholder")}
                     className={clsx(
                       "input input-bordered w-96 dark:text-white",
                       {
@@ -141,18 +152,18 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
                         "text-error": description.length > DESCRIPTION_LENGTH,
                       })}
                     >
-                      Description
+                      {tCommon("descriptionLabel")}
                     </span>
                   </div>
                   <textarea
                     className={clsx(
-                      "textarea textarea-bordered h-40 resize-none",
+                      "textarea textarea-bordered h-40 w-96 resize-none",
                       {
                         "border-error focus:border-error":
                           description.length > DESCRIPTION_LENGTH,
                       }
                     )}
-                    placeholder="Tell viewers about your video"
+                    placeholder={tCommon("descriptionPlaceholder")}
                     value={description}
                     onChange={(e) => {
                       setDescription(e.currentTarget.value);
@@ -171,23 +182,27 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
                 </label>
                 <label className="form-control w-96">
                   <div className="label">
-                    <span className={labelBaseStyle}>Visibility</span>
+                    <span className={labelBaseStyle}>
+                      {tCommon("visibilityLabel")}
+                    </span>
                   </div>
                   <select
                     className="select select-bordered dark:text-white"
                     value={visibility}
                     onChange={(e) => setVisibility(e.currentTarget.value)}
                   >
-                    <option value={"PUBLIC"}>Public</option>
-                    <option value={"PRIVATE"}>Private</option>
+                    <option value={"PUBLIC"}>{tCommon("public")}</option>
+                    <option value={"PRIVATE"}>{tCommon("private")}</option>
                   </select>
                 </label>
               </div>
 
               <div className="flex flex-col gap-5">
-                <div>
+                <div className="w-80">
                   <div className="label">
-                    <span className={labelBaseStyle}>Preview</span>
+                    <span className={labelBaseStyle}>
+                      {tCommon("previewLabel")}
+                    </span>
                   </div>
                   <div className="w-80 mx-auto border bg-black rounded-xl ">
                     <video
@@ -209,7 +224,7 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
                 {loading ? (
                   <span className="loading loading-spinner loading-lg"></span>
                 ) : (
-                  "Save"
+                  t("saveBtn")
                 )}
               </button>
             </div>

@@ -155,7 +155,7 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
                     </div>
                   </td>
                   <td className="dark:text-white">
-                    {capitalizeFirstLetter(video.visibility)}
+                    {tCommon(video.visibility.toLowerCase())}
                   </td>
                   <td className="w-32 dark:text-white">
                     {formatDate(video.createdAt)}

@@ -4,6 +4,17 @@
     "logout": "Log out",
     "delete": "Delete",
     "edit": "Edit",
+    "public": "Public",
+    "private": "Private",
+    "chooseFile": "Choose file",
+    "noFileChosen": "No file chosen",
+    "titleLabel": "Title (required)",
+    "titlePlaceholder": "Add title that describes your video",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Tell viewers about your video",
+    "visibilityLabel": "Visibility",
+    "previewLabel": "Preview",
+    "errorTitleEmpty": "Title cannot be empty",
     "viewCount": "{count, plural, =0 {# view} =1 {# view} other {# views}}",
     "subscriberCount": "{count, plural, =0 {# subscriber} =1 {# subscriber} other {# subscribers}}",
     "commentCount": "{count, plural, =0 {# comment} =1 {# comment} other {# comments}}",
@@ -76,6 +87,18 @@
   "SearchPage": {
     "noResultTitle": "No results found",
     "noResultMessage": "Try different keywords"
+  },
+  "UploadPage": {
+    "title": "Upload video",
+    "videoFileLabel": "Video file (required)",
+    "uploadBtn": "Upload",
+    "errorFileEmpty": "Video file cannot be empty!",
+    "errorFileSize": "File max size is 100MB",
+    "errorInvalidFile": "Please upload a valid video file."
+  },
+  "EditPage": {
+    "title": "Edit video",
+    "saveBtn": "Save"
   },
 
   "Navbar": {

@@ -5,8 +5,11 @@ import { createVideo } from "@/services/videoService";
 import clsx from "clsx";
 import { redirect } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export default function Page() {
+  const t = useTranslations("UploadPage");
+  const tCommon = useTranslations("Common");
   const { user, token } = useUser();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -36,7 +39,14 @@ export default function Page() {
     e.preventDefault();
     if (videoFile == null) {
       setIsAlertVisible(true);
-      setErrorMessage("Upload a video file");
+      setErrorMessage(t("errorFileEmpty"));
+      return;
+    }
+
+    if (!title) {
+      setIsAlertVisible(true);
+      setErrorMessage(tCommon("errorTitleEmpty"));
+      setLoading(false);
       return;
     }
 
@@ -64,19 +74,19 @@ export default function Page() {
 
     if (!file) {
       setIsAlertVisible(true);
-      setErrorMessage("File cannot be empty!");
+      setErrorMessage(t("errorFileEmpty"));
       return;
     }
 
     if (file.size > MAX_FILE_SIZE) {
       setIsAlertVisible(true);
-      setErrorMessage("File max size is 100MB");
+      setErrorMessage(t("errorFileSize"));
       return;
     }
 
     if (!file.type.startsWith("video/")) {
       setIsAlertVisible(true);
-      setErrorMessage("Please upload a valid video file.");
+      setErrorMessage(t("errorInvalidFile"));
       return;
     }
 
@@ -108,7 +118,7 @@ export default function Page() {
     <div className="p-5">
       <div className="bg-neutral-100 dark:bg-neutral-800 rounded-md">
         <h1 className="text-center text-4xl font-bold dark:text-white p-5">
-          Upload video
+          {t("title")}
         </h1>
         <div className="border-t-2 border-neutral-400"></div>
         <Alert
@@ -118,7 +128,7 @@ export default function Page() {
           onClose={() => setIsAlertVisible(false)}
         />
         <form onSubmit={handleUpload}>
-          <div className="flex justify-around p-5">
+          <div className="grid lg:grid-cols-2 p-5 justify-center">
             <div>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
@@ -127,12 +137,12 @@ export default function Page() {
                       "text-error": title.length > TITLE_LENGTH,
                     })}
                   >
-                    Title (required)
+                    {tCommon("titleLabel")}
                   </span>
                 </div>
                 <input
                   type="text"
-                  placeholder="Add title that describes your video"
+                  placeholder={tCommon("titlePlaceholder")}
                   className={clsx("input input-bordered w-96 dark:text-white", {
                     "border-error focus:border-error":
                       title.length > TITLE_LENGTH,
@@ -155,25 +165,25 @@ export default function Page() {
                 </div>
               </label>
 
-              <label className="form-control">
+              <label className="form-control w-full max-w-xs">
                 <div className="label">
                   <span
                     className={clsx(labelBaseStyle, {
                       "text-error": description.length > DESCRIPTION_LENGTH,
                     })}
                   >
-                    Description
+                    {tCommon("descriptionLabel")}
                   </span>
                 </div>
                 <textarea
                   className={clsx(
-                    "textarea textarea-bordered h-40 resize-none dark:text-white",
+                    "textarea textarea-bordered h-40 w-96 resize-none dark:text-white",
                     {
                       "border-error focus:border-error":
                         description.length > DESCRIPTION_LENGTH,
                     }
                   )}
-                  placeholder="Tell viewers about your video"
+                  placeholder={tCommon("descriptionPlaceholder")}
                   value={description}
                   onChange={(e) => {
                     setDescription(e.currentTarget.value);
@@ -193,7 +203,9 @@ export default function Page() {
               </label>
               <label className="form-control w-96">
                 <div className="label">
-                  <span className={labelBaseStyle}>Visibility</span>
+                  <span className={labelBaseStyle}>
+                    {tCommon("visibilityLabel")}
+                  </span>
                 </div>
                 <select
                   className="select select-bordered dark:text-white"
@@ -201,29 +213,47 @@ export default function Page() {
                   onChange={(e) => setVisibility(e.currentTarget.value)}
                   disabled={loading}
                 >
-                  <option value={"PUBLIC"}>Public</option>
-                  <option value={"PRIVATE"}>Private</option>
+                  <option value={"PUBLIC"}>{tCommon("public")}</option>
+                  <option value={"PRIVATE"}>{tCommon("private")}</option>
                 </select>
               </label>
             </div>
 
             <div className="flex flex-col gap-5">
-              <label className="form-control w-full max-w-xs">
+              <label className="form-control w-96">
                 <div className="label">
-                  <span className={labelBaseStyle}>Video file (required)</span>
+                  <span className={labelBaseStyle}>{t("videoFileLabel")}</span>
                 </div>
-                <input
-                  type="file"
-                  accept="video/*"
-                  className="file-input file-input-bordered w-full max-w-xs dark:text-white"
-                  onChange={handleFileChange}
-                  disabled={loading}
-                />
+                <div className="flex items-center border border-gray-300 rounded-md">
+                  <input
+                    type="file"
+                    id="fileInput"
+                    accept="video/*"
+                    className="hidden"
+                    onChange={handleFileChange}
+                    disabled={loading}
+                  />
+                  <label
+                    htmlFor="fileInput"
+                    className="bg-gray-700 text-white py-2 px-4 rounded-l-md cursor-pointer hover:bg-gray-600"
+                  >
+                    {tCommon("chooseFile")}
+                  </label>
+                  <span
+                    className={clsx("mx-3 text-gray-600", {
+                      "truncate w-48": videoFile,
+                    })}
+                  >
+                    {videoFile ? videoFile.name : tCommon("noFileChosen")}
+                  </span>
+                </div>
               </label>
               {videoUrl && (
-                <div>
+                <div className="w-80">
                   <div className="label">
-                    <span className={labelBaseStyle}>Preview</span>
+                    <span className={labelBaseStyle}>
+                      {tCommon("previewLabel")}
+                    </span>
                   </div>
                   <div className="w-80 mx-auto border bg-black rounded-xl ">
                     <video
@@ -247,7 +277,7 @@ export default function Page() {
               {loading ? (
                 <span className="loading loading-spinner loading-lg"></span>
               ) : (
-                "Upload"
+                t("uploadBtn")
               )}
             </button>
           </div>
