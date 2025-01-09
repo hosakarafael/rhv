@@ -22,6 +22,10 @@ export interface HistoryType {
   videoVisible: boolean;
 }
 
+export type GroupedHistory = {
+  [date: string]: HistoryType[];
+};
+
 export interface VideoType extends Response {
   id: number;
   title: string;

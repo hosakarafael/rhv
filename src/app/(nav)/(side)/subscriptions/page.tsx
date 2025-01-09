@@ -8,18 +8,22 @@ import { fetchByUserIdsAndPublic } from "@/services/publicVideoService";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { VideoGridSkeleton } from "@/ui/video_grid/VideoGridSkeleton";
 
 export default function Page() {
   const t = useTranslations("SubscriptionsPage");
-  const [videos, setVideos] = useState<VideoType[] | null>(null);
+  const [videos, setVideos] = useState<VideoType[]>([]);
+  const [loading, setLoading] = useState(false);
   const { user } = useUser();
   const pathname = usePathname();
 
   async function init() {
     if (user) {
+      setLoading(true);
       const ids = user.subscribedUsers.map((subs) => subs.id);
       const res = await fetchByUserIdsAndPublic(ids);
       setVideos(res);
+      setLoading(false);
     }
   }
 
@@ -47,21 +51,18 @@ export default function Page() {
     );
   };
 
-  return (
-    <>
-      {user ? (
-        user.subscribedUsers.length > 0 ? (
-          videos ? (
-            <VideoGrid videos={videos} />
-          ) : (
-            <></>
-          )
-        ) : (
-          notSubscribedAnyChannel()
-        )
-      ) : (
-        notLoggedSubscription()
-      )}
-    </>
-  );
+  const render = () => {
+    if (!user) {
+      return notLoggedSubscription();
+    }
+    if (user.subscribedUsers.length == 0) {
+      return notSubscribedAnyChannel();
+    }
+    if (loading) {
+      return <VideoGridSkeleton />;
+    }
+    return <VideoGrid videos={videos} />;
+  };
+
+  return <>{render()}</>;
 }

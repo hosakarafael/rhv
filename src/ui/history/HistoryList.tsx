@@ -1,36 +1,13 @@
-"use client";
-import { useUser } from "@/context/userContext";
-import { HistoryType } from "@/lib/definitions";
-import { fetchHistoryByUserId } from "@/services/userService";
-import { useEffect, useState } from "react";
+import { GroupedHistory } from "@/lib/definitions";
 import { HistoryCard } from "./HistoryCard";
 import { useTranslations } from "next-intl";
 
-type GroupedHistory = {
-  [date: string]: HistoryType[];
-};
+interface HistoryListProps {
+  histories: GroupedHistory;
+}
 
-export const HistoryList = () => {
+export const HistoryList = ({ histories }: HistoryListProps) => {
   const t = useTranslations("HistoryPage");
-  const [histories, setHistories] = useState<GroupedHistory>({});
-  const { token, user } = useUser();
-
-  async function init() {
-    if (user && token) {
-      const res = await fetchHistoryByUserId(user.id, token);
-
-      const groupedByDate: GroupedHistory = {};
-      res.map((history) => {
-        const dateObject = new Date(history.watchedAt);
-        const dateString = dateObject.toISOString().split("T")[0];
-        if (!groupedByDate[dateString]) {
-          groupedByDate[dateString] = [];
-        }
-        groupedByDate[dateString].push(history);
-      });
-      setHistories(groupedByDate);
-    }
-  }
 
   const renderHistories = () => {
     return Object.entries(histories).map(([date, entries]) => {
@@ -44,10 +21,6 @@ export const HistoryList = () => {
       );
     });
   };
-
-  useEffect(() => {
-    init();
-  }, [user]);
 
   return Object.entries(histories).length == 0 ? (
     <div>

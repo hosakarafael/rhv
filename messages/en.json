@@ -61,7 +61,7 @@
   },
   "SubscriptionsPage": {
     "loginSubscriptionsTitle": "Subscriptions",
-    "loginSubscriptions": "Log in to see the latest updates from your favorite channels",
+    "loginSubscriptionsMessage": "Log in to see the latest updates from your favorite channels",
     "noSubscription": "You are not subscribed to any channel!"
   },
   "HistoryPage": {
