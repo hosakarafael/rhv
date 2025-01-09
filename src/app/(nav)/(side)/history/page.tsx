@@ -56,7 +56,7 @@ export default function Page() {
             {t("title")}
           </h1>
           {loading ? (
-            <HistoryListSkeleton />
+            <HistoryListSkeleton renderCount={4} />
           ) : (
             <HistoryList histories={histories} />
           )}
