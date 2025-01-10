@@ -100,7 +100,7 @@ export default function Page() {
           <form onSubmit={handleSubmit} className="flex flex-col gap-1 w-96">
             <label className="form-control w-96">
               <div className="label">
-                <span>Email</span>
+                <span>{t("emailLabel")}</span>
               </div>
               <label className="input input-bordered flex items-center gap-2">
                 <svg
@@ -124,7 +124,7 @@ export default function Page() {
 
             <label className="form-control w-96">
               <div className="label">
-                <span>Password</span>
+                <span>{t("passwordLabel")}</span>
               </div>
               <label className="input input-bordered flex items-center gap-2">
                 <svg
@@ -157,7 +157,7 @@ export default function Page() {
             <div className="flex justify-end gap-3  mt-3">
               <button
                 disabled={!validate() || loading}
-                className="w-24 btn btn-accent text-xl text-white rounded-full w-full"
+                className="btn btn-accent text-xl text-white rounded-full w-full"
               >
                 {loading ? (
                   <span className="loading loading-spinner loading-lg"></span>

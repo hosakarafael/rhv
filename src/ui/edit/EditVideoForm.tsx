@@ -157,7 +157,7 @@ export const EditVideoForm = ({ id }: EditVideoFormProps) => {
                   </div>
                   <textarea
                     className={clsx(
-                      "textarea textarea-bordered h-40 w-96 resize-none",
+                      "textarea textarea-bordered h-40 w-96 resize-none dark:text-white",
                       {
                         "border-error focus:border-error":
                           description.length > DESCRIPTION_LENGTH,

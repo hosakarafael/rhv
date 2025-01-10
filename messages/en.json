@@ -39,7 +39,7 @@
     "emailPlaceholder": "Email",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Password",
-    "createAcc": "Dont have an account?",
+    "createAcc": "Don't have an account?",
     "createAccLink": "Create an new account",
     "loginBtn": "Log in",
     "errorEmailEmpty": "Email cannot be empty",

@@ -44,7 +44,7 @@
     "loginBtn": "Login",
     "errorEmailEmpty": "Email não deve ser vazio",
     "errorPasswordEmpty": "Senha não deve ser vazio",
-    "errorIncorrectEmailOrPassword": "Email or senha incorreto"
+    "errorIncorrectEmailOrPassword": "Email ou senha incorreto"
   },
   "CreatePage": {
     "title": "Criar conta",
