@@ -39,14 +39,15 @@
     "emailPlaceholder": "Email",
     "passwordLabel": "Senha",
     "passwordPlaceholder": "Senha",
-    "createBtn": "Criar",
+    "createAcc": "Não possui uma conta?",
+    "createAccLink": "Criar uma nova conta",
     "loginBtn": "Login",
     "errorEmailEmpty": "Email não deve ser vazio",
     "errorPasswordEmpty": "Senha não deve ser vazio",
     "errorIncorrectEmailOrPassword": "Email or senha incorreto"
   },
   "CreatePage": {
-    "title": "Criar",
+    "title": "Criar conta",
     "nameLabel": "Nome do canal",
     "namePlaceholder": "Nome do canal",
     "emailLabel": "Email",

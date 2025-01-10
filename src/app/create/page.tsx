@@ -92,8 +92,8 @@ export default function Page() {
         </div>
       </div>
       <div className="flex items-center h-screen justify-center gap-3 dark:text-white">
-        <div className="flex flex-col gap-5 sm:flex-row">
-          <h1 className="text-6xl">{t("title")}</h1>
+        <div className="flex flex-col gap-5 bg-neutral-100 dark:bg-neutral-800 p-10 rounded-lg">
+          <h1 className="text-6xl text-center">{t("title")}</h1>
           <form className="flex flex-col gap-1 w-96">
             <label className="form-control w-96">
               <div className="label">

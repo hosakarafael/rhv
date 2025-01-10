@@ -8,6 +8,7 @@ import { redirect, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GuestMenu } from "@/ui/navbar/GuestMenu";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 export default function Page() {
   const t = useTranslations("LoginPage");
@@ -94,8 +95,8 @@ export default function Page() {
         </div>
       </div>
       <div className="h-screen overflow-hidden flex items-center justify-center gap-3 dark:text-white">
-        <div className="flex flex-col gap-5 sm:flex-row">
-          <h1 className="text-6xl">{t("title")}</h1>
+        <div className="flex gap-5 p-10 rounded-lg flex-col bg-neutral-100 dark:bg-neutral-800">
+          <h1 className="text-6xl text-center">{t("title")}</h1>
           <form onSubmit={handleSubmit} className="flex flex-col gap-1 w-96">
             <label className="form-control w-96">
               <div className="label">
@@ -154,16 +155,9 @@ export default function Page() {
               onClose={() => setIsAlertVisible(false)}
             />
             <div className="flex justify-end gap-3  mt-3">
-              <a
-                href={continueTo ? `create?continueTo=${continueTo}` : "create"}
-                className="btn btn-neutral dark:btn-outline text-xl dark:text-white rounded-full"
-              >
-                {t("createBtn")}
-              </a>
-
               <button
                 disabled={!validate() || loading}
-                className="w-24 btn btn-accent text-xl text-white rounded-full"
+                className="w-24 btn btn-accent text-xl text-white rounded-full w-full"
               >
                 {loading ? (
                   <span className="loading loading-spinner loading-lg"></span>
@@ -173,6 +167,16 @@ export default function Page() {
               </button>
             </div>
           </form>
+          <div className="divider m-0"></div>
+          <div className="flex items-center justify-center gap-2">
+            {t("createAcc")}
+            <Link
+              href={continueTo ? `create?continueTo=${continueTo}` : "create"}
+              className="dark:text-white underline"
+            >
+              {t("createAccLink")}
+            </Link>
+          </div>
         </div>
       </div>
     </div>

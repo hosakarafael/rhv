@@ -39,14 +39,15 @@
     "emailPlaceholder": "Email",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Password",
-    "createBtn": "Create",
+    "createAcc": "Dont have an account?",
+    "createAccLink": "Create an new account",
     "loginBtn": "Log in",
     "errorEmailEmpty": "Email cannot be empty",
     "errorPasswordEmpty": "Password cannot be empty",
     "errorIncorrectEmailOrPassword": "Incorrect email or password."
   },
   "CreatePage": {
-    "title": "Create",
+    "title": "Create account",
     "nameLabel": "Channel name",
     "namePlaceholder": "Channel name",
     "emailLabel": "Email",
