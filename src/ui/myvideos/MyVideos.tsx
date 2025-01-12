@@ -13,7 +13,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { usePathname } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 
 interface MyVideosProps {
@@ -28,6 +28,11 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
   const { user, token } = useUser();
   const pathname = usePathname();
   const modalRef = useRef<HTMLDialogElement>(null);
+  const deleteWaitModalRef = useRef<HTMLDialogElement>(null);
+
+  const [activeModalVideoId, setActiveModalVideoId] = useState<number | null>(
+    null
+  );
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -57,6 +62,7 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
 
   const handleDeleteVideo = async (videoId: number) => {
     if (token) {
+      deleteWaitModalRef.current?.showModal();
       const res = await deleteVideo(videoId, token);
       if (res.errorCode == "VS000") {
         setIsAlertVisible(false);
@@ -66,6 +72,7 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
         setIsAlertVisible(true);
         setErrorMessage(res.message);
       }
+      deleteWaitModalRef.current?.close();
     }
   };
 
@@ -81,7 +88,10 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
         </Tooltip>
         <Tooltip label={tCommon("delete")}>
           <div
-            onClick={() => modalRef.current?.showModal()}
+            onClick={() => {
+              modalRef.current?.showModal();
+              setActiveModalVideoId(videoId);
+            }}
             className="hover:bg-gray-200 hover:dark:bg-neutral-800 cursor-pointer w-[40px] p-2 rounded-full dark:text-white"
           >
             <TrashIcon />
@@ -143,15 +153,6 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
                         <div className="hidden group-hover:block absolute">
                           {renderActionSection(video.id)}
                         </div>
-                        <Modal
-                          type="Cancel/Yes"
-                          onYes={() => {
-                            handleDeleteVideo(video.id);
-                          }}
-                          title={t("deleteDialogTitle")}
-                          text={t("deleteDialogText")}
-                          ref={modalRef}
-                        />
                       </div>
                     </div>
                   </td>
@@ -169,6 +170,25 @@ export const MyVideos = ({ videos, updateVideos }: MyVideosProps) => {
             })}
           </tbody>
         </table>
+        {activeModalVideoId && (
+          <Modal
+            type="Cancel/Yes"
+            onYes={() => {
+              handleDeleteVideo(activeModalVideoId);
+            }}
+            title={t("deleteDialogTitle")}
+            text={t("deleteDialogText")}
+            ref={modalRef}
+          />
+        )}
+
+        <Modal
+          type="Loading"
+          title={t("deleteWaitDialogTitle")}
+          text={t("deleteWaitDialogText")}
+          ref={deleteWaitModalRef}
+        />
+
         {videos.length == 0 && noVideoFound()}
       </div>
     );

@@ -83,7 +83,9 @@
     "tableComments": "Comments",
     "tableLikes": "Likes",
     "deleteDialogTitle": "Delete video",
-    "deleteDialogText": "Delete your video permanently?"
+    "deleteDialogText": "Delete your video permanently?",
+    "deleteWaitDialogTitle": "Deleting video",
+    "deleteWaitDialogText": "Deleting video please wait..."
   },
   "SearchPage": {
     "noResultTitle": "No results found",

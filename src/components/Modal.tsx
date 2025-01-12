@@ -1,9 +1,11 @@
+"use client";
 import { LoginButton } from "./LoginButton";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 
 interface ModalProps {
-  type?: "Close" | "Login" | "Cancel/Yes";
+  type?: "Close" | "Login" | "Cancel/Yes" | "Loading";
   title: string;
   text: string;
   ref: React.RefObject<HTMLDialogElement>;
@@ -19,6 +21,25 @@ export const Modal = ({
 }: ModalProps) => {
   const pathname = usePathname();
   const t = useTranslations("Modal");
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+      }
+    };
+
+    const modal = ref.current;
+    if (modal) {
+      modal.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      if (modal) {
+        modal.removeEventListener("keydown", handleKeyDown);
+      }
+    };
+  }, []);
 
   const renderButtonsSection = () => {
     switch (type) {
@@ -51,6 +72,8 @@ export const Modal = ({
             </button>
           </div>
         );
+      case "Loading":
+        return <span className="loading loading-spinner loading-lg"></span>;
     }
   };
 

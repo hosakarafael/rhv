@@ -83,7 +83,9 @@
     "tableComments": "Comentários",
     "tableLikes": "Gostos",
     "deleteDialogTitle": "Excluir vídeo",
-    "deleteDialogText": "Excluir seu vídeo permanentemente?"
+    "deleteDialogText": "Excluir seu vídeo permanentemente?",
+    "deleteWaitDialogTitle": "Excluindo vídeo",
+    "deleteWaitDialogText": "Excluindo vídeo, aguarde..."
   },
   "SearchPage": {
     "noResultTitle": "Nenhum resultado encontrado",
