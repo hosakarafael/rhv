@@ -41,7 +41,7 @@ export interface VideoType extends Response {
 }
 
 export interface CommentType {
-  id: number;
+  id: string;
   videoId: number;
   text: string;
   user: UserType;

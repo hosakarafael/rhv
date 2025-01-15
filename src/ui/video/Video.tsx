@@ -9,7 +9,7 @@ import { HandThumbUpIcon as HandThumbUpIconOutline } from "@heroicons/react/24/o
 import { HandThumbUpIcon as HandThumbUpIconSolid } from "@heroicons/react/24/solid";
 import { registerHistory } from "@/services/userService";
 import { useUser } from "@/context/userContext";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useOptimistic, useRef, useState } from "react";
 import { SubscribeButton } from "../../components/SubscribeButton";
 import Link from "next/link";
 import { useSidebar } from "@/context/sidebarContext";
@@ -36,6 +36,7 @@ export const Video = ({ video, updateVideo }: VideoProps) => {
   const { user, token } = useUser();
   const { update: updateSidebar } = useSidebar();
   const modalRef = useRef<HTMLDialogElement>(null);
+  const [comments, setComments] = useState<CommentType[]>([]);
 
   async function init() {
     //update sidebar to set min = true, making it invisble on first
@@ -44,6 +45,12 @@ export const Video = ({ video, updateVideo }: VideoProps) => {
       increaseView(video.id);
     }
   }
+
+  useEffect(() => {
+    if (video) {
+      setComments(video.comments);
+    }
+  }, [video]);
 
   useEffect(() => {
     init();
@@ -75,6 +82,16 @@ export const Video = ({ video, updateVideo }: VideoProps) => {
 
   const handleAddComment = async (text: string) => {
     if (video && user && token) {
+      const tempComment: CommentType = {
+        id: `temp-${Date.now()}`,
+        videoId: video.id,
+        text,
+        user: user,
+        createdAt: new Date().toISOString(),
+      };
+      const tempComments = [tempComment, ...video.comments];
+      setComments(tempComments);
+
       const comment = await createComment(user.id, video.id, text, token);
       const updatedComments = [comment, ...video.comments];
       const updatedVideo = { ...video, comments: updatedComments };
@@ -84,7 +101,7 @@ export const Video = ({ video, updateVideo }: VideoProps) => {
 
   const handleDeleteComment = (comment: CommentType) => {
     if (video && token) {
-      deleteComment(comment.id, token);
+      deleteComment(Number(comment.id), token);
       const updatedComments = video?.comments.filter((c) => c.id != comment.id);
       const updatedVideo = { ...video, comments: updatedComments };
       updateVideo(updatedVideo);
@@ -191,7 +208,7 @@ export const Video = ({ video, updateVideo }: VideoProps) => {
         </div>
         <CommentSection
           videoId={video.id}
-          comments={video.comments}
+          comments={comments}
           onAdd={handleAddComment}
           onDelete={handleDeleteComment}
         />
